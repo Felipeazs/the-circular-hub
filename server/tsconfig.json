@@ -1,0 +1,16 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx",
+		"baseUrl": "./",
+		"paths": {
+			"@/server/*": ["./src/*"]
+		},
+		"strict": true,
+		"inlineSources": true,
+		"outDir": "./dist",
+		"sourceMap": true,
+		"sourceRoot": "/"
+	}
+}
