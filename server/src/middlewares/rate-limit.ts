@@ -1,5 +1,3 @@
-import { getConnInfo } from "@hono/node-server/conninfo"
-import { getConnInfo as getBunConnInfo } from "hono/bun"
 import { createMiddleware } from "hono/factory"
 import { HTTPException } from "hono/http-exception"
 
@@ -16,8 +14,13 @@ import { env } from "../t3-env"
 import { tryCatch } from "../utils/try-catch"
 
 export default createMiddleware(async (c, next) => {
-	const info = getBunConnInfo(c) ?? getConnInfo(c)
-	const ip = info.remote.address ?? ""
+	// const info = getBunConnInfo(c) ?? getConnInfo(c)
+	// const ip = info.remote.address ?? ""
+
+	// cloudflare
+	const info = c.req.header("cf-connecting-ip") ?? ""
+	const ip = info
+
 	console.warn(ip)
 	const key = `${ip}:rate_limit`
 
