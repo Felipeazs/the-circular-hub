@@ -53,7 +53,7 @@ function RouteComponent() {
 				{isLoggedIn && (
 					<Avatar>
 						<DropdownMenu>
-							<DropdownMenuTrigger className="hover:cursor-pointer">
+							<DropdownMenuTrigger className="w-full hover:cursor-pointer">
 								<AvatarImage src={data?.image ?? ""} width={32} height={32} alt="profile-image" />
 								<AvatarFallback>
 									{data?.nombre?.substring(0, 1)?.toUpperCase() ?? "N"}

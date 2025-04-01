@@ -4,20 +4,22 @@ import { useNavigate } from "@tanstack/react-router"
 import { toast } from "sonner"
 
 import { useAppForm } from "../hooks/form"
-import { signup } from "../lib/queries"
+import { login, signup } from "../lib/queries"
+import { useStore } from "../store"
 
 export function Signup() {
 	const navigate = useNavigate()
 
+	const { enter } = useStore()
 	const { mutate } = useMutation({
-		mutationKey: ["signup"],
 		mutationFn: async (data: SignupUsuario) =>
 			await signup({
 				email: data.email,
 				password: data.password,
 				repeat_password: data.repeat_password,
-			}),
-		onSuccess: () => {
+			}).then(async () => await login({ email: data.email, password: data.password })),
+		onSuccess: async (data) => {
+			enter(data)
 			toast("Bienvenido")
 
 			navigate({ to: "/dashboard" })

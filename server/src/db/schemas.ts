@@ -37,7 +37,7 @@ export const respuesta = pgTable(
 	"respuestas",
 	{
 		id: serial("id").primaryKey(),
-		usuarioId: integer("usuario_id").references(() => usuario.id),
+		usuarioId: integer("usuario_id"),
 		gestion_organizacional_1: boolean("go_1"),
 		gestion_organizacional_2: boolean("go_2"),
 		gestion_organizacional_3: boolean("go_3"),
@@ -51,6 +51,13 @@ export const respuesta = pgTable(
 
 export const usuarioRelations = relations(usuario, ({ many }) => ({
 	respuestas: many(respuesta),
+}))
+
+export const respuestaRelations = relations(respuesta, ({ one }) => ({
+	autor: one(usuario, {
+		fields: [respuesta.usuarioId],
+		references: [usuario.id],
+	}),
 }))
 
 export const signupSchema = createInsertSchema(usuario, {
@@ -79,10 +86,13 @@ export const editUsuarioSchema = createInsertSchema(usuario, {
 			z.string().transform((value) => (value === "" ? undefined : value)),
 		])
 		.optional(),
-	roles: z
-		.array(z.enum(["super_admin", "admin", "user"]))
-		.default(["user"])
-		.optional(),
+	roles: z.union([
+		z
+			.array(z.enum(["super_admin", "admin", "user"]))
+			.default(["user"])
+			.optional(),
+		z.string(),
+	]),
 }).omit({
 	id: true,
 	password: true,

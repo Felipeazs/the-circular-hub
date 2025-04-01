@@ -75,8 +75,6 @@ export async function signup({ email, password, repeat_password }: SignupUsuario
 
 				throw new Error(json.message as string)
 			}
-
-			return login({ email, password })
 		})
 }
 
