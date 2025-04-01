@@ -16,9 +16,10 @@ import { env } from "../t3-env"
 import { tryCatch } from "../utils/try-catch"
 
 export default createMiddleware(async (c, next) => {
-	const id = getBunConnInfo(c)?.remote.address ?? getConnInfo(c).remote.address
-	console.warn(id)
-	const key = `${id}:rate_limit`
+	const info = getBunConnInfo(c) ?? getConnInfo(c)
+	const ip = info.remote.address ?? ""
+	console.warn(ip)
+	const key = `${ip}:rate_limit`
 
 	// Use Redis MULTI for atomic operations
 	const redis = getRedisClient()
