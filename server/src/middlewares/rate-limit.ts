@@ -16,6 +16,7 @@ import { tryCatch } from "../utils/try-catch"
 
 export default createMiddleware(async (c, next) => {
 	const id = getConnInfo(c).remote.address ?? ""
+	console.warn(id)
 	const key = `${id}:rate_limit`
 
 	// Use Redis MULTI for atomic operations

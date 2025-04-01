@@ -3,6 +3,7 @@ import { Hono } from "hono"
 import type { AppAPI, AppEnv } from "../lib/types"
 
 import { BASE_PATH } from "../lib/constants"
+import rateLimit from "../middlewares/rate-limit"
 import authMe from "./auth"
 import login from "./login"
 import logout from "./logout"
@@ -13,7 +14,7 @@ import usuario_route from "./usuario"
 
 export function registerRoutes(app: AppAPI) {
 	return app
-		.get("/health", (c) => {
+		.get("/health", rateLimit, (c) => {
 			c.status(200)
 			return c.text("API live and running...")
 		})
