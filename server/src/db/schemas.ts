@@ -1,55 +1,59 @@
+import { relations } from "drizzle-orm"
+import { boolean, integer, pgTable, serial, text, uniqueIndex } from "drizzle-orm/pg-core"
+import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { z } from "zod"
 
-// Usuario
-export const usuarioSchema = z.object({
-	nombre: z.string(),
-	apellido: z.string(),
-	email: z.string().email({ message: "Ingresa el mail" }),
-	organizacion: z.string(),
-	password: z.string().min(1, "Ingresa el password"),
-	roles: z
-		.array(z.enum(["super_admin", "admin", "user"]))
-		.default(["user"])
-		.optional(),
-	rut: z.string(),
-	image: z.string(),
-	createdAt: z.date().optional(),
-	updatedAt: z.date().optional(),
-})
+export const usuario = pgTable(
+	"usuarios",
+	{
+		id: serial("id").primaryKey(),
+		email: text("email").notNull(),
+		password: text("password").notNull(),
+		roles: text({ enum: ["super_admin", "admin", "user"] }).array(),
+		image: text("image"),
+	},
+	(table) => {
+		return [uniqueIndex("email_idx").on(table.email)]
+	},
+)
 
-export const loginSchema = usuarioSchema.pick({
-	email: true,
-	password: true,
-})
+export const respuesta = pgTable(
+	"respuestas",
+	{
+		id: serial("id").primaryKey(),
+		usuarioId: integer("usuario_id").references(() => usuario.id),
+		gestion_organizacional_1: boolean("go_1"),
+		gestion_organizacional_2: boolean("go_2"),
+		gestion_organizacional_3: boolean("go_3"),
+	},
+	(table) => {
+		return [uniqueIndex("usuario_idx").on(table.usuarioId)]
+	},
+)
 
-export const signupSchema = loginSchema.merge(
+export const usuarioRelations = relations(usuario, ({ many }) => ({
+	respuestas: many(respuesta),
+}))
+
+export const signupSchema = createInsertSchema(usuario, {
+	email: z.string().email(),
+	password: z.string(),
+}).merge(
 	z.object({
-		repeat_password: z.string().min(1, { message: "Repita el password" }),
+		repeat_password: z.string(),
 	}),
 )
 
-export const editUsuarioSchema = z.object({
-	nombre: z.string(),
-	apellido: z.string(),
-	email: z.string().email({ message: "Ingresa el mail" }),
-	organizacion: z.string(),
-	rut: z.string(),
-	image: z
-		.union([
-			z.instanceof(File),
-			z.string().transform((value) => (value === "" ? undefined : value)),
-		])
-		.optional(),
-	roles: z.union([
-		z
-			.array(z.enum(["super_admin", "admin", "user"]))
-			.default(["user"])
-			.optional(),
-		z.string(),
-	]),
+export const loginSchema = createInsertSchema(usuario, {
+	email: z.string().email(),
+	password: z.string(),
 })
 
+export const editUsuarioSchema = createInsertSchema(usuario, {
+	email: z.string().email(),
+	roles: z.array(z.enum(["super_admin", "admin", "user"])),
+	image: z.string().url(),
+})
+
+export const usuarioSchema = createSelectSchema(usuario)
 export type Usuario = z.infer<typeof usuarioSchema>
-export type LoginUsuario = z.infer<typeof loginSchema>
-export type SignupUsuario = z.infer<typeof signupSchema>
-export type EditUsuario = z.infer<typeof editUsuarioSchema>

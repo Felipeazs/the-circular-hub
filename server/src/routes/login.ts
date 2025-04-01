@@ -1,10 +1,11 @@
+import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { HTTPException } from "hono/http-exception"
 
 import type { EnvUsuario } from "../lib/types"
 
-import Usuario from "../db/models"
-import { loginSchema } from "../db/schemas"
+import db from "../db"
+import { loginSchema, usuario as usuarioTable } from "../db/schemas"
 import { ERROR_CODE } from "../lib/constants"
 import { generateTokensAndCookies } from "../lib/cookies"
 import { captureEvent } from "../lib/posthog"
@@ -16,7 +17,7 @@ export default new Hono().post("/", zValidator("json", loginSchema), rateLimit, 
 	const { email, password } = c.req.valid("json")
 
 	const { data: usuarioEncontrado, error: dbError } = await tryCatch(
-		Usuario.findOne({ email }).lean(),
+		db.query.usuario.findFirst({ where: eq(usuarioTable.email, email) }),
 	)
 	if (dbError) {
 		throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })
@@ -38,7 +39,7 @@ export default new Hono().post("/", zValidator("json", loginSchema), rateLimit, 
 	}
 
 	const usuario: EnvUsuario = {
-		id: usuarioEncontrado._id.toString(),
+		id: usuarioEncontrado.id.toString(),
 		roles: usuarioEncontrado.roles ?? ["user"],
 	}
 

@@ -10,7 +10,6 @@ import { readFile } from "node:fs/promises"
 
 import type { AppAPI, AppEnv } from "./types"
 
-import { initMongoDB } from "../db"
 import { CSP_RULES } from "../middlewares/csp"
 import notFound from "../middlewares/not-found"
 import onError from "../middlewares/on-error"
@@ -22,7 +21,6 @@ import { initRedis } from "./redis"
 const indexHtml = await readFile("public/index.html", "utf8")
 
 export function createRouter() {
-	initMongoDB()
 	initRedis()
 	initPosthog()
 

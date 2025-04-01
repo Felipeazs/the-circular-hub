@@ -23,3 +23,6 @@ jobs:
 
       - name: Lint
         run: bun run --filter '*' lint
+
+      - name: build source
+        run: bun run build

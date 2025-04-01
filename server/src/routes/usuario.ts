@@ -1,13 +1,13 @@
+import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { HTTPException } from "hono/http-exception"
-import mongoose from "mongoose"
 import { Buffer } from "node:buffer"
 import SuperJSON from "superjson"
 
 import type { AppEnv } from "../lib/types"
 
-import Usuario from "../db/models"
-import { editUsuarioSchema } from "../db/schemas"
+import db from "../db"
+import { editUsuarioSchema, usuario as usuarioTable } from "../db/schemas"
 import { ERROR_CODE } from "../lib/constants"
 import { uploadImage } from "../lib/providers/cloudinary"
 import { deleteRedisItem, getRedisItem, setRedisItem } from "../lib/redis"
@@ -32,10 +32,10 @@ const app = new Hono<AppEnv>()
 			return c.json({ usuario: redisItem }, 200)
 		}
 
-		const id = new mongoose.Types.ObjectId(usuario.id)
+		const id = usuario.id
 
 		const { data: usuarioFound, error: dbError } = await tryCatch(
-			Usuario.findById({ _id: id }, ["-_id", "-password"]).lean(),
+			db.query.usuario.findFirst({ where: eq(usuarioTable.id, Number(id)) }),
 		)
 		if (dbError) {
 			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })
@@ -60,13 +60,13 @@ const app = new Hono<AppEnv>()
 		async (c) => {
 			const usuario = c.get("usuario")
 
-			const { nombre, apellido, email, organizacion, rut, roles, image } = c.req.valid("form")
+			const { email, roles, image } = c.req.valid("form")
 
-			let dbimage = image
-			if (image instanceof File) {
-				const arrayBuf = await image.arrayBuffer()
+			let dbimage = image as any
+			if (dbimage instanceof File) {
+				const arrayBuf = await dbimage.arrayBuffer()
 				const buffer = Buffer.from(arrayBuf).toString("base64")
-				const { data: cloud, error } = await tryCatch(uploadImage(buffer!, usuario.id))
+				const { data: cloud, error } = await tryCatch(uploadImage(buffer!, usuario.id, "profile"))
 				if (error) {
 					throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: error.message })
 				}
@@ -74,25 +74,12 @@ const app = new Hono<AppEnv>()
 				dbimage = cloud.secure_url
 			}
 
-			const id = new mongoose.Types.ObjectId(usuario.id)
 			const { data: usuarioFound, error: dbUpdateError } = await tryCatch(
-				Usuario.findOneAndUpdate(
-					{ _id: id },
-					{
-						$set: {
-							nombre,
-							apellido,
-							email,
-							organizacion,
-							rut,
-							roles: roles?.length ? roles : ["user"],
-							image: dbimage,
-						},
-					},
-					{
-						returnOriginal: false,
-					},
-				).lean(),
+				db.update(usuarioTable).set({
+					email,
+					roles,
+					image: dbimage,
+				}),
 			)
 			if (dbUpdateError) {
 				throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, {

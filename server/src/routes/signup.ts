@@ -1,8 +1,9 @@
+import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { HTTPException } from "hono/http-exception"
 
-import Usuario from "../db/models"
-import { signupSchema } from "../db/schemas"
+import db from "../db"
+import { signupSchema, usuario } from "../db/schemas"
 import { ERROR_CODE } from "../lib/constants"
 import { captureEvent } from "../lib/posthog"
 import { zValidator } from "../lib/validator-wrapper"
@@ -17,7 +18,9 @@ export default new Hono().post("/", zValidator("json", signupSchema), rateLimit,
 	}
 
 	const { data: usuarioEncontrado, error: dbFindError } = await tryCatch(
-		Usuario.findOne({ email }).lean(),
+		db.query.usuario.findFirst({
+			where: eq(usuario.email, email),
+		}),
 	)
 	if (dbFindError) {
 		throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbFindError.message })
@@ -38,13 +41,20 @@ export default new Hono().post("/", zValidator("json", signupSchema), rateLimit,
 		throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: hashError.message })
 	}
 
-	const nuevoUsuario = new Usuario({ email, password: hashedPassword })
-	const { data: _data, error: dbError } = await tryCatch(nuevoUsuario.save())
+	const { data: nuevo_usuario, error: dbError } = await tryCatch(
+		db
+			.insert(usuario)
+			.values({
+				email,
+				password: hashedPassword,
+			})
+			.returning(),
+	)
 	if (dbError) {
 		throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })
 	}
 
 	captureEvent({ distinct_id: email, event: "signup" })
 
-	return c.json({ usuario: nuevoUsuario.id }, 200)
+	return c.json({ usuario: nuevo_usuario[0].id }, 200)
 })

@@ -1,18 +1,10 @@
-import { HTTPException } from "hono/http-exception"
-import mongoose from "mongoose"
+import { drizzle } from "drizzle-orm/postgres-js"
+import postgres from "postgres"
 
 import { env } from "../t3-env"
+import * as schema from "./schemas"
 
-export async function initMongoDB() {
-	try {
-		mongoose.set("strictQuery", true)
+const pgclient = postgres(env.DATABASE_URI, { prepare: false })
+const db = drizzle({ client: pgclient, schema })
 
-		mongoose.connect(env.DATABASE_URI)
-
-		mongoose.connection.on("open", () => {
-			console.warn("Mongo connected")
-		})
-	} catch (err: any) {
-		throw new HTTPException(500, { message: err.message })
-	}
-}
+export default db
