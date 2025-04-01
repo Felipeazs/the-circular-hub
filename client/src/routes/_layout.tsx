@@ -10,6 +10,7 @@ import {
 	DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu"
 import { logout } from "../lib/queries"
+import { buttonVariants } from "../lib/utils"
 import { useStore } from "../store"
 
 export const Route = createFileRoute("/_layout")({
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/_layout")({
 })
 
 function RouteComponent() {
+	const { queryClient } = Route.useRouteContext()
 	const { isLoggedIn, usuario: data, quit } = useStore((state) => state)
 	const isFetching = useIsFetching()
 	const isMutating = useIsMutating()
@@ -27,10 +29,14 @@ function RouteComponent() {
 		mutationFn: logout,
 		onSuccess: () => {
 			quit()
+			queryClient.invalidateQueries({ queryKey: ["auth"] })
+
 			navigate({ to: "/" })
 		},
 		onError: () => {
 			quit()
+			queryClient.invalidateQueries({ queryKey: ["auth"] })
+
 			navigate({ to: "/" })
 		},
 	})
@@ -40,14 +46,18 @@ function RouteComponent() {
 	}
 
 	return (
-		<div className="max-h-screen overflow-y-auto bg-slate-300">
+		<div className="max-h-screen overflow-y-auto">
 			<div className="flex h-[48px] items-center justify-between gap-4 px-20 py-2">
 				<Link to="/" className="font-bold uppercase" viewTransition>
-					Monorepo
+					The circula hub
 				</Link>
 				{!isLoggedIn && (
-					<Link to="/about" activeProps={{ className: "font-bold" }} viewTransition>
-						Login
+					<Link
+						to="/about"
+						activeProps={{ className: "font-bold" }}
+						className={buttonVariants({ variant: "outline" })}
+						viewTransition>
+						Log in
 					</Link>
 				)}
 				{isLoggedIn && (
@@ -61,8 +71,18 @@ function RouteComponent() {
 								</AvatarFallback>
 								<DropdownMenuContent>
 									<DropdownMenuItem>
+										<Link to="/" className="w-full">
+											Home
+										</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										<Link to="/dashboard" className="w-full">
+											Dashboard
+										</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
 										<Link to="/ajustes" className="w-full">
-											Profile
+											Settings
 										</Link>
 									</DropdownMenuItem>
 									<DropdownMenuItem className="w-full hover:cursor-pointer" onClick={handleLogout}>
@@ -78,6 +98,7 @@ function RouteComponent() {
 				<ProgressBar status={isFetching || isMutating} min={isLoggedIn ? 25 : 0} />
 			</div>
 			<div className="min-h-screen bg-slate-50">
+				<hr />
 				<Outlet />
 			</div>
 		</div>

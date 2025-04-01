@@ -1,8 +1,9 @@
+import { useMutation } from "@tanstack/react-query"
 import { Link, useLocation } from "@tanstack/react-router"
-import * as lucideReact from "lucide-react"
+import { BarChart3, Home, LogOut, PlusCircle, Settings } from "lucide-react"
 
+import { logout } from "../lib/queries"
 import { cn } from "../lib/utils"
-import { Button } from "./ui/button"
 import {
 	Sidebar,
 	SidebarContent,
@@ -19,33 +20,44 @@ const items = [
 	{
 		title: "Dashboard",
 		url: "/dashboard",
-		icon: lucideReact.Home,
+		icon: Home,
 	},
 	{
 		title: "Mis Resultados",
 		url: "/resultados",
-		icon: lucideReact.BarChart3,
+		icon: BarChart3,
 	},
 	{
 		title: "Nueva Evaluación",
 		url: "/evaluacion",
-		icon: lucideReact.PlusCircle,
+		icon: PlusCircle,
 	},
 	{
 		title: "Ajustes",
 		url: "/ajustes",
-		icon: lucideReact.Settings,
+		icon: Settings,
 	},
 ]
 
-export function AppSidebar() {
+export function AppSidebar({ handleExit }: { handleExit: () => void }) {
 	const { pathname } = useLocation()
+
+	const { mutate } = useMutation({
+		mutationFn: logout,
+		onSuccess: () => {
+			handleExit()
+		},
+	})
+
+	function handleLogout() {
+		mutate()
+	}
 
 	return (
 		<Sidebar className="bg-slate-50 p-4">
 			<SidebarContent>
 				<SidebarGroup />
-				<SidebarGroupLabel>Circula</SidebarGroupLabel>
+				<SidebarGroupLabel>The circular hub</SidebarGroupLabel>
 				<SidebarGroupContent>
 					<SidebarMenu>
 						<SidebarMenuItem className="grid w-full gap-2">
@@ -64,13 +76,12 @@ export function AppSidebar() {
 									</Link>
 								</SidebarMenuButton>
 							))}
-							<SidebarMenuButton>
-								<Button
-									variant="ghost"
-									className="justify-start text-red-500 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/20">
-									<lucideReact.LogOut className="mr-2 h-5 w-5" />
-									Sign Out
-								</Button>
+							<SidebarMenuButton
+								variant="outline"
+								onClick={handleLogout}
+								className="justify-start bg-slate-50 text-red-500 hover:cursor-pointer hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/20">
+								<LogOut className="mr-2 h-5 w-5" />
+								Sign Out
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>

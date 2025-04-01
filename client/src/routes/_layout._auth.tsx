@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, redirect, useLocation } from "@tanstack/react-router"
+import { createFileRoute, Outlet, redirect, useLocation, useNavigate } from "@tanstack/react-router"
 import { useEffect } from "react"
 
 import { AppSidebar } from "../components/app-sidebar"
@@ -34,16 +34,24 @@ export const Route = createFileRoute("/_layout/_auth")({
 function AuthRoute() {
 	const { paths } = useStore()
 	const { pathname } = useLocation()
-	const { store } = Route.useRouteContext()
+	const { store, queryClient } = Route.useRouteContext()
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		store.setPaths(pathname)
 	}, [pathname])
 
+	function handleExit() {
+		store.quit()
+		queryClient.invalidateQueries({ queryKey: ["auth"] })
+
+		navigate({ to: "/" })
+	}
+
 	return (
 		<>
 			<SidebarProvider>
-				<AppSidebar />
+				<AppSidebar handleExit={handleExit} />
 				<SidebarTrigger />
 				<div className="flex w-full flex-col gap-6 p-1">
 					<Breadcrumbs breadcrumbs={paths?.links} current={paths?.current} />
