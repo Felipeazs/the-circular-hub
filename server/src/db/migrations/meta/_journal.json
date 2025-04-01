@@ -43,6 +43,13 @@
       "when": 1743514844604,
       "tag": "0005_natural_guardsmen",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1743518831232,
+      "tag": "0006_gigantic_landau",
+      "breakpoints": true
     }
   ]
 }

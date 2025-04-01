@@ -21,7 +21,9 @@ export const usuario = pgTable(
 		organizacion: text("organizacion"),
 		rut: text("rut"),
 		password: text("password").notNull(),
-		roles: text({ enum: ["super_admin", "admin", "user"] }).array(),
+		roles: text({ enum: ["super_admin", "admin", "user"] })
+			.array()
+			.default(["user"]),
 		image: text("image"),
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at"),

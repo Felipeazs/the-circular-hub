@@ -81,7 +81,7 @@ const app = new Hono<AppEnv>()
 					rut,
 					email,
 					organizacion,
-					roles,
+					roles: roles?.length ? roles : ["user"],
 					image: dbimage as string,
 				}),
 			)
