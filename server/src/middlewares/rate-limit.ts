@@ -1,4 +1,5 @@
-import { getConnInfo } from "hono/bun"
+import { getConnInfo } from "@hono/node-server/conninfo"
+import { getConnInfo as getBunConnInfo } from "hono/bun"
 import { createMiddleware } from "hono/factory"
 import { HTTPException } from "hono/http-exception"
 
@@ -15,7 +16,7 @@ import { env } from "../t3-env"
 import { tryCatch } from "../utils/try-catch"
 
 export default createMiddleware(async (c, next) => {
-	const id = getConnInfo(c).remote.address ?? ""
+	const id = getBunConnInfo(c)?.remote.address ?? getConnInfo(c).remote.address
 	console.warn(id)
 	const key = `${id}:rate_limit`
 
