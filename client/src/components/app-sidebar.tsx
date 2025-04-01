@@ -1,9 +1,8 @@
-import { Link } from "@tanstack/react-router"
-import { Calendar, Construction, Home, Inbox, Settings, User } from "lucide-react"
+import { Link, useLocation } from "@tanstack/react-router"
+import * as lucideReact from "lucide-react"
 
-import type { AuthUsuario } from "../lib/queries"
-
-import { hasPermission } from "../lib/permission"
+import { cn } from "../lib/utils"
+import { Button } from "./ui/button"
 import {
 	Sidebar,
 	SidebarContent,
@@ -18,60 +17,60 @@ import {
 
 const items = [
 	{
-		title: "Console",
-		url: "#",
-		icon: Construction,
+		title: "Dashboard",
+		url: "/dashboard",
+		icon: lucideReact.Home,
+	},
+	{
+		title: "Mis Resultados",
+		url: "/resultados",
+		icon: lucideReact.BarChart3,
+	},
+	{
+		title: "Nueva Evaluación",
+		url: "/evaluacion",
+		icon: lucideReact.PlusCircle,
+	},
+	{
+		title: "Ajustes",
+		url: "/ajustes",
+		icon: lucideReact.Settings,
 	},
 ]
 
-export function AppSidebar({ usuario }: { usuario: AuthUsuario }) {
+export function AppSidebar() {
+	const { pathname } = useLocation()
+
 	return (
-		<Sidebar>
+		<Sidebar className="bg-slate-50 p-4">
 			<SidebarContent>
 				<SidebarGroup />
 				<SidebarGroupLabel>Circula</SidebarGroupLabel>
 				<SidebarGroupContent>
 					<SidebarMenu>
-						<SidebarMenuItem>
-							<SidebarMenuButton asChild>
-								<Link to="/profile">
-									<User />
-									<span>Profile</span>
-								</Link>
-							</SidebarMenuButton>
-							<SidebarMenuButton asChild>
-								<Link to="/dashboard">
-									<Home />
-									<span>Dashboard</span>
-								</Link>
-							</SidebarMenuButton>
+						<SidebarMenuItem className="grid w-full gap-2">
 							{items.map((item) => (
-								<SidebarMenuButton key={item.title} asChild>
-									{hasPermission(usuario, "sidebar", "view") && (
-										<a href={item.url}>
-											<item.icon />
-											<span>{item.title}</span>
-										</a>
+								<SidebarMenuButton
+									key={item.title}
+									className={cn(
+										"w-full justify-start",
+										pathname === item.url && "bg-muted font-medium",
 									)}
+									variant={pathname === item.url ? "outline" : "default"}
+									asChild>
+									<Link to={item.url}>
+										<item.icon />
+										<span>{item.title}</span>
+									</Link>
 								</SidebarMenuButton>
 							))}
-							<SidebarMenuButton asChild>
-								<Link to="/">
-									<Inbox />
-									<span>Inbox</span>
-								</Link>
-							</SidebarMenuButton>
-							<SidebarMenuButton asChild>
-								<Link to="/">
-									<Calendar />
-									<span>Calendar</span>
-								</Link>
-							</SidebarMenuButton>
-							<SidebarMenuButton asChild>
-								<Link to="/">
-									<Settings />
-									<span>Settings</span>
-								</Link>
+							<SidebarMenuButton>
+								<Button
+									variant="ghost"
+									className="justify-start text-red-500 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/20">
+									<lucideReact.LogOut className="mr-2 h-5 w-5" />
+									Sign Out
+								</Button>
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>

@@ -32,6 +32,7 @@ export default function createConfig(options, ...userConfigs) {
 					1,
 					{ selfClosing: "tag-aligned", nonEmpty: "after-props" },
 				],
+				"style/jsx-one-expression-per-line": "off",
 				"style/arrow-parens": "off",
 				"style/quote-props": "off",
 				"style/brace-style": "off",

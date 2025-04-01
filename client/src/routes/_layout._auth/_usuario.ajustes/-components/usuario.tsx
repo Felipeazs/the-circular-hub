@@ -67,7 +67,7 @@ export function UsuarioCard({ data, ctx }: UsuarioProps) {
 				<hr className="p-5" />
 				<CardFooter className="flex justify-center">
 					<Link
-						to="/profile/edit"
+						to="/ajustes/edit"
 						className={buttonVariants({
 							size: "sm",
 						})}

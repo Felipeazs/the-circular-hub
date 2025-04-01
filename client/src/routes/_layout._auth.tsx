@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_layout/_auth")({
 function AuthRoute() {
 	const { paths } = useStore()
 	const { pathname } = useLocation()
-	const { usuario: usuarioCtx, store } = Route.useRouteContext()
+	const { store } = Route.useRouteContext()
 
 	useEffect(() => {
 		store.setPaths(pathname)
@@ -43,11 +43,11 @@ function AuthRoute() {
 	return (
 		<>
 			<SidebarProvider>
-				<AppSidebar usuario={usuarioCtx!} />
+				<AppSidebar />
 				<SidebarTrigger />
-				<div className="flex w-full flex-col p-1">
+				<div className="flex w-full flex-col gap-6 p-1">
 					<Breadcrumbs breadcrumbs={paths?.links} current={paths?.current} />
-					<main className="flex w-full items-center justify-baseline p-5">
+					<main className="flex w-full items-center justify-baseline">
 						<Outlet />
 					</main>
 				</div>

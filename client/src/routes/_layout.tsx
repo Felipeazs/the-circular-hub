@@ -40,7 +40,7 @@ function RouteComponent() {
 	}
 
 	return (
-		<div className="max-h-screen overflow-y-hidden bg-slate-300">
+		<div className="max-h-screen overflow-y-auto bg-slate-300">
 			<div className="flex h-[48px] items-center justify-between gap-4 px-20 py-2">
 				<Link to="/" className="font-bold uppercase" viewTransition>
 					Monorepo
@@ -61,7 +61,7 @@ function RouteComponent() {
 								</AvatarFallback>
 								<DropdownMenuContent>
 									<DropdownMenuItem>
-										<Link to="/profile" className="w-full">
+										<Link to="/ajustes" className="w-full">
 											Profile
 										</Link>
 									</DropdownMenuItem>
