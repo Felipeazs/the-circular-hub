@@ -34,7 +34,7 @@ export function UsuarioCard({ data, ctx }: UsuarioProps) {
 					<CardDescription>{data?.email}</CardDescription>
 				</div>
 				<Avatar className="h-[50px] w-[50px]">
-					<AvatarImage src={data?.image} alt="profile-image"></AvatarImage>
+					<AvatarImage src={data?.image ?? ""} alt="profile-image"></AvatarImage>
 					<AvatarFallback>
 						{data?.nombre?.substring(0, 1)?.toUpperCase() ?? "N"}
 						{data?.apellido?.substring(0, 1)?.toUpperCase() ?? "N"}

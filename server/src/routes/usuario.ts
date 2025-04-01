@@ -60,11 +60,11 @@ const app = new Hono<AppEnv>()
 		async (c) => {
 			const usuario = c.get("usuario")
 
-			const { email, roles, image } = c.req.valid("form")
+			const { nombre, apellido, rut, email, organizacion, roles, image } = c.req.valid("form")
 
-			let dbimage = image as any
-			if (dbimage instanceof File) {
-				const arrayBuf = await dbimage.arrayBuffer()
+			let dbimage = image
+			if (image instanceof File) {
+				const arrayBuf = await image.arrayBuffer()
 				const buffer = Buffer.from(arrayBuf).toString("base64")
 				const { data: cloud, error } = await tryCatch(uploadImage(buffer!, usuario.id, "profile"))
 				if (error) {
@@ -76,9 +76,13 @@ const app = new Hono<AppEnv>()
 
 			const { data: usuarioFound, error: dbUpdateError } = await tryCatch(
 				db.update(usuarioTable).set({
+					nombre,
+					apellido,
+					rut,
 					email,
+					organizacion,
 					roles,
-					image: dbimage,
+					image: dbimage as string,
 				}),
 			)
 			if (dbUpdateError) {

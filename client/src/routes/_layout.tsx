@@ -54,7 +54,7 @@ function RouteComponent() {
 					<Avatar>
 						<DropdownMenu>
 							<DropdownMenuTrigger className="hover:cursor-pointer">
-								<AvatarImage src={data?.image} width={32} height={32} alt="profile-image" />
+								<AvatarImage src={data?.image ?? ""} width={32} height={32} alt="profile-image" />
 								<AvatarFallback>
 									{data?.nombre?.substring(0, 1)?.toUpperCase() ?? "N"}
 									{data?.apellido?.substring(0, 1)?.toUpperCase() ?? "N"}
