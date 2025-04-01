@@ -13,7 +13,7 @@ export function About() {
 		<div className="flex w-full justify-center gap-5 pt-5">
 			<Card>
 				<CardHeader>
-					<CardTitle>Login</CardTitle>
+					<CardTitle>Log in</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<Login />
@@ -21,7 +21,7 @@ export function About() {
 			</Card>
 			<Card>
 				<CardHeader>
-					<CardTitle>Register</CardTitle>
+					<CardTitle>Regístrate</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<Signup />

@@ -41,7 +41,7 @@ export function Login() {
 
 	return (
 		<form
-			className="flex w-[250px] flex-col gap-5"
+			className="flex w-full flex-col gap-5"
 			onSubmit={(e) => {
 				e.preventDefault()
 				e.stopPropagation()

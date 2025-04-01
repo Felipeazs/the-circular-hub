@@ -46,7 +46,7 @@ function RouteComponent() {
 	}
 
 	return (
-		<div className="max-h-screen overflow-y-auto">
+		<div className="min-h-screen overflow-y-auto">
 			<div className="flex h-[48px] items-center justify-between gap-4 px-20 py-2">
 				<Link to="/" className="font-bold uppercase" viewTransition>
 					The circula hub
@@ -97,10 +97,35 @@ function RouteComponent() {
 			<div className="h-1">
 				<ProgressBar status={isFetching || isMutating} min={isLoggedIn ? 25 : 0} />
 			</div>
-			<div className="min-h-screen bg-slate-50">
+			<div className="min-h-screen">
 				<hr />
 				<Outlet />
 			</div>
+			{/* Footer */}
+			<footer className="absolute z-10 my-6 w-full border-t bg-white py-6 md:py-0">
+				<div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+					<p className="text-muted-foreground text-center text-sm leading-loose md:text-left">
+						© 2025 AssessmentPro. All rights reserved.
+					</p>
+					<div className="flex gap-4">
+						<Link
+							to="/"
+							className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
+							Terms
+						</Link>
+						<Link
+							to="/"
+							className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
+							Privacy
+						</Link>
+						<Link
+							to="/"
+							className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
+							Contact
+						</Link>
+					</div>
+				</div>
+			</footer>
 		</div>
 	)
 }
