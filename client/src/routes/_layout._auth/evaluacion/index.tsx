@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_layout/_auth/evaluacion/")({
 })
 
 type Answers = {
-	[key: string]: "yes" | "no" | null
+	[key: string]: "si" | "no" | null
 }
 
 function RouteComponent() {
@@ -19,9 +19,9 @@ function RouteComponent() {
 	return (
 		<div className="w-[80%] space-y-6">
 			<div>
-				<h1 className="text-3xl font-bold tracking-tight">New Assessment</h1>
+				<h1 className="text-3xl font-bold tracking-tight">Nueva Evaluación</h1>
 				<p className="text-muted-foreground mt-2">
-					Complete the questionnaire below to receive your personalized results.
+					Completa el cuestionario para recivir resultados personalizados
 				</p>
 			</div>
 			<Preguntas saveForm={saveForm} />
