@@ -1,4 +1,5 @@
 import type {
+	CreateRespuestas,
 	EditUsuario,
 	LoginUsuario,
 	Respuestas,
@@ -187,7 +188,7 @@ export async function editMe(data: EditUsuario): Promise<string | null> {
 	)
 }
 
-export async function saveRespuestas(respuestas: Respuestas) {
+export async function saveRespuestas(respuestas: CreateRespuestas) {
 	return fetchWithAuth().then((token) =>
 		client.api.respuestas
 			.$post(
@@ -208,4 +209,31 @@ export async function saveRespuestas(respuestas: Respuestas) {
 				return json
 			}),
 	)
+}
+
+export async function getRespuestas(): Promise<Respuestas[] | null> {
+	return fetchWithAuth().then((token) =>
+		client.api.respuestas
+			.$get({}, { headers: { Authorization: `Bearer ${token}` } })
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return SuperJSON.parse(json.respuestas)
+			}),
+	)
+}
+export const getRespuestasOptions = (id: string | undefined) => {
+	return queryOptions({
+		queryKey: ["respuestas", id],
+		queryFn: getRespuestas,
+		enabled: !!id,
+		staleTime: Infinity,
+		throwOnError: true,
+	})
 }

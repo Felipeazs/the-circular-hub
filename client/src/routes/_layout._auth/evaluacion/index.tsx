@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
 
 import { saveRespuestas } from "@/client/lib/queries"
 
@@ -10,12 +10,16 @@ export const Route = createFileRoute("/_layout/_auth/evaluacion/")({
 })
 
 type Answers = {
-	[key: string]: "si" | "no" | null
+	[key: string]: "si" | "no" | null | undefined
 }
 
 function RouteComponent() {
+	const navigate = useNavigate()
 	const { mutate } = useMutation({
 		mutationFn: saveRespuestas,
+		onSuccess: (data) => {
+			navigate({ to: `/resultados/${data.id}` })
+		},
 	})
 	function saveForm(form: Answers) {
 		console.warn(form)
@@ -25,7 +29,7 @@ function RouteComponent() {
 		// Luego de guardar redireccionar a /resultados/$id
 	}
 	return (
-		<div className="w-[80%] space-y-6">
+		<div className="w-[90%] space-y-6">
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">Nueva Evaluación</h1>
 				<p className="text-muted-foreground mt-2">

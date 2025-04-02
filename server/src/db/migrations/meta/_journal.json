@@ -78,6 +78,20 @@
       "when": 1743600737508,
       "tag": "0010_wandering_giant_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1743605274331,
+      "tag": "0011_salty_revanche",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1743611957073,
+      "tag": "0012_shocking_tempest",
+      "breakpoints": true
     }
   ]
 }

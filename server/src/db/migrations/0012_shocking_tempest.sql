@@ -1,0 +1,1 @@
+ALTER TABLE "respuestas" ADD COLUMN "ge_3" text;

@@ -51,6 +51,7 @@ export const respuesta = pgTable(
 		extension_reparabilidad_3: text("er_3", { enum: ["si", "no"] }),
 		gestion_estrategia_1: text("ge_1", { enum: ["si", "no"] }),
 		gestion_estrategia_2: text("ge_2", { enum: ["si", "no"] }),
+		gestion_estrategia_3: text("ge_3", { enum: ["si", "no"] }),
 		gestion_recursos_1: text("gr_1", { enum: ["si", "no"] }),
 		gestion_recursos_2: text("gr_2", { enum: ["si", "no"] }),
 		gestion_recursos_3: text("gr_3", { enum: ["si", "no"] }),
@@ -126,8 +127,12 @@ export const usuarioSchema = createSelectSchema(usuario).omit({
 	password: true,
 })
 
-export const respuestasSchema = createInsertSchema(respuesta).omit({
+export const respuestasSchema = createSelectSchema(respuesta).omit({
+	usuarioId: true,
+})
+export const createRespuestasSchema = createInsertSchema(respuesta).omit({
 	id: true,
+	usuarioId: true,
 	createdAt: true,
 	updatedAt: true,
 })
@@ -138,3 +143,4 @@ export type SignupUsuario = z.infer<typeof signupSchema>
 export type EditUsuario = z.infer<typeof editUsuarioSchema>
 
 export type Respuestas = z.infer<typeof respuestasSchema>
+export type CreateRespuestas = z.infer<typeof createRespuestasSchema>

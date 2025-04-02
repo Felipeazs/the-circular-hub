@@ -314,7 +314,7 @@ const questions: Question[] = [
 	},
 	{
 		id: "gestion_residuos_2",
-		text: "¿Qué hace actualmente la empresa con los residuos generados (pago por retiro, entrega a terceros, tratamiento interno)?",
+		text: "¿Actualmente, la empresa gestiona los residuos generados (pago por retiro, entrega a terceros, tratamiento interno)?",
 		category: "gestion_residuos",
 	},
 	{
@@ -560,28 +560,66 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 		)
 	}
 	return (
-		<div className="mx-auto w-full max-w-3xl">
-			{!showSummary && (
-				<div className="mb-6">
-					<div className="mb-2 flex items-center justify-between">
-						<p className="text-muted-foreground text-sm">
-							Categoria {currentCategoryIndex + 1} de {categories.length}
-						</p>
-						<p className="text-sm font-medium">
-							{Math.round((currentCategoryIndex / categories.length) * 100)}% Completado
-						</p>
+		<div className="flex gap-10">
+			<div className="mx-auto w-full max-w-3xl">
+				{!showSummary && (
+					<div className="mb-6">
+						<div className="mb-2 flex items-center justify-between">
+							<p className="text-muted-foreground text-sm">
+								Categoria {currentCategoryIndex + 1} de {categories.length}
+							</p>
+							<p className="text-sm font-medium">
+								{Math.round((currentCategoryIndex / categories.length) * 100)}% Completado
+							</p>
+						</div>
+						<div className="bg-muted h-2 w-full rounded-full">
+							<div
+								className="bg-primary h-2 rounded-full transition-all duration-300"
+								style={{ width: `${(currentCategoryIndex / categories.length) * 100}%` }}
+							/>
+						</div>
 					</div>
-					<div className="bg-muted h-2 w-full rounded-full">
-						<div
-							className="bg-primary h-2 rounded-full transition-all duration-300"
-							style={{ width: `${(currentCategoryIndex / categories.length) * 100}%` }}
-						/>
-					</div>
-				</div>
-			)}
+				)}
+
+				<Card className="flex w-full">
+					{showSummary ? renderSummary() : renderCategoryQuestions()}
+
+					<CardFooter className="flex justify-between pt-6">
+						{!showSummary ? (
+							<>
+								<Button
+									variant="outline"
+									onClick={prevCategory}
+									disabled={currentCategoryIndex === 0}>
+									Anterior
+								</Button>
+								<Button onClick={nextCategory} disabled={!isCurrentCategoryComplete()}>
+									{currentCategoryIndex === categories.length - 1 ? "Ver Resumen" : "Siguiente"}
+								</Button>
+							</>
+						) : (
+							<>
+								<Button
+									variant="outline"
+									onClick={prevCategory}
+									disabled={currentCategoryIndex === 0}
+									className="mx-auto">
+									Editar Respuestas
+								</Button>
+								<Button variant="outline" onClick={handleSaveForm} className="mx-auto">
+									Guardar
+								</Button>
+								<Button variant="outline" onClick={resetForm} className="mx-auto">
+									Reiniciar
+								</Button>
+							</>
+						)}
+					</CardFooter>
+				</Card>
+			</div>
 
 			{!showSummary && (
-				<div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-5">
+				<div className="grid w-[40%] grid-cols-1 gap-2">
 					{categories.map((category, index) => {
 						const status = getCategoryCompletionStatus(category.id)
 						return (
@@ -606,42 +644,6 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 					})}
 				</div>
 			)}
-
-			<Card className="w-full">
-				{showSummary ? renderSummary() : renderCategoryQuestions()}
-
-				<CardFooter className="flex justify-between pt-6">
-					{!showSummary ? (
-						<>
-							<Button
-								variant="outline"
-								onClick={prevCategory}
-								disabled={currentCategoryIndex === 0}>
-								Anterior
-							</Button>
-							<Button onClick={nextCategory} disabled={!isCurrentCategoryComplete()}>
-								{currentCategoryIndex === categories.length - 1 ? "Ver Resumen" : "Siguiente"}
-							</Button>
-						</>
-					) : (
-						<>
-							<Button
-								variant="outline"
-								onClick={prevCategory}
-								disabled={currentCategoryIndex === 0}
-								className="mx-auto">
-								Editar Respuestas
-							</Button>
-							<Button variant="outline" onClick={handleSaveForm} className="mx-auto">
-								Guardar
-							</Button>
-							<Button variant="outline" onClick={resetForm} className="mx-auto">
-								Reiniciar
-							</Button>
-						</>
-					)}
-				</CardFooter>
-			</Card>
 		</div>
 	)
 }
