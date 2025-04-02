@@ -1,20 +1,15 @@
+import { createId } from "@paralleldrive/cuid2"
 import { relations } from "drizzle-orm"
-import {
-	boolean,
-	integer,
-	pgTable,
-	serial,
-	text,
-	timestamp,
-	uniqueIndex,
-} from "drizzle-orm/pg-core"
+import { pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { z } from "zod"
 
 export const usuario = pgTable(
 	"usuarios",
 	{
-		id: serial("id").primaryKey(),
+		id: text("id")
+			.primaryKey()
+			.$defaultFn(() => createId()),
 		nombre: text("nombre"),
 		apellido: text("apellido"),
 		email: text("email").notNull(),
@@ -26,7 +21,7 @@ export const usuario = pgTable(
 			.default(["user"]),
 		image: text("image"),
 		createdAt: timestamp("created_at").defaultNow().notNull(),
-		updatedAt: timestamp("updated_at"),
+		updatedAt: timestamp("updated_at").$onUpdateFn(() => new Date()),
 	},
 	(table) => {
 		return [uniqueIndex("email_idx").on(table.email)]
@@ -36,16 +31,43 @@ export const usuario = pgTable(
 export const respuesta = pgTable(
 	"respuestas",
 	{
-		id: serial("id").primaryKey(),
-		usuarioId: integer("usuario_id"),
-		gestion_organizacional_1: boolean("go_1"),
-		gestion_organizacional_2: boolean("go_2"),
-		gestion_organizacional_3: boolean("go_3"),
-		createdAt: timestamp().defaultNow().notNull(),
-		updatedAt: timestamp(),
+		id: text("id")
+			.primaryKey()
+			.$defaultFn(() => createId()),
+		usuarioId: text("usuario_id"),
+		colaboracion_1: text("cl_1", { enum: ["si", "no"] }),
+		colaboracion_2: text("cl_2", { enum: ["si", "no"] }),
+		colaboracion_3: text("cl_3", { enum: ["si", "no"] }),
+		diseno_circular_1: text("ds_1", { enum: ["si", "no"] }),
+		diseno_circular_2: text("ds_2", { enum: ["si", "no"] }),
+		diseno_circular_3: text("ds_3", { enum: ["si", "no"] }),
+		educacion_sensibilizacion_1: text("es_1", { enum: ["si", "no"] }),
+		educacion_sensibilizacion_2: text("es_2", { enum: ["si", "no"] }),
+		educacion_sensibilizacion_3: text("es_3", { enum: ["si", "no"] }),
+		energia_eficiencia_1: text("ee_1", { enum: ["si", "no"] }),
+		energia_eficiencia_2: text("ee_2", { enum: ["si", "no"] }),
+		extension_reparabilidad_1: text("er_1", { enum: ["si", "no"] }),
+		extension_reparabilidad_2: text("er_2", { enum: ["si", "no"] }),
+		extension_reparabilidad_3: text("er_3", { enum: ["si", "no"] }),
+		gestion_estrategia_1: text("ge_1", { enum: ["si", "no"] }),
+		gestion_estrategia_2: text("ge_2", { enum: ["si", "no"] }),
+		gestion_recursos_1: text("gr_1", { enum: ["si", "no"] }),
+		gestion_recursos_2: text("gr_2", { enum: ["si", "no"] }),
+		gestion_recursos_3: text("gr_3", { enum: ["si", "no"] }),
+		gestion_residuos_1: text("gs_1", { enum: ["si", "no"] }),
+		gestion_residuos_2: text("gs_2", { enum: ["si", "no"] }),
+		gestion_residuos_3: text("gs_3", { enum: ["si", "no"] }),
+		impacto_ambiental_1: text("ia_1", { enum: ["si", "no"] }),
+		impacto_ambiental_2: text("ia_2", { enum: ["si", "no"] }),
+		impacto_ambiental_3: text("ia_3", { enum: ["si", "no"] }),
+		vinculacion_1: text("v_1", { enum: ["si", "no"] }),
+		vinculacion_2: text("v_2", { enum: ["si", "no"] }),
+		vinculacion_3: text("v_3", { enum: ["si", "no"] }),
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").$onUpdateFn(() => new Date()),
 	},
 	(table) => {
-		return [uniqueIndex("usuario_idx").on(table.usuarioId)]
+		return [uniqueIndex("idx").on(table.id)]
 	},
 )
 
@@ -103,7 +125,16 @@ export const editUsuarioSchema = createInsertSchema(usuario, {
 export const usuarioSchema = createSelectSchema(usuario).omit({
 	password: true,
 })
+
+export const respuestasSchema = createInsertSchema(respuesta).omit({
+	id: true,
+	createdAt: true,
+	updatedAt: true,
+})
+
 export type Usuario = z.infer<typeof usuarioSchema>
 export type LoginUsuario = z.infer<typeof loginSchema>
 export type SignupUsuario = z.infer<typeof signupSchema>
 export type EditUsuario = z.infer<typeof editUsuarioSchema>
+
+export type Respuestas = z.infer<typeof respuestasSchema>

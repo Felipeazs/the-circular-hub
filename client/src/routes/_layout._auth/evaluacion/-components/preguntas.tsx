@@ -338,17 +338,17 @@ const questions: Question[] = [
 		category: "diseno_circular",
 	},
 	{
-		id: "calaboracion_1",
+		id: "colaboracion_1",
 		text: "¿Existen iniciativas para compratir maquinaria y servcios a mayor escala con otras empresas?",
 		category: "colaboracion",
 	},
 	{
-		id: "calaboracion_2",
+		id: "colaboracion_2",
 		text: "¿Podrían las salidas (residuos) de una organización del entorno ser utilizadas como recurosos para la empresa?",
 		category: "colaboracion",
 	},
 	{
-		id: "calaboracion_3",
+		id: "colaboracion_3",
 		text: "¿Se identifican beneficios al compratir servicios y almacenamiento con otras organizaciones del entorno?",
 		category: "colaboracion",
 	},
@@ -581,7 +581,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 			)}
 
 			{!showSummary && (
-				<div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+				<div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-5">
 					{categories.map((category, index) => {
 						const status = getCategoryCompletionStatus(category.id)
 						return (

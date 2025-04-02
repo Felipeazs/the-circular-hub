@@ -57,6 +57,27 @@
       "when": 1743520191574,
       "tag": "0007_young_luke_cage",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1743599079882,
+      "tag": "0008_dazzling_texas_twister",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1743600122602,
+      "tag": "0009_futuristic_dragon_lord",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1743600737508,
+      "tag": "0010_wandering_giant_girl",
+      "breakpoints": true
     }
   ]
 }

@@ -7,8 +7,8 @@ import rateLimit from "../middlewares/rate-limit"
 import authMe from "./auth"
 import login from "./login"
 import logout from "./logout"
-import producto_route from "./producto"
 import refresh from "./refresh"
+import respuestas_route from "./respuestas"
 import signup from "./signup"
 import usuario_route from "./usuario"
 
@@ -27,7 +27,7 @@ export function registerRoutes(app: AppAPI) {
 		.route("/auth", authMe)
 		.route("/refresh", refresh)
 		.route("/usuario", usuario_route)
-		.route("/producto", producto_route)
+		.route("/respuestas", respuestas_route)
 }
 
 // to use in client api

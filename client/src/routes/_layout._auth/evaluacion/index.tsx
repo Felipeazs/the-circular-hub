@@ -1,4 +1,7 @@
+import { useMutation } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
+
+import { saveRespuestas } from "@/client/lib/queries"
 
 import { Preguntas } from "./-components/preguntas"
 
@@ -11,9 +14,14 @@ type Answers = {
 }
 
 function RouteComponent() {
+	const { mutate } = useMutation({
+		mutationFn: saveRespuestas,
+	})
 	function saveForm(form: Answers) {
 		console.warn(form)
-		// Guardar formulario en bd
+
+		mutate(form)
+
 		// Luego de guardar redireccionar a /resultados/$id
 	}
 	return (
@@ -21,7 +29,7 @@ function RouteComponent() {
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">Nueva Evaluación</h1>
 				<p className="text-muted-foreground mt-2">
-					Completa el cuestionario para recivir resultados personalizados
+					Completa el cuestionario para recibir resultados personalizados
 				</p>
 			</div>
 			<Preguntas saveForm={saveForm} />

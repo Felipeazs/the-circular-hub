@@ -1,4 +1,10 @@
-import type { EditUsuario, LoginUsuario, SignupUsuario, Usuario } from "@monorepo/server/db"
+import type {
+	EditUsuario,
+	LoginUsuario,
+	Respuestas,
+	SignupUsuario,
+	Usuario,
+} from "@monorepo/server/db"
 
 import { queryOptions } from "@tanstack/react-query"
 import SuperJSON from "superjson"
@@ -177,6 +183,29 @@ export async function editMe(data: EditUsuario): Promise<string | null> {
 				}
 
 				return json.status
+			}),
+	)
+}
+
+export async function saveRespuestas(respuestas: Respuestas) {
+	return fetchWithAuth().then((token) =>
+		client.api.respuestas
+			.$post(
+				{
+					json: respuestas,
+				},
+				{ headers: { Authorization: `Bearer ${token}` } },
+			)
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return json
 			}),
 	)
 }
