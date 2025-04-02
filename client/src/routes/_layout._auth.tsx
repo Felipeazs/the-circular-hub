@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_layout/_auth")({
 
 			await logout().then(() =>
 				redirect({
-					to: "/about",
+					to: "/login",
 					throw: true,
 				}),
 			)
