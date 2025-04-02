@@ -52,13 +52,14 @@ function RouteComponent() {
 					The circula hub
 				</Link>
 				{!isLoggedIn && (
-					<Link
-						to="/about"
-						activeProps={{ className: "font-bold" }}
-						className={buttonVariants({ variant: "outline" })}
-						viewTransition>
-						Log in
-					</Link>
+					<div className="flex gap-2">
+						<Link to="/login" className={buttonVariants({ variant: "outline" })} viewTransition>
+							Log in
+						</Link>
+						<Link to="/registro" className={buttonVariants({ variant: "default" })} viewTransition>
+							Regístrate
+						</Link>
+					</div>
 				)}
 				{isLoggedIn && (
 					<Avatar>
