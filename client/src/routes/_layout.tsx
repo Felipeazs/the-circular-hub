@@ -1,5 +1,6 @@
-import { useIsFetching, useIsMutating, useMutation } from "@tanstack/react-query"
-import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router"
+import { useIsFetching, useIsMutating } from "@tanstack/react-query"
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router"
+import { Settings } from "lucide-react"
 
 import { ProgressBar } from "../components/progress-bar"
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
@@ -9,7 +10,6 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu"
-import { logout } from "../lib/queries"
 import { buttonVariants } from "../lib/utils"
 import { useStore } from "../store"
 
@@ -18,32 +18,9 @@ export const Route = createFileRoute("/_layout")({
 })
 
 function RouteComponent() {
-	const { queryClient } = Route.useRouteContext()
-	const { isLoggedIn, usuario: data, quit } = useStore((state) => state)
+	const { isLoggedIn, usuario: data } = useStore((state) => state)
 	const isFetching = useIsFetching()
 	const isMutating = useIsMutating()
-
-	const navigate = useNavigate()
-
-	const { mutate } = useMutation({
-		mutationFn: logout,
-		onSuccess: () => {
-			quit()
-			queryClient.invalidateQueries({ queryKey: ["auth"] })
-
-			navigate({ to: "/" })
-		},
-		onError: () => {
-			quit()
-			queryClient.invalidateQueries({ queryKey: ["auth"] })
-
-			navigate({ to: "/" })
-		},
-	})
-
-	const handleLogout = () => {
-		mutate()
-	}
 
 	return (
 		<div className="min-h-screen overflow-y-auto">
@@ -72,22 +49,10 @@ function RouteComponent() {
 								</AvatarFallback>
 								<DropdownMenuContent>
 									<DropdownMenuItem>
-										<Link to="/" className="w-full">
-											Home
+										<Link to="/ajustes" className="flex w-full items-center gap-2">
+											<Settings />
+											<span>Cuenta</span>
 										</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem>
-										<Link to="/dashboard" className="w-full">
-											Dashboard
-										</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem>
-										<Link to="/ajustes" className="w-full">
-											Settings
-										</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem className="w-full hover:cursor-pointer" onClick={handleLogout}>
-										Logout
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenuTrigger>

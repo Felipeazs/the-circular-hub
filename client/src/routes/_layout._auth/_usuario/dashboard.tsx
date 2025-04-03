@@ -13,7 +13,7 @@ import {
 import { useStore } from "@/client/store"
 import { recentResult } from "@/client/utils/resultados"
 
-export const Route = createFileRoute("/_layout/_auth/_resultados/dashboard")({
+export const Route = createFileRoute("/_layout/_auth/_usuario/dashboard")({
 	component: RouteComponent,
 })
 

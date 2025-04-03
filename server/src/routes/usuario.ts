@@ -60,7 +60,7 @@ const app = new Hono<AppEnv>()
 		async (c) => {
 			const usuario = c.get("usuario")
 
-			const { nombre, apellido, rut, email, organizacion, roles, image } = c.req.valid("form")
+			const { nombre, apellido, email, rut, organizacion, roles, image } = c.req.valid("form")
 
 			let dbimage = image
 			if (image instanceof File) {
@@ -75,15 +75,18 @@ const app = new Hono<AppEnv>()
 			}
 
 			const { data: usuarioFound, error: dbUpdateError } = await tryCatch(
-				db.update(usuarioTable).set({
-					nombre,
-					apellido,
-					rut,
-					email,
-					organizacion,
-					roles: typeof roles === "string" ? ["user"] : roles,
-					image: dbimage as string,
-				}),
+				db
+					.update(usuarioTable)
+					.set({
+						nombre,
+						apellido,
+						email,
+						rut,
+						organizacion,
+						roles: typeof roles === "string" ? ["user"] : roles,
+						image: dbimage as string,
+					})
+					.where(eq(usuarioTable.id, usuario.id)),
 			)
 			if (dbUpdateError) {
 				throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, {

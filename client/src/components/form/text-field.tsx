@@ -12,7 +12,7 @@ type TextFieldProps = {
 export function TextField({ label, type = "text" }: TextFieldProps) {
 	const field = useFieldContext<string>()
 	return (
-		<label>
+		<label className="space-y-2">
 			<Label>{label}</Label>
 			<Input
 				type={type}

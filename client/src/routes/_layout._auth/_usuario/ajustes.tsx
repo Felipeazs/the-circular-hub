@@ -4,10 +4,13 @@ import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
 import { toast } from "sonner"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/client/components/ui/avatar"
+import { Button } from "@/client/components/ui/button"
 import {
 	Card,
 	CardContent,
 	CardDescription,
+	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/client/components/ui/card"
@@ -18,7 +21,7 @@ import { hasPermission } from "@/client/lib/permission"
 import { editMe } from "@/client/lib/queries"
 import { useStore } from "@/client/store"
 
-export const Route = createFileRoute("/_layout/_auth/_usuario/ajustes/edit")({
+export const Route = createFileRoute("/_layout/_auth/_usuario/ajustes")({
 	component: RouteComponent,
 })
 
@@ -56,20 +59,39 @@ function RouteComponent() {
 	})
 
 	return (
-		<main className="w-full p-5">
-			<Card className="w-[500px]">
-				<CardHeader>
-					<CardTitle>Editar</CardTitle>
-					<CardDescription>editar propiedades</CardDescription>
-				</CardHeader>
-				<CardContent className="w-full">
-					<form
-						className="flex flex-col gap-5"
-						onSubmit={(e) => {
-							e.preventDefault()
-							e.stopPropagation()
-							form.handleSubmit()
-						}}>
+		<div className="w-[80%] space-y-6">
+			<div className="flex w-full gap-2">
+				<Avatar className="h-[62px] w-[62px] border-2">
+					<AvatarImage src={usuario?.image ?? ""} width={62} height={62} alt="profile-image" />
+					<AvatarFallback>
+						{usuario?.nombre?.substring(0, 1)?.toUpperCase() ?? "N"}
+						{usuario?.apellido?.substring(0, 1)?.toUpperCase() ?? "N"}
+					</AvatarFallback>
+				</Avatar>
+				<div>
+					{usuario?.nombre && usuario?.apellido ? (
+						<h1 className="text-3xl font-bold tracking-tight">
+							{usuario?.apellido}, {usuario?.nombre}
+						</h1>
+					) : (
+						<h1 className="text-3xl font-bold tracking-tight">Tu Cuenta</h1>
+					)}
+					<p className="text-muted-foreground mt-2">{usuario?.email}</p>
+				</div>
+			</div>
+
+			<form
+				onSubmit={(e) => {
+					e.preventDefault()
+					e.stopPropagation()
+					form.handleSubmit()
+				}}>
+				<Card>
+					<CardHeader>
+						<CardTitle>Información de tu Cuenta</CardTitle>
+						<CardDescription>Actualiza la información de tu perfil</CardDescription>
+					</CardHeader>
+					<CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 						<form.AppField
 							name="nombre"
 							validators={{ onChange: editUsuarioSchema.shape.nombre }}
@@ -81,21 +103,16 @@ function RouteComponent() {
 							children={(field) => <field.TextField label="Apellido" />}
 						/>
 						<form.AppField
-							name="email"
-							validators={{ onChange: editUsuarioSchema.shape.email }}
-							children={(field) => <field.TextField label="Email" />}
+							name="rut"
+							validators={{ onChange: editUsuarioSchema.shape.rut }}
+							children={(field) => <field.TextField label="Rut" />}
 						/>
 						<form.AppField
 							name="organizacion"
 							validators={{ onChange: editUsuarioSchema.shape.organizacion }}
 							children={(field) => <field.TextField label="Organización" />}
 						/>
-						<form.AppField
-							name="rut"
-							validators={{ onChange: editUsuarioSchema.shape.rut }}
-							children={(field) => <field.TextField label="Rut" />}
-						/>
-						<div>
+						<div className="space-y-2">
 							<Label>Imagen</Label>
 							<Input
 								type="file"
@@ -131,12 +148,38 @@ function RouteComponent() {
 								</>
 							)}
 						</div>
+					</CardContent>
+					<CardFooter>
 						<form.AppForm>
-							<form.SubscribeButton label="Aceptar" />
+							<form.SubscribeButton label="Guardar cambios" />
 						</form.AppForm>
-					</form>
+					</CardFooter>
+				</Card>
+			</form>
+
+			<Card>
+				<CardHeader>
+					<CardTitle>Contraseña</CardTitle>
+					<CardDescription>Actualiza tu contraseña</CardDescription>
+				</CardHeader>
+				<CardContent className="space-y-4">
+					<div className="space-y-2">
+						<Label htmlFor="current-password">Contraseña actual</Label>
+						<Input id="current-password" type="password" />
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="new-password">Nueva contraseña</Label>
+						<Input id="new-password" type="password" />
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="confirm-password">Confirma la contraseña</Label>
+						<Input id="confirm-password" type="password" />
+					</div>
 				</CardContent>
+				<CardFooter>
+					<Button>Change Password</Button>
+				</CardFooter>
 			</Card>
-		</main>
+		</div>
 	)
 }

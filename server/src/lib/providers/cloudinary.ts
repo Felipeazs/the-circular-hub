@@ -21,7 +21,7 @@ export async function uploadImage(
 		overwrite: true,
 		transformation: [
 			{
-				width: 50,
+				width: 100,
 				crop: "scale",
 			},
 			{ radius: "max" },

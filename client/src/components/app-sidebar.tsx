@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { Link, useLocation } from "@tanstack/react-router"
-import { BarChart3, Home, LogOut, PlusCircle, Settings } from "lucide-react"
+import { BarChart3, Home, LogOut, PlusCircle } from "lucide-react"
 
 import { logout } from "../lib/queries"
 import { cn } from "../lib/utils"
@@ -31,11 +31,6 @@ const items = [
 		title: "Nueva Evaluación",
 		url: "/evaluacion",
 		icon: PlusCircle,
-	},
-	{
-		title: "Ajustes",
-		url: "/ajustes",
-		icon: Settings,
 	},
 ]
 
@@ -80,8 +75,8 @@ export function AppSidebar({ handleExit }: { handleExit: () => void }) {
 								variant="outline"
 								onClick={handleLogout}
 								className="justify-start bg-slate-50 text-red-500 hover:cursor-pointer hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/20">
-								<LogOut className="mr-2 h-5 w-5" />
-								Sign Out
+								<LogOut className="h-5 w-5" />
+								Cerrar Sesión
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>

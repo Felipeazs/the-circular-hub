@@ -12,7 +12,7 @@ import { getRespuestaByIdOptions } from "@/client/lib/queries"
 import { buttonVariants, cn } from "@/client/lib/utils"
 import { daysOff, recentResult } from "@/client/utils/resultados"
 
-export const Route = createFileRoute("/_layout/_auth/resultados/$id")({
+export const Route = createFileRoute("/_layout/_auth/_usuario/resultados/$id")({
 	loader: async ({ context: { queryClient, usuario }, params }) => ({
 		respuesta: await queryClient.fetchQuery(getRespuestaByIdOptions(usuario!.id, params.id)),
 	}),

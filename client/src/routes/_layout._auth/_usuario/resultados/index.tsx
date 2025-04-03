@@ -14,7 +14,7 @@ import { buttonVariants, cn } from "@/client/lib/utils"
 import { useStore } from "@/client/store"
 import { daysOff, lineGraph, recentResult } from "@/client/utils/resultados"
 
-export const Route = createFileRoute("/_layout/_auth/_resultados/resultados")({
+export const Route = createFileRoute("/_layout/_auth/_usuario/resultados/")({
 	component: RouteComponent,
 })
 
