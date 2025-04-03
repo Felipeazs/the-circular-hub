@@ -228,11 +228,39 @@ export async function getRespuestas(): Promise<Respuestas[] | null> {
 			}),
 	)
 }
+
 export const getRespuestasOptions = (id: string | undefined) => {
 	return queryOptions({
 		queryKey: ["respuestas", id],
 		queryFn: getRespuestas,
 		enabled: !!id,
+		staleTime: Infinity,
+		throwOnError: true,
+	})
+}
+
+export async function getRespuestaById(respuestaId: string): Promise<Respuestas | null> {
+	return fetchWithAuth().then((token) =>
+		client.api.respuestas[":id"]
+			.$get({ param: { id: respuestaId } }, { headers: { Authorization: `Bearer ${token}` } })
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return SuperJSON.parse(json.respuesta)
+			}),
+	)
+}
+export const getRespuestaByIdOptions = (usuarioId: string | undefined, respuestaId: string) => {
+	return queryOptions({
+		queryKey: ["respuestas", usuarioId, respuestaId],
+		queryFn: () => getRespuestaById(respuestaId),
+		enabled: !!usuarioId && !!respuestaId,
 		staleTime: Infinity,
 		throwOnError: true,
 	})

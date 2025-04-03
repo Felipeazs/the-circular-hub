@@ -49,7 +49,7 @@ function RouteComponent() {
 		<div className="min-h-screen overflow-y-auto">
 			<div className="flex h-[48px] items-center justify-between gap-4 px-20 py-2">
 				<Link to="/" className="font-bold uppercase" viewTransition>
-					The circula hub
+					The Circular Hub
 				</Link>
 				{!isLoggedIn && (
 					<div className="flex gap-2">

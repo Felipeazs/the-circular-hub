@@ -27,9 +27,9 @@ export function LineGraph({ data }: { data: LineGraphProps[] | undefined }) {
 					bottom: 0,
 				}}>
 				<XAxis dataKey="name" fontSize={12} />
-				<YAxis fontSize={12} />
+				<YAxis dataKey="puntaje" fontSize={12} />
 				<Tooltip />
-				<CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+				<CartesianGrid stroke="#eee" strokeDasharray="7 7" />
 				<Line type="monotone" dataKey="puntaje" stroke="#82ca9d" />
 			</LineChart>
 		</ResponsiveContainer>

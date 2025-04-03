@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm"
+import { and, desc, eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { HTTPException } from "hono/http-exception"
 import SuperJSON from "superjson"
@@ -33,6 +33,25 @@ export default new Hono<AppEnv>()
 		const sjson = SuperJSON.stringify(data)
 
 		return c.json({ respuestas: sjson }, 200)
+	})
+	.get("/:id", checkAuth, async (c) => {
+		const usuario = c.get("usuario")
+		const id = c.req.param("id")
+
+		const { data, error: dbError } = await tryCatch(
+			db.query.respuesta.findFirst({
+				where: and(eq(respuestaTable.usuarioId, usuario.id), eq(respuestaTable.id, id)),
+			}),
+		)
+		if (dbError) {
+			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })
+		}
+		if (!data) {
+			throw new HTTPException(ERROR_CODE.NOT_FOUND, { message: "Resultado no encontrado" })
+		}
+		const sjson = SuperJSON.stringify(data)
+
+		return c.json({ respuesta: sjson }, 200)
 	})
 	.post("/", zValidator("json", createRespuestasSchema), rateLimit, checkAuth, async (c) => {
 		const usuario = c.get("usuario")

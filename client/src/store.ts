@@ -1,4 +1,4 @@
-import type { Usuario } from "@monorepo/server/db"
+import type { Respuestas, Usuario } from "@monorepo/server/db"
 
 import { create } from "zustand"
 
@@ -20,10 +20,29 @@ export interface StoreState {
 	setPaths: (paths: string) => void
 	usuario: Usuario | undefined
 	setUsuario: (data: Usuario) => void
+	resultados: Respuestas[] | undefined
+	setResultados: (data: Respuestas[]) => void
 }
 
 export const useStore = create<StoreState>()((set) => ({
 	isLoggedIn: false,
+	enter: (access_token) =>
+		set(() => {
+			localStorage.setItem("access_token", access_token)
+			return { isLoggedIn: true }
+		}),
+	reenter: () =>
+		set(() => {
+			if (localStorage.getItem("access_token")) {
+				return { isLoggedIn: true }
+			}
+			return { isLoggedIn: false }
+		}),
+	quit: () =>
+		set(() => {
+			localStorage.removeItem("access_token")
+			return { isLoggedIn: false }
+		}),
 	paths: undefined,
 	setPaths: (paths) =>
 		set(() => {
@@ -44,22 +63,7 @@ export const useStore = create<StoreState>()((set) => ({
 			return { paths: { links: newPaths, current } }
 		}),
 	usuario: undefined,
-	enter: (access_token) =>
-		set(() => {
-			localStorage.setItem("access_token", access_token)
-			return { isLoggedIn: true }
-		}),
-	reenter: () =>
-		set(() => {
-			if (localStorage.getItem("access_token")) {
-				return { isLoggedIn: true }
-			}
-			return { isLoggedIn: false }
-		}),
-	quit: () =>
-		set(() => {
-			localStorage.removeItem("access_token")
-			return { isLoggedIn: false }
-		}),
 	setUsuario: (usuario) => set(() => ({ usuario })),
+	resultados: undefined,
+	setResultados: (resultados) => set(() => ({ resultados })),
 }))

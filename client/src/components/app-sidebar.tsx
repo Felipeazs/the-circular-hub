@@ -57,7 +57,7 @@ export function AppSidebar({ handleExit }: { handleExit: () => void }) {
 		<Sidebar className="bg-slate-50 p-4">
 			<SidebarContent>
 				<SidebarGroup />
-				<SidebarGroupLabel>The circular hub</SidebarGroupLabel>
+				<SidebarGroupLabel>The Circular Hub</SidebarGroupLabel>
 				<SidebarGroupContent>
 					<SidebarMenu>
 						<SidebarMenuItem className="grid w-full gap-2">
