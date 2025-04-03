@@ -1,6 +1,7 @@
 import { editUsuarioSchema } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
+import { TriangleAlert } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -178,6 +179,20 @@ function RouteComponent() {
 				</CardContent>
 				<CardFooter>
 					<Button>Change Password</Button>
+				</CardFooter>
+			</Card>
+
+			<Card>
+				<CardHeader>
+					<CardTitle>Zona de peligro</CardTitle>
+					<CardDescription className="border-destructive flex items-center gap-4 rounded-md border-1 p-4 text-red-500">
+						<TriangleAlert />
+						Eliminar esta cuenta borrará permanentemente toda la información almacenada en la base
+						de datos.
+					</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<Button variant="destructive">Eliminar Cuenta</Button>
 				</CardFooter>
 			</Card>
 		</div>
