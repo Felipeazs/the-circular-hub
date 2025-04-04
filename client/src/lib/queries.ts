@@ -35,7 +35,7 @@ async function fetchWithAuth() {
 			token = getAccessToken()
 		} catch (_err) {
 			localStorage.removeItem("access_token")
-			window.location.href = "/about"
+			window.location.href = "/login"
 			return
 		}
 	}
@@ -47,7 +47,7 @@ async function checkRateLimit(status: number) {
 	if (status === 429) {
 		await logout()
 
-		return (window.location.href = "/about")
+		return (window.location.href = "/login")
 	}
 }
 

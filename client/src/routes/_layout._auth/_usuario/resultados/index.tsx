@@ -135,9 +135,9 @@ function RouteComponent() {
 													<div className="bg-muted h-2 w-full rounded-full">
 														<div
 															className={cn("h-2 rounded-full", {
-																"bg-red-300": category?.score <= 33,
-																"bg-orange-300": category?.score > 33 && category.score <= 67,
-																"bg-green-300": category?.score > 67,
+																"bg-red-200": category?.score <= 33,
+																"bg-yellow-200": category?.score > 33 && category.score <= 67,
+																"bg-green-200": category?.score > 67,
 															})}
 															style={{ width: `${category.score}%` }}
 														/>

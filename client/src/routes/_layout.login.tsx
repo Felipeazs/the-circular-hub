@@ -4,10 +4,10 @@ import { Login } from "../components/login"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 
 export const Route = createFileRoute("/_layout/login")({
-	component: About,
+	component: RouteComponent,
 })
 
-export function About() {
+export function RouteComponent() {
 	return (
 		<Card className="mx-auto mt-20 w-max">
 			<CardHeader>
