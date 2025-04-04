@@ -24,7 +24,7 @@ export const ERROR_CODE = {
 }
 
 export const ERROR_MESSAGE = {
-	BAD_REQUEST: "Credenciales mas ingresadas",
+	BAD_REQUEST: "Credenciales mal ingresadas",
 	UNAUTHORIZED: "Acceso no autorizado",
 	FORBIDDEN: "Acceso denegado",
 	NOT_FOUND: "No encontrado",

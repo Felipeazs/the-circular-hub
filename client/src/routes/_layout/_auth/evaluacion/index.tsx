@@ -15,9 +15,13 @@ type Answers = {
 
 function RouteComponent() {
 	const navigate = useNavigate()
+	const { queryClient, usuario } = Route.useRouteContext()
+
 	const { mutate } = useMutation({
 		mutationFn: saveRespuestas,
-		onSuccess: (data) => {
+		onSuccess: async (data) => {
+			await queryClient.invalidateQueries({ queryKey: ["resultados", usuario?.id] })
+
 			navigate({ to: `/resultados/${data.id}` })
 		},
 	})
@@ -25,8 +29,6 @@ function RouteComponent() {
 		console.warn(form)
 
 		mutate(form)
-
-		// Luego de guardar redireccionar a /resultados/$id
 	}
 	return (
 		<div className="space-y-6">

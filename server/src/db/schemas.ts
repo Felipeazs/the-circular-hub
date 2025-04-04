@@ -20,6 +20,8 @@ export const usuario = pgTable(
 			.array()
 			.default(["user"]),
 		image: text("image"),
+		passwordResetToken: text("password_reset_token").default(""),
+		passwordResetExpires: timestamp("password_reset_expires"),
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 		updatedAt: timestamp("updated_at").$onUpdateFn(() => new Date()),
 	},
@@ -97,6 +99,10 @@ export const loginSchema = createInsertSchema(usuario, {
 	password: z.string(),
 })
 
+export const resentSchema = createInsertSchema(usuario).pick({
+	email: true,
+})
+
 export const editUsuarioSchema = createInsertSchema(usuario, {
 	nombre: z.string(),
 	apellido: z.string(),
@@ -119,12 +125,16 @@ export const editUsuarioSchema = createInsertSchema(usuario, {
 }).omit({
 	id: true,
 	password: true,
+	passwordResetToken: true,
+	passwordResetExpires: true,
 	createdAt: true,
 	updatedAt: true,
 })
 
 export const usuarioSchema = createSelectSchema(usuario).omit({
 	password: true,
+	passwordResetToken: true,
+	passwordResetExpires: true,
 })
 
 export const respuestasSchema = createSelectSchema(respuesta).omit({

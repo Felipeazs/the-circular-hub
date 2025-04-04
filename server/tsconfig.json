@@ -2,11 +2,17 @@
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx",
+		"jsxImportSource": "react",
 		"baseUrl": "./",
 		"paths": {
-			"@/server/*": ["./src/*"]
+			"@/server/*": [
+				"./src/*"
+			]
 		},
+		"types": [
+			"hono",
+			"bun"
+		],
 		"strict": true,
 		"inlineSources": true,
 		"outDir": "./dist",

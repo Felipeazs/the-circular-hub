@@ -4,7 +4,7 @@ import posthog from "posthog-js"
 import { PostHogProvider as PHProvider } from "posthog-js/react"
 import React, { useEffect } from "react"
 
-import { env } from "../t3-env"
+import { env } from "@/client/t3-env"
 
 const PostHogPageView = import.meta.env.PROD
 	? React.lazy(() => import("./posthog-tracker"))

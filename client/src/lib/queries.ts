@@ -10,7 +10,8 @@ import type {
 import { queryOptions } from "@tanstack/react-query"
 import SuperJSON from "superjson"
 
-import { env } from "../t3-env"
+import { env } from "@/client/t3-env"
+
 import hcClient from "./api"
 import { checkAccessTokenExpired, getAccessToken, TIMER } from "./api-utils"
 
@@ -89,6 +90,18 @@ export async function logout(): Promise<{ status: string }> {
 	return client.api.logout.$post({}).then(async (res) => {
 		const json = await res.json()
 		return json
+	})
+}
+
+export async function forgotPassword(email: string) {
+	return client.api.password.forgot.$post({ json: { email } }).then(async (res) => {
+		const json = await res.json()
+
+		if (!res.ok && "status" in json && "message" in json) {
+			await checkRateLimit(json.status as unknown as number)
+
+			throw new Error(json.message as string)
+		}
 	})
 }
 
@@ -231,7 +244,7 @@ export async function getRespuestas(): Promise<Respuestas[] | null> {
 
 export const getRespuestasOptions = (id: string | undefined) => {
 	return queryOptions({
-		queryKey: ["respuestas", id],
+		queryKey: ["resultados", id],
 		queryFn: getRespuestas,
 		enabled: !!id,
 		staleTime: Infinity,

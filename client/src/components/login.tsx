@@ -1,6 +1,6 @@
 import { loginSchema, type LoginUsuario } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
-import { useNavigate } from "@tanstack/react-router"
+import { Link, useNavigate } from "@tanstack/react-router"
 import { toast } from "sonner"
 
 import { useAppForm } from "../hooks/form"
@@ -52,11 +52,19 @@ export function Login() {
 				validators={{ onChange: loginSchema.shape.email }}
 				children={(field) => <field.TextField label="Email" />}
 			/>
-			<form.AppField
-				name="password"
-				validators={{ onChange: loginSchema.shape.password }}
-				children={(field) => <field.TextField label="Password" type="password" />}
-			/>
+			<div>
+				<form.AppField
+					name="password"
+					validators={{ onChange: loginSchema.shape.password }}
+					children={(field) => <field.TextField label="Password" type="password" />}
+				/>
+				<Link
+					to="/password/forgot"
+					className="underline-blue-100 text-xs underline underline-offset-1"
+					viewTransition>
+					¿Te has ovlidado de tu contraseña?
+				</Link>
+			</div>
 			<form.AppForm>
 				<form.SubscribeButton label="Ingresar" />
 			</form.AppForm>

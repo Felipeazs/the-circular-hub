@@ -8,6 +8,7 @@ import authMe from "./auth"
 import login from "./login"
 import logout from "./logout"
 import refresh from "./refresh"
+import reset_route from "./reset-password"
 import respuestas_route from "./respuestas"
 import signup from "./signup"
 import usuario_route from "./usuario"
@@ -24,6 +25,7 @@ export function registerRoutes(app: AppAPI) {
 		.route("/login", login)
 		.route("/signup", signup)
 		.route("/logout", logout)
+		.route("/password", reset_route)
 		.route("/auth", authMe)
 		.route("/refresh", refresh)
 		.route("/usuario", usuario_route)

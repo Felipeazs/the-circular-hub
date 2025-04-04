@@ -1,11 +1,11 @@
 import { createFileRoute, Outlet, redirect, useLocation, useNavigate } from "@tanstack/react-router"
 import { useEffect } from "react"
 
-import { AppSidebar } from "../components/app-sidebar"
-import { Breadcrumbs } from "../components/breadbrumbs"
-import { SidebarProvider, SidebarTrigger } from "../components/ui/sidebar"
-import { authMeQueryOptions, logout } from "../lib/queries"
-import { useStore } from "../store"
+import { AppSidebar } from "../../components/app-sidebar"
+import { Breadcrumbs } from "../../components/breadbrumbs"
+import { SidebarProvider, SidebarTrigger } from "../../components/ui/sidebar"
+import { authMeQueryOptions, logout } from "../../lib/queries"
+import { useStore } from "../../store"
 
 export const Route = createFileRoute("/_layout/_auth")({
 	beforeLoad: async ({ context: { queryClient, store } }) => {

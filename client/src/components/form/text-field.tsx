@@ -7,9 +7,10 @@ import FieldInfo from "./field-info"
 type TextFieldProps = {
 	label: string
 	type?: "text" | "password"
+	placeholder?: string
 }
 
-export function TextField({ label, type = "text" }: TextFieldProps) {
+export function TextField({ label, type = "text", placeholder }: TextFieldProps) {
 	const field = useFieldContext<string>()
 	return (
 		<label className="space-y-2">
@@ -21,6 +22,7 @@ export function TextField({ label, type = "text" }: TextFieldProps) {
 				onBlur={field.handleBlur}
 				onChange={(e) => field.handleChange(e.target.value)}
 				autoComplete="off"
+				placeholder={placeholder}
 			/>
 			<FieldInfo field={field} />
 		</label>
