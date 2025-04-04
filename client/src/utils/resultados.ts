@@ -110,7 +110,7 @@ export function lineGraph(respuestas: Respuestas[] | null) {
 		respuestas.toReversed().forEach((respuesta, i) => {
 			const res = recentResult(respuesta)
 
-			data.push({ name: `Eval ${i + 1}`, puntaje: res!.score })
+			data.push({ name: `Eval. ${i + 1}`, puntaje: res!.score })
 		})
 
 		return data

@@ -60,7 +60,7 @@ function RouteComponent() {
 	})
 
 	return (
-		<div className="w-[80%] space-y-6">
+		<div className="space-y-6">
 			<div className="flex w-full gap-2">
 				<Avatar className="h-[62px] w-[62px] border-2">
 					<AvatarImage src={usuario?.image ?? ""} width={62} height={62} alt="profile-image" />
@@ -71,11 +71,11 @@ function RouteComponent() {
 				</Avatar>
 				<div>
 					{usuario?.nombre && usuario?.apellido ? (
-						<h1 className="text-3xl font-bold tracking-tight">
+						<h1 className="text-xl font-bold tracking-tight md:text-3xl">
 							{usuario?.apellido}, {usuario?.nombre}
 						</h1>
 					) : (
-						<h1 className="text-3xl font-bold tracking-tight">Tu Cuenta</h1>
+						<h1 className="text-xl font-bold tracking-tight md:text-3xl">Tu Cuenta</h1>
 					)}
 					<p className="text-muted-foreground mt-2">{usuario?.email}</p>
 				</div>
@@ -186,9 +186,8 @@ function RouteComponent() {
 				<CardHeader>
 					<CardTitle>Zona de peligro</CardTitle>
 					<CardDescription className="border-destructive flex items-center gap-4 rounded-md border-1 p-4 text-red-500">
-						<TriangleAlert />
-						Eliminar esta cuenta borrará permanentemente toda la información almacenada en la base
-						de datos.
+						<TriangleAlert width={50} />
+						Eliminar esta cuenta borrará permanentemente toda la información de tus evaluaciones.
 					</CardDescription>
 				</CardHeader>
 				<CardFooter>

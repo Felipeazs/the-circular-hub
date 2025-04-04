@@ -14,23 +14,25 @@ import { daysOff, recentResult } from "@/client/utils/resultados"
 
 export const Route = createFileRoute("/_layout/_auth/_usuario/resultados/$id")({
 	loader: async ({ context: { queryClient, usuario }, params }) => ({
-		respuesta: await queryClient.fetchQuery(getRespuestaByIdOptions(usuario!.id, params.id)),
+		resultado: await queryClient.fetchQuery(getRespuestaByIdOptions(usuario!.id, params.id)),
 	}),
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-	const { respuesta } = Route.useLoaderData()
+	const { resultado } = Route.useLoaderData()
 
 	const daysDiff = useMemo(() => {
-		if (respuesta) {
-			return daysOff(respuesta)
+		if (resultado) {
+			return daysOff(resultado)
 		}
-	}, [respuesta])
+	}, [resultado])
 
 	const puntaje = useMemo(() => {
-		return recentResult(respuesta)
-	}, [respuesta])
+		if (resultado) {
+			return recentResult(resultado)
+		}
+	}, [resultado])
 
 	return (
 		<div className="space-y-6">
@@ -48,7 +50,7 @@ function RouteComponent() {
 			</div>
 
 			<Card>
-				{respuesta ? (
+				{resultado ? (
 					<>
 						<CardHeader>
 							<CardTitle>Resultados</CardTitle>
