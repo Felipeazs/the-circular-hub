@@ -28,11 +28,15 @@ function RouteComponent() {
 	}, [resultados])
 
 	const puntaje = useMemo(() => {
-		return recentResult(resultados![0])
+		if (resultados?.length) {
+			return recentResult(resultados[0])
+		}
 	}, [resultados])
 
 	const graphRes = useMemo(() => {
-		return lineGraph(resultados!)
+		if (resultados?.length) {
+			return lineGraph(resultados!)
+		}
 	}, [resultados])
 
 	return (

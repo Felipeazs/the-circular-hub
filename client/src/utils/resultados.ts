@@ -32,7 +32,7 @@ type Puntajes = {
 	[key: string]: number | string
 }
 
-export function recentResult(respuestas: Respuestas | null): Puntajes | undefined {
+export function recentResult(respuestas: Respuestas): Puntajes | undefined {
 	const puntajes: Puntajes = {
 		ge: 0,
 		v: 0,
@@ -94,9 +94,9 @@ export function recentResult(respuestas: Respuestas | null): Puntajes | undefine
 		puntajes.ia = Math.round((puntajes.ia / 3) * 100)
 		puntajes.es = Math.round((puntajes.es / 3) * 100)
 		puntajes.score = Math.round((puntajes.score / puntajes.total) * 100)
-
-		return puntajes
 	}
+
+	return puntajes
 }
 
 type LineGraphProps = {
