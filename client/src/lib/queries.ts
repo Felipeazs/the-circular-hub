@@ -105,6 +105,26 @@ export async function forgotPassword(email: string) {
 	})
 }
 
+type ResetPassword = {
+	password: string
+	repeat_password: string
+	token: string
+}
+
+export async function resetPassword({ password, repeat_password, token }: ResetPassword) {
+	return client.api.password.reset[":token"]
+		.$post({ json: { password, repeat_password }, param: { token } })
+		.then(async (res) => {
+			const json = await res.json()
+
+			if (!res.ok && "status" in json && "message" in json) {
+				await checkRateLimit(json.status as unknown as number)
+
+				throw new Error(json.message as string)
+			}
+		})
+}
+
 async function refreshAccessToken() {
 	return await client.api.refresh.$post().then(async (res) => {
 		const json = await res.json()

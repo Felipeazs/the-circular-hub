@@ -37,7 +37,7 @@ export function ForgotPass({ email, link }: ForgotPassProps) {
 						</Text>
 
 						<Text className="text-2xl leading-1.5">
-							Hola {email}, una nueva solicitud de creación de contraseña a sido generada.
+							Hola {email}, una nueva solicitud de creación de contraseña ha sido generada.
 						</Text>
 
 						<Section className="p-6 border-1 border-[#dedede] rounded-[5px] text-center">

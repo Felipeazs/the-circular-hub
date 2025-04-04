@@ -99,8 +99,17 @@ export const loginSchema = createInsertSchema(usuario, {
 	password: z.string(),
 })
 
-export const resentSchema = createInsertSchema(usuario).pick({
+export const forgotPassSchema = createInsertSchema(usuario).pick({
 	email: true,
+})
+
+export const resetPassSchema = z.object({
+	password: z.string(),
+	repeat_password: z.string(),
+})
+
+export const resetPasswordTokenSchema = z.object({
+	token: z.string(),
 })
 
 export const editUsuarioSchema = createInsertSchema(usuario, {

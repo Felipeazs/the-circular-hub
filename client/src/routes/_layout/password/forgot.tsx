@@ -1,4 +1,4 @@
-import { resentSchema } from "@monorepo/server/db"
+import { forgotPassSchema } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { toast } from "sonner"
@@ -14,7 +14,9 @@ export const Route = createFileRoute("/_layout/password/forgot")({
 export function RouteComponent() {
 	const { mutate } = useMutation({
 		mutationFn: forgotPassword,
-		onSuccess: () => {},
+		onSuccess: () => {
+			toast("Te Hemos enviado un correo para cambiar la contraseña")
+		},
 		onError: (error) => {
 			toast(error.message)
 		},
@@ -44,7 +46,7 @@ export function RouteComponent() {
 					}}>
 					<form.AppField
 						name="email"
-						validators={{ onChange: resentSchema.shape.email }}
+						validators={{ onChange: forgotPassSchema.shape.email }}
 						children={(field) => <field.TextField label="Email" placeholder="Ingresa tu email" />}
 					/>
 					<form.AppForm>

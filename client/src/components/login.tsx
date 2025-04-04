@@ -62,7 +62,7 @@ export function Login() {
 					to="/password/forgot"
 					className="underline-blue-100 text-xs underline underline-offset-1"
 					viewTransition>
-					¿Te has ovlidado de tu contraseña?
+					¿Has ovlidado de tu contraseña?
 				</Link>
 			</div>
 			<form.AppForm>
