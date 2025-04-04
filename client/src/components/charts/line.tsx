@@ -15,9 +15,9 @@ type LineGraphProps = {
 
 export function LineGraph({ data }: { data: LineGraphProps[] | undefined }) {
 	return (
-		<ResponsiveContainer minWidth={500} minHeight={280} width="100%" height="100%">
+		<ResponsiveContainer minWidth={100} minHeight={100}>
 			<LineChart
-				width={500}
+				width={300}
 				height={300}
 				data={data}
 				margin={{

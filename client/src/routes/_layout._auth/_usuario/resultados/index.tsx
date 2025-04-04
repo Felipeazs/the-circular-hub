@@ -36,7 +36,7 @@ function RouteComponent() {
 	}, [resultados])
 
 	return (
-		<div className="w-[80%] space-y-6">
+		<div className="space-y-6">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">Mis Resultados</h1>
@@ -125,8 +125,8 @@ function RouteComponent() {
 											].map((category) => (
 												<div key={category.name} className="space-y-1">
 													<div className="flex items-center justify-between">
-														<p className="text-sm">{category.name}</p>
-														<p className="text-sm font-medium">{category.score}%</p>
+														<p>{category.name}</p>
+														<p className="font-medium">{category.score}%</p>
 													</div>
 													<div className="bg-muted h-2 w-full rounded-full">
 														<div
@@ -179,15 +179,15 @@ function RouteComponent() {
 											key={assessment.id}
 											className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0">
 											<div className="grid grid-cols-8 items-baseline gap-5">
-												<p className="w-[40px] text-4xl font-bold">{i + 1}.</p>
-												<p className="text-muted-foreground col-span-6 grid text-sm">
+												<p className="w-[40px] font-bold md:text-4xl">{i + 1}.</p>
+												<p className="text-muted-foreground md:text-md col-span-6 grid text-xs">
 													Completado {assessment.date}
 												</p>
 											</div>
-											<div className="flex items-center gap-4">
+											<div className="flex items-center gap-4 text-xs md:text-sm">
 												<div className="text-right">
 													<p className="font-medium">{assessment.score}%</p>
-													<p className="text-muted-foreground text-sm">Puntaje</p>
+													<p className="text-muted-foreground">Puntaje</p>
 												</div>
 												<Link
 													to="/resultados/$id"
@@ -209,9 +209,9 @@ function RouteComponent() {
 							<CardTitle>Tendencias de progreso</CardTitle>
 							<CardDescription>Sigue el progreso de tus evaluaciones</CardDescription>
 						</CardHeader>
-						<CardContent>
-							<div className="flex h-[300px] items-center justify-center rounded-md border border-dashed">
-								<div className="flex flex-col items-center gap-2 text-center">
+						<CardContent className="p-2 md:p-6">
+							<div className="rounded-md border border-dashed">
+								<div className="h-[300px] w-[280px] md:w-[500px]">
 									<LineGraph data={graphRes} />
 								</div>
 							</div>

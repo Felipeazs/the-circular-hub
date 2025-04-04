@@ -24,7 +24,7 @@ function RouteComponent() {
 
 	return (
 		<div className="min-h-screen overflow-y-auto">
-			<div className="flex h-[48px] items-center justify-between gap-4 px-20 py-2">
+			<div className="flex h-[48px] items-center justify-between gap-4 px-2 py-2 md:px-20">
 				<Link to="/" className="font-bold uppercase" viewTransition>
 					The Circular Hub
 				</Link>

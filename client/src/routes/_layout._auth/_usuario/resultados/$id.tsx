@@ -33,7 +33,7 @@ function RouteComponent() {
 	}, [respuesta])
 
 	return (
-		<div className="w-[80%] space-y-6">
+		<div className="space-y-6">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">Evaluacion</h1>
@@ -115,8 +115,8 @@ function RouteComponent() {
 									].map((category) => (
 										<div key={category.name} className="space-y-1">
 											<div className="flex items-center justify-between">
-												<p className="text-sm">{category.name}</p>
-												<p className="text-sm font-medium">{category.score}%</p>
+												<p>{category.name}</p>
+												<p className="font-medium">{category.score}%</p>
 											</div>
 											<div className="bg-muted h-2 w-full rounded-full">
 												<div

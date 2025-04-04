@@ -45,7 +45,7 @@ function RouteComponent() {
 	}, [resultados])
 
 	return (
-		<div className="w-[80%] space-y-8">
+		<div className="space-y-8">
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
 				<p className="text-muted-foreground mt-2">
@@ -97,10 +97,12 @@ function RouteComponent() {
 										key={assessment.id}
 										className="flex items-center justify-between border-b pb-2 last:border-0">
 										<div className="grid grid-cols-5 items-start gap-5">
-											<p className="grid-col-span-1 grid w-[40px] text-4xl font-bold">{i + 1}.</p>
+											<p className="grid-col-span-1 grid w-[40px] font-bold md:text-4xl">
+												{i + 1}.
+											</p>
 											<div className="col-span-4 grid">
-												<p className="text-muted-foreground text-sm">Completado</p>
-												<p className="text-muted-foreground text-sm">{assessment.date}</p>
+												<p className="text-muted-foreground">Completado</p>
+												<p className="text-muted-foreground">{assessment.date}</p>
 											</div>
 										</div>
 										<Button variant="outline" size="sm" asChild>

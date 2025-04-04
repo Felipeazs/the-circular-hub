@@ -482,7 +482,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 	const renderCategoryQuestions = () => {
 		return (
 			<>
-				<CardHeader>
+				<CardHeader className="p-2 md:p-6">
 					<CardTitle>{currentCategory.title}</CardTitle>
 					<CardDescription>{currentCategory.description}</CardDescription>
 					<CardDescription>
@@ -493,7 +493,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 						</ul>
 					</CardDescription>
 				</CardHeader>
-				<CardContent className="space-y-6">
+				<CardContent className="space-y-6 p-2 md:p-6">
 					{categoryQuestions.map((question, index) => (
 						<div key={question.id} className="space-y-2">
 							<p className="font-medium">
@@ -526,7 +526,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 					<CardTitle>Resumen de tus respuestas</CardTitle>
 					<CardDescription>Review de las respuestas a todas las preguntas</CardDescription>
 				</CardHeader>
-				<CardContent className="space-y-8">
+				<CardContent className="space-y-8 p-2 md:p-6">
 					{categories.map((category) => {
 						const categoryQuestions = questions.filter((q) => q.category === category.id)
 						return (
@@ -619,7 +619,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 			</div>
 
 			{!showSummary && (
-				<div className="grid w-[40%] grid-cols-1 gap-2">
+				<div className="hidden w-[40%] grid-cols-1 gap-2 xl:grid">
 					{categories.map((category, index) => {
 						const status = getCategoryCompletionStatus(category.id)
 						return (
