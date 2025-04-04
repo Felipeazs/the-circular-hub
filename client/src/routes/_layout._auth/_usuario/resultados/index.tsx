@@ -36,7 +36,7 @@ function RouteComponent() {
 	}, [resultados])
 
 	return (
-		<div className="space-y-6">
+		<div className="w-full space-y-6">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">Mis Resultados</h1>
@@ -56,10 +56,10 @@ function RouteComponent() {
 					<TabsTrigger value="all">Todos</TabsTrigger>
 					<TabsTrigger value="trends">Tendencia</TabsTrigger>
 				</TabsList>
-				<TabsContent value="recent" className="space-y-4">
+				<TabsContent value="recent">
 					<Card>
 						{resultados?.[0] ? (
-							<>
+							<div className="space-y-4">
 								<CardHeader>
 									<CardTitle>Evaluación</CardTitle>
 									<CardDescription>
@@ -143,7 +143,7 @@ function RouteComponent() {
 										</div>
 									</div>
 								</CardContent>
-							</>
+							</div>
 						) : (
 							<CardHeader>
 								<CardTitle>Evaluación</CardTitle>
@@ -181,7 +181,7 @@ function RouteComponent() {
 											<div className="grid grid-cols-8 items-baseline gap-5">
 												<p className="w-[40px] font-bold md:text-4xl">{i + 1}.</p>
 												<p className="text-muted-foreground md:text-md col-span-6 grid text-xs">
-													Completado {assessment.date}
+													{assessment.date}
 												</p>
 											</div>
 											<div className="flex items-center gap-4 text-xs md:text-sm">
@@ -210,8 +210,8 @@ function RouteComponent() {
 							<CardDescription>Sigue el progreso de tus evaluaciones</CardDescription>
 						</CardHeader>
 						<CardContent className="p-2 md:p-6">
-							<div className="rounded-md border border-dashed">
-								<div className="h-[300px] w-[280px] md:w-[500px]">
+							<div className="rounded-md border border-dashed md:p-2">
+								<div className="h-[300px] md:w-full">
 									<LineGraph data={graphRes} />
 								</div>
 							</div>
