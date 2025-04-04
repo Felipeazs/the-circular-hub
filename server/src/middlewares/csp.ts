@@ -15,6 +15,7 @@ export const CSP_RULES = {
 			"'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
 			"'sha256-knPAv6T1m9aFSc0s3vSMuh3Kdxy//BumDVqYOSPzYqE='",
 			"'sha256-nzTgYzXYDNe6BAHiiI7NNlfK8n/auuOAhh2t92YvuXo='",
+			"'sha256-kAApudxpTi9mfjlC9lC8ZaS9xFHU9/NLLbB173MU7SU='",
 		],
 	},
 	permissionsPolicy: {
