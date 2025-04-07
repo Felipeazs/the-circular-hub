@@ -108,8 +108,14 @@ export const resetPassSchema = z.object({
 	repeat_password: z.string(),
 })
 
-export const resetPasswordTokenSchema = z.object({
+export const resetPassTokenSchema = z.object({
 	token: z.string(),
+})
+
+export const changePassSchema = z.object({
+	password: z.string(),
+	new_password: z.string(),
+	repeat_new_password: z.string(),
 })
 
 export const editUsuarioSchema = createInsertSchema(usuario, {

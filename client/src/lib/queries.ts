@@ -125,6 +125,30 @@ export async function resetPassword({ password, repeat_password, token }: ResetP
 		})
 }
 
+type ChangePassword = {
+	password: string
+	new_password: string
+	repeat_new_password: string
+}
+
+export async function changePassword(data: ChangePassword) {
+	return fetchWithAuth().then((token) =>
+		client.api.password.change
+			.$put({ json: data }, { headers: { Authorization: `Bearer ${token}` } })
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return json
+			}),
+	)
+}
+
 async function refreshAccessToken() {
 	return await client.api.refresh.$post().then(async (res) => {
 		const json = await res.json()

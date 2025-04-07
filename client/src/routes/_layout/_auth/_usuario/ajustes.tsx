@@ -22,6 +22,8 @@ import { hasPermission } from "@/client/lib/permission"
 import { editMe } from "@/client/lib/queries"
 import { useStore } from "@/client/store"
 
+import { ChangePassword } from "./-components/change-password"
+
 export const Route = createFileRoute("/_layout/_auth/_usuario/ajustes")({
 	component: RouteComponent,
 })
@@ -158,29 +160,7 @@ function RouteComponent() {
 				</Card>
 			</form>
 
-			<Card>
-				<CardHeader>
-					<CardTitle>Contraseña</CardTitle>
-					<CardDescription>Actualiza tu contraseña</CardDescription>
-				</CardHeader>
-				<CardContent className="space-y-4">
-					<div className="space-y-2">
-						<Label htmlFor="current-password">Contraseña actual</Label>
-						<Input id="current-password" type="password" />
-					</div>
-					<div className="space-y-2">
-						<Label htmlFor="new-password">Nueva contraseña</Label>
-						<Input id="new-password" type="password" />
-					</div>
-					<div className="space-y-2">
-						<Label htmlFor="confirm-password">Confirma la contraseña</Label>
-						<Input id="confirm-password" type="password" />
-					</div>
-				</CardContent>
-				<CardFooter>
-					<Button>Change Password</Button>
-				</CardFooter>
-			</Card>
+			<ChangePassword />
 
 			<Card>
 				<CardHeader>
