@@ -48,14 +48,14 @@ const recomendaciones = {
 			subtitulo: "Eficiencia operativa y cumplimiento",
 			detalles: [
 				"Costos operativos más altos: la falta de optimización en áreas clave, como la gestión de residuos o recursos, puede generar gastos innecesarios.",
-				"Riesgo regulatorio: No cumplor con normativas ambientales emergentes puede resultar en sanciones opérdida de accesoo a mercados más exigentes.",
+				"Riesgo regulatorio: No cumplir con normativas ambientales emergentes puede resultar en sanciones o pérdida de acceso a mercados más exigentes.",
 				"Oportunidades comerciales desaprovechadas: la falta de integración completa de principios circulares limita su capacidad para atraer clientes e inversionistas interesados en sosteniblidad.",
 			],
 		},
 		indicaciones: [
-			"Priorizar áreas críticas: identificar las áreas con menoor desempeño (por ejemplo, gestión de residuos o deseño circular) y desarrllar planes específicos para mejorarlas.",
+			"Priorizar áreas críticas: identificar las áreas con menor desempeño (por ejemplo, gestión de residuos o deseño circular) y desarrollar planes específicos para mejorarlas.",
 			"Capacitar al personal clave: invertir en formación sobre herramientas como ecodiseño, análisis de ciclo de vida o estrategias de valorización de residuos.",
-			"Desarrollar una hora de ruta circular: formalizar un plan estratégico con objetivos claros medibles para avanzart hacia la economía circular",
+			"Desarrollar una hora de ruta circular: formalizar un plan estratégico con objetivos claros medibles para avanzar hacia la economía circular",
 		],
 	},
 	low: {
@@ -65,14 +65,14 @@ const recomendaciones = {
 			subtitulo:
 				"Enfocarse en establecer fundamentos básicos, como políticas ambientales, monitoros de recursos y gestión de residuos",
 			detalles: [
-				"Pérdida económia a largo plazo: ignorar prácticas circulares puede llevar a costos crecientes por ineficiencia en recursos y gestión de residuos.",
+				"Pérdida económica a largo plazo: ignorar prácticas circulares puede llevar a costos crecientes por ineficiencia en recursos y gestión de residuos.",
 				"Reputación deteriorada: los consumidores e inversionistas valoran cada vez más la sosteniblidad; no actuar puede dañar la perceptición pública y reducir oportunidades comerciales",
 				"Impacto ambiental negativo: la falta de acción contribuye a problemas globales como el cambio climático, agotamiento de recursos naturales y contaminación.",
 			],
 		},
 		indicaciones: [
-			"Establecer fundamentos básicos: implementar sistemas simples para monitorear consumo de recursos, identificar residuos generados y extablecer políticas ambientales iniciales.",
-			"Iniciar con proyectos piloto: comenzar con inciativas peqyeñas pero visibles, como separación básica de residuos o sustitución parcial por materiales reciclados.",
+			"Establecer fundamentos básicos: implementar sistemas simples para monitorear consumo de recursos, identificar residuos generados y establecer políticas ambientales iniciales.",
+			"Iniciar con proyectos piloto: comenzar con inciativas pequeñas pero visibles, como separación básica de residuos o sustitución parcial por materiales reciclados.",
 			"Sensibilizar al equipo interno: realizar talleres introductorios sobre economía circular para construir una cultura organizacional orientada a la sosteniblidad.",
 		],
 	},
