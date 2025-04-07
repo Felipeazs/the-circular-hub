@@ -97,7 +97,7 @@ function RouteComponent() {
 										key={assessment.id}
 										className="flex items-center justify-between border-b pb-2 last:border-0">
 										<div className="grid grid-cols-5 items-start gap-5">
-											<p className="grid-col-span-1 grid w-[40px] font-bold md:text-4xl">
+											<p className="grid-col-span-1 grid w-[40px] text-xl font-bold md:text-4xl">
 												{i + 1}.
 											</p>
 											<div className="col-span-4 grid">

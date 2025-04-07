@@ -116,3 +116,74 @@ export function lineGraph(respuestas: Respuestas[] | null) {
 		return data
 	}
 }
+
+export const recomendaciones = {
+	high: {
+		titulo:
+			"La empresa tiene una alta implementación de prácticas alineadas con la economía circular",
+		potencial: {
+			subtitulo: "Innovación y liderazgo",
+			detalles: [
+				"Falta de diferenciación competitiva: las empresas en este nivel podrían perder oportunidades para posicionarse como líderes en sostenibilidad dentro de su sector.",
+				"Innovación limitada: No explorar modelos desruptivos como el ecodiseño avanzado, la simbiosis industrial o los modelos de nogocio circulares puede limitar su capacidad para capturar nuevos mercados.",
+				"Impacto social y ambiental reducido: aunque tienen una buena base, no maximizar su impacto positivo significa desaprovechar oportunidades de contribuir significativamente a la reducción del cambio climático y la desiguladad social",
+			],
+		},
+		indicaciones: [
+			"Explorar innovaciones disruptivas: implementar proyectos piloto que incluyan tecnologías avanzadas como el blockchain para trazabilidad o análisis de ciclo de vida completo",
+			"Liderar colaboraciones sectoriales: participar activamente en iniciativas regionales o sectoriales para estableces estándares y compartir mejores prácticas",
+			"Escalar impacto: invertir en proyectos que amplíen el alcance de sus iniciativas sostenibles, como modelos de negocio basados en servicios o economía colaborativa.",
+		],
+	},
+	medium: {
+		titulo:
+			"La empresa tiene un progreso moderado, con áreas desarrolladas y otras que requieren mejoras",
+		potencial: {
+			subtitulo: "Eficiencia operativa y cumplimiento",
+			detalles: [
+				"Costos operativos más altos: la falta de optimización en áreas clave, como la gestión de residuos o recursos, puede generar gastos innecesarios.",
+				"Riesgo regulatorio: No cumplir con normativas ambientales emergentes puede resultar en sanciones o pérdida de acceso a mercados más exigentes.",
+				"Oportunidades comerciales desaprovechadas: la falta de integración completa de principios circulares limita su capacidad para atraer clientes e inversionistas interesados en sosteniblidad.",
+			],
+		},
+		indicaciones: [
+			"Priorizar áreas críticas: identificar las áreas con menor desempeño (por ejemplo, gestión de residuos o deseño circular) y desarrollar planes específicos para mejorarlas.",
+			"Capacitar al personal clave: invertir en formación sobre herramientas como ecodiseño, análisis de ciclo de vida o estrategias de valorización de residuos.",
+			"Desarrollar una hora de ruta circular: formalizar un plan estratégico con objetivos claros medibles para avanzar hacia la economía circular",
+		],
+	},
+	low: {
+		titulo:
+			"La empresa está en una etapa inicial, con una baja implementación de prácticas circulares",
+		potencial: {
+			subtitulo:
+				"Enfocarse en establecer fundamentos básicos, como políticas ambientales, monitoros de recursos y gestión de residuos",
+			detalles: [
+				"Pérdida económica a largo plazo: ignorar prácticas circulares puede llevar a costos crecientes por ineficiencia en recursos y gestión de residuos.",
+				"Reputación deteriorada: los consumidores e inversionistas valoran cada vez más la sosteniblidad; no actuar puede dañar la perceptición pública y reducir oportunidades comerciales",
+				"Impacto ambiental negativo: la falta de acción contribuye a problemas globales como el cambio climático, agotamiento de recursos naturales y contaminación.",
+			],
+		},
+		indicaciones: [
+			"Establecer fundamentos básicos: implementar sistemas simples para monitorear consumo de recursos, identificar residuos generados y establecer políticas ambientales iniciales.",
+			"Iniciar con proyectos piloto: comenzar con inciativas pequeñas pero visibles, como separación básica de residuos o sustitución parcial por materiales reciclados.",
+			"Sensibilizar al equipo interno: realizar talleres introductorios sobre economía circular para construir una cultura organizacional orientada a la sosteniblidad.",
+		],
+	},
+}
+export function getBagde(score: number) {
+	let style = "bg-red-200"
+	let nivel = "Bajo"
+
+	if (score > 33 && score <= 66) {
+		style = "bg-yellow-200"
+		nivel = "Medio"
+	} else if (score > 66) {
+		style = "bg-green-200"
+		nivel = "Alto"
+	}
+
+	const title = `${score}% Nivel ${nivel}`
+
+	return { score, style, title }
+}
