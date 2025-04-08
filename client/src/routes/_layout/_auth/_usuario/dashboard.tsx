@@ -26,7 +26,7 @@ function RouteComponent() {
 
 			const diffPenultimo = ultimoPuntaje - recentResult(resultados![1])!.score
 
-			const sign = diffPenultimo > 0 ? "+" : "-"
+			const sign = diffPenultimo > 0 ? "+" : ""
 			const textDiff = `${sign}${diffPenultimo} desde la última evaluación`
 
 			const mesRealizadas = resultados.filter((res) => {

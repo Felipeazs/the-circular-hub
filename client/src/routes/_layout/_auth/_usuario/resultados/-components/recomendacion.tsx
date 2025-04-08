@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 import { Badge } from "@/client/components/ui/badge"
 import {
 	Card,
@@ -6,21 +8,32 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/client/components/ui/card"
-import { cn } from "@/client/lib/utils"
-import { getBagde, type recomendaciones } from "@/client/utils/resultados"
+import { getBagde, recomendaciones } from "@/client/utils/resultados"
 
 export type Recomendaciones = typeof recomendaciones.high
 
 type RecomendacionProps = {
 	score?: number
-	potencial: Recomendaciones
-	isHidden?: boolean
 }
 
-export function Recomendacion({ score, potencial, isHidden = false }: RecomendacionProps) {
+export function Recomendacion({ score }: RecomendacionProps) {
+	const [potencial, setPotencial] = useState<Recomendaciones>()
+
+	useEffect(() => {
+		if (score) {
+			if (score <= 33) {
+				setPotencial(recomendaciones.low)
+			} else if (score > 33 && score <= 66) {
+				setPotencial(recomendaciones.medium)
+			} else {
+				setPotencial(recomendaciones.high)
+			}
+		}
+	}, [score])
+
 	return (
 		score && (
-			<div className={cn("space-y-5", { hidden: isHidden })}>
+			<div className="space-y-5">
 				<Card>
 					<CardHeader>
 						<CardTitle>Recomendaciones</CardTitle>

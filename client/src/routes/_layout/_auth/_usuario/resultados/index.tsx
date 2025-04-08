@@ -15,6 +15,7 @@ import { useStore } from "@/client/store"
 import { lineGraph, recentResult } from "@/client/utils/resultados"
 
 import { MainPanel } from "./-components/main-panel"
+import { Recomendacion } from "./-components/recomendacion"
 
 export const Route = createFileRoute("/_layout/_auth/_usuario/resultados/")({
 	component: RouteComponent,
@@ -26,6 +27,12 @@ function RouteComponent() {
 	const graphRes = useMemo(() => {
 		if (resultados?.length) {
 			return lineGraph(resultados!)
+		}
+	}, [resultados])
+
+	const puntaje = useMemo(() => {
+		if (resultados) {
+			return recentResult(resultados[0])
 		}
 	}, [resultados])
 
@@ -49,6 +56,7 @@ function RouteComponent() {
 					<TabsTrigger value="recent">Reciente</TabsTrigger>
 					<TabsTrigger value="all">Todos</TabsTrigger>
 					<TabsTrigger value="trends">Tendencia</TabsTrigger>
+					<TabsTrigger value="recs">Recomendaciones</TabsTrigger>
 				</TabsList>
 				<TabsContent value="recent">
 					<MainPanel resultados={resultados?.[0]} />
@@ -113,6 +121,9 @@ function RouteComponent() {
 							</div>
 						</CardContent>
 					</Card>
+				</TabsContent>
+				<TabsContent value="recs">
+					<Recomendacion score={puntaje?.score} />
 				</TabsContent>
 			</Tabs>
 		</div>

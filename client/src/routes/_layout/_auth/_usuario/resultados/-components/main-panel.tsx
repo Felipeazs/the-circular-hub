@@ -1,7 +1,7 @@
 import type { Respuestas } from "@monorepo/server/db"
 
 import { Link } from "@tanstack/react-router"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo } from "react"
 
 import {
 	Card,
@@ -11,18 +11,13 @@ import {
 	CardTitle,
 } from "@/client/components/ui/card"
 import { buttonVariants, cn } from "@/client/lib/utils"
-import { daysOff, recentResult, recomendaciones } from "@/client/utils/resultados"
-
-import { Recomendacion, type Recomendaciones } from "./recomendacion"
+import { daysOff, recentResult } from "@/client/utils/resultados"
 
 type MainPanelProps = {
 	resultados?: Respuestas
-	isHidden?: boolean
 }
 
-export function MainPanel({ resultados, isHidden }: MainPanelProps) {
-	const [potencial, setPotencial] = useState<Recomendaciones>()
-
+export function MainPanel({ resultados }: MainPanelProps) {
 	const daysDiff = useMemo(() => {
 		if (resultados) {
 			return daysOff(resultados)
@@ -32,18 +27,6 @@ export function MainPanel({ resultados, isHidden }: MainPanelProps) {
 	const puntaje = useMemo(() => {
 		if (resultados) {
 			return recentResult(resultados)
-		}
-	}, [resultados])
-
-	useEffect(() => {
-		if (puntaje?.score) {
-			if (puntaje.score <= 33) {
-				setPotencial(recomendaciones.low)
-			} else if (puntaje.score > 33 && puntaje.score <= 66) {
-				setPotencial(recomendaciones.medium)
-			} else {
-				setPotencial(recomendaciones.high)
-			}
 		}
 	}, [resultados])
 
@@ -148,7 +131,6 @@ export function MainPanel({ resultados, isHidden }: MainPanelProps) {
 					</CardHeader>
 				)}
 			</Card>
-			<Recomendacion score={puntaje?.score} potencial={potencial!} isHidden={isHidden} />
 		</div>
 	)
 }
