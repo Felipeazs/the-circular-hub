@@ -1,6 +1,6 @@
 import { editUsuarioSchema } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { CircleUserRound } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -29,6 +29,7 @@ export const Route = createFileRoute("/_layout/_auth/_usuario/ajustes")({
 })
 
 function RouteComponent() {
+	const navigate = useNavigate()
 	const { queryClient, usuario: usuarioCtx } = Route.useRouteContext()
 	const { usuario } = useStore()
 	const [imageFile, setImageFile] = useState<File | string>("")
@@ -38,7 +39,10 @@ function RouteComponent() {
 		mutationFn: editMe,
 		onSuccess: async () => {
 			toast("Usuario editado")
-			await queryClient.refetchQueries({ queryKey: ["usuario", usuarioCtx!.id] })
+
+			await queryClient.invalidateQueries({ queryKey: ["usuario", usuarioCtx?.id] })
+
+			navigate({ to: "/dashboard" })
 		},
 		onError: (error) => {
 			toast(error.message)
