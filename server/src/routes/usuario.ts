@@ -109,5 +109,24 @@ const app = new Hono<AppEnv>()
 			return c.json({ status: "ok" }, 200)
 		},
 	)
+	.delete("/delete", rateLimit, checkAuth, restrict("super_admin", "admin", "user"), async (c) => {
+		const usuario = c.get("usuario")
+
+		const { data, error } = await tryCatch(
+			db.delete(usuarioTable).where(eq(usuarioTable.id, usuario.id)).returning(),
+		)
+		if (error) {
+			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, {
+				message: error.message,
+			})
+		}
+		if (!data[0]) {
+			throw new HTTPException(ERROR_CODE.NOT_FOUND, {
+				message: "No se puedo eliminar el usuario",
+			})
+		}
+
+		return c.json({ status: "ok" }, 200)
+	})
 
 export default app

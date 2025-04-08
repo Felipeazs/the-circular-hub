@@ -147,7 +147,7 @@ export const recomendaciones = {
 			],
 		},
 		indicaciones: [
-			"Priorizar áreas críticas: identificar las áreas con menor desempeño (por ejemplo, gestión de residuos o deseño circular) y desarrollar planes específicos para mejorarlas.",
+			"Priorizar áreas críticas: identificar las áreas con menor desempeño (por ejemplo, gestión de residuos o diseño circular) y desarrollar planes específicos para mejorarlas.",
 			"Capacitar al personal clave: invertir en formación sobre herramientas como ecodiseño, análisis de ciclo de vida o estrategias de valorización de residuos.",
 			"Desarrollar una hora de ruta circular: formalizar un plan estratégico con objetivos claros medibles para avanzar hacia la economía circular",
 		],

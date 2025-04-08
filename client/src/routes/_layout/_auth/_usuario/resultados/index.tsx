@@ -66,8 +66,8 @@ function RouteComponent() {
 									return [
 										{
 											name: "Evaluacion",
-											date: res!.date,
-											score: res!.score,
+											date: res?.date,
+											score: res?.score,
 											id: res!.id,
 										},
 									].map((assessment) => (
@@ -82,7 +82,7 @@ function RouteComponent() {
 											</div>
 											<div className="flex items-center gap-4 text-xs md:text-sm">
 												<div className="text-right">
-													<p className="font-medium">{assessment.score}%</p>
+													<p className="font-medium">{assessment?.score}%</p>
 													<p className="text-muted-foreground">Puntaje</p>
 												</div>
 												<Link

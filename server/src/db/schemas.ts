@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2"
 import { relations } from "drizzle-orm"
-import { pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core"
+import { foreignKey, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { z } from "zod"
 
@@ -9,7 +9,8 @@ export const usuario = pgTable(
 	{
 		id: text("id")
 			.primaryKey()
-			.$defaultFn(() => createId()),
+			.$defaultFn(() => createId())
+			.notNull(),
 		nombre: text("nombre"),
 		apellido: text("apellido"),
 		email: text("email").notNull(),
@@ -23,7 +24,9 @@ export const usuario = pgTable(
 		passwordResetToken: text("password_reset_token").default(""),
 		passwordResetExpires: timestamp("password_reset_expires"),
 		createdAt: timestamp("created_at").defaultNow().notNull(),
-		updatedAt: timestamp("updated_at").$onUpdateFn(() => new Date()),
+		updatedAt: timestamp("updated_at")
+			.$onUpdateFn(() => new Date())
+			.notNull(),
 	},
 	(table) => {
 		return [uniqueIndex("email_idx").on(table.email)]
@@ -35,7 +38,8 @@ export const respuesta = pgTable(
 	{
 		id: text("id")
 			.primaryKey()
-			.$defaultFn(() => createId()),
+			.$defaultFn(() => createId())
+			.notNull(),
 		usuarioId: text("usuario_id"),
 		colaboracion_1: text("cl_1", { enum: ["si", "no"] }),
 		colaboracion_2: text("cl_2", { enum: ["si", "no"] }),
@@ -67,10 +71,15 @@ export const respuesta = pgTable(
 		vinculacion_2: text("v_2", { enum: ["si", "no"] }),
 		vinculacion_3: text("v_3", { enum: ["si", "no"] }),
 		createdAt: timestamp("created_at").defaultNow().notNull(),
-		updatedAt: timestamp("updated_at").$onUpdateFn(() => new Date()),
+		updatedAt: timestamp("updated_at")
+			.$onUpdateFn(() => new Date())
+			.notNull(),
 	},
 	(table) => {
-		return [uniqueIndex("idx").on(table.id)]
+		return [
+			uniqueIndex("idx").on(table.id),
+			foreignKey({ columns: [table.usuarioId], foreignColumns: [usuario.id] }).onDelete("cascade"),
+		]
 	},
 )
 

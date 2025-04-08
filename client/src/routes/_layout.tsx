@@ -1,6 +1,6 @@
 import { useIsFetching, useIsMutating } from "@tanstack/react-query"
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router"
-import { Settings } from "lucide-react"
+import { CircleUserRound, Settings } from "lucide-react"
 
 import { ProgressBar } from "../components/progress-bar"
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
@@ -44,8 +44,8 @@ function RouteComponent() {
 							<DropdownMenuTrigger className="w-full hover:cursor-pointer">
 								<AvatarImage src={data?.image ?? ""} width={32} height={32} alt="profile-image" />
 								<AvatarFallback>
-									{data?.nombre?.substring(0, 1)?.toUpperCase() ?? "N"}
-									{data?.apellido?.substring(0, 1)?.toUpperCase() ?? "N"}
+									{data?.nombre?.substring(0, 1)?.toUpperCase() ?? <CircleUserRound />}
+									{data?.apellido?.substring(0, 1)?.toUpperCase()}
 								</AvatarFallback>
 								<DropdownMenuContent>
 									<DropdownMenuItem>

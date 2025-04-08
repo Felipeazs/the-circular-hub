@@ -1,12 +1,11 @@
 import { editUsuarioSchema } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
-import { TriangleAlert } from "lucide-react"
+import { CircleUserRound } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/client/components/ui/avatar"
-import { Button } from "@/client/components/ui/button"
 import {
 	Card,
 	CardContent,
@@ -23,6 +22,7 @@ import { editMe } from "@/client/lib/queries"
 import { useStore } from "@/client/store"
 
 import { ChangePassword } from "./-components/change-password"
+import { EliminarUsuario } from "./-components/eliminar-usuario"
 
 export const Route = createFileRoute("/_layout/_auth/_usuario/ajustes")({
 	component: RouteComponent,
@@ -67,8 +67,8 @@ function RouteComponent() {
 				<Avatar className="h-[62px] w-[62px] border-2">
 					<AvatarImage src={usuario?.image ?? ""} width={62} height={62} alt="profile-image" />
 					<AvatarFallback>
-						{usuario?.nombre?.substring(0, 1)?.toUpperCase() ?? "N"}
-						{usuario?.apellido?.substring(0, 1)?.toUpperCase() ?? "N"}
+						{usuario?.nombre?.substring(0, 1)?.toUpperCase() ?? <CircleUserRound />}
+						{usuario?.apellido?.substring(0, 1)?.toUpperCase()}
 					</AvatarFallback>
 				</Avatar>
 				<div>
@@ -161,19 +161,7 @@ function RouteComponent() {
 			</form>
 
 			<ChangePassword />
-
-			<Card>
-				<CardHeader>
-					<CardTitle>Zona de peligro</CardTitle>
-					<CardDescription className="border-destructive flex items-center gap-4 rounded-md border-1 p-4 text-red-500">
-						<TriangleAlert width={50} />
-						Eliminar esta cuenta borrará permanentemente toda la información de tus evaluaciones.
-					</CardDescription>
-				</CardHeader>
-				<CardFooter>
-					<Button variant="destructive">Eliminar Cuenta</Button>
-				</CardFooter>
-			</Card>
+			<EliminarUsuario />
 		</div>
 	)
 }

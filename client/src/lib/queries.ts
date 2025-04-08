@@ -149,6 +149,24 @@ export async function changePassword(data: ChangePassword) {
 	)
 }
 
+export async function deleteUsuario() {
+	return fetchWithAuth().then((token) =>
+		client.api.usuario.delete
+			.$delete({}, { headers: { Authorization: `Bearer ${token}` } })
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return json
+			}),
+	)
+}
+
 async function refreshAccessToken() {
 	return await client.api.refresh.$post().then(async (res) => {
 		const json = await res.json()

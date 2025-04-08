@@ -1,5 +1,5 @@
 {
-  "id": "bbb3fde9-32a5-4836-9abc-edfcfa5ce39b",
+  "id": "ba611861-cef9-4c43-ae22-c8e1fbd8ec54",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,7 +10,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
@@ -20,31 +20,200 @@
           "primaryKey": false,
           "notNull": false
         },
-        "go_1": {
-          "name": "go_1",
-          "type": "boolean",
+        "cl_1": {
+          "name": "cl_1",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "go_2": {
-          "name": "go_2",
-          "type": "boolean",
+        "cl_2": {
+          "name": "cl_2",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "go_3": {
-          "name": "go_3",
-          "type": "boolean",
+        "cl_3": {
+          "name": "cl_3",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "ds_1": {
+          "name": "ds_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ds_2": {
+          "name": "ds_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ds_3": {
+          "name": "ds_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "es_1": {
+          "name": "es_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "es_2": {
+          "name": "es_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "es_3": {
+          "name": "es_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ee_1": {
+          "name": "ee_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ee_2": {
+          "name": "ee_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "er_1": {
+          "name": "er_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "er_2": {
+          "name": "er_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "er_3": {
+          "name": "er_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ge_1": {
+          "name": "ge_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ge_2": {
+          "name": "ge_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ge_3": {
+          "name": "ge_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gr_1": {
+          "name": "gr_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gr_2": {
+          "name": "gr_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gr_3": {
+          "name": "gr_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gs_1": {
+          "name": "gs_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gs_2": {
+          "name": "gs_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gs_3": {
+          "name": "gs_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ia_1": {
+          "name": "ia_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ia_2": {
+          "name": "ia_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ia_3": {
+          "name": "ia_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "v_1": {
+          "name": "v_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "v_2": {
+          "name": "v_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "v_3": {
+          "name": "v_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {
-        "usuario_idx": {
-          "name": "usuario_idx",
+        "idx": {
+          "name": "idx",
           "columns": [
             {
-              "expression": "usuario_id",
+              "expression": "id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -67,7 +236,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -83,15 +252,39 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "apellido": {
+          "name": "apellido",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "organizacion": {
+          "name": "organizacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rut": {
+          "name": "rut",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "password": {
           "name": "password",
@@ -103,7 +296,40 @@
           "name": "roles",
           "type": "text[]",
           "primaryKey": false,
+          "notNull": false,
+          "default": "'{\"user\"}'"
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
           "notNull": false
+        },
+        "password_reset_token": {
+          "name": "password_reset_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
+        "password_reset_expires": {
+          "name": "password_reset_expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {

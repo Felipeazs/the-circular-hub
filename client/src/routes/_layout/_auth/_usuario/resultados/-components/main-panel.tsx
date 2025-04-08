@@ -148,7 +148,7 @@ export function MainPanel({ resultados, isHidden }: MainPanelProps) {
 					</CardHeader>
 				)}
 			</Card>
-			<Recomendacion score={puntaje!.score} potencial={potencial!} isHidden={isHidden} />
+			<Recomendacion score={puntaje?.score} potencial={potencial!} isHidden={isHidden} />
 		</div>
 	)
 }
