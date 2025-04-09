@@ -1,8 +1,8 @@
 import { editUsuarioSchema } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-import { CircleUserRound, Upload } from "lucide-react"
-import { useState } from "react"
+import { CircleUserRound, Edit2 } from "lucide-react"
+import { useRef, useState } from "react"
 import { toast } from "sonner"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/client/components/ui/avatar"
@@ -32,6 +32,8 @@ function RouteComponent() {
 	const navigate = useNavigate()
 	const { queryClient, usuario: usuarioCtx } = Route.useRouteContext()
 	const { usuario } = useStore()
+	const hiddenFileInput = useRef<HTMLInputElement | null>(null)
+
 	const [imageFile, setImageFile] = useState<File | string>("")
 
 	const { mutate } = useMutation({
@@ -67,12 +69,25 @@ function RouteComponent() {
 	return (
 		<div className="space-y-6">
 			<div className="flex w-full gap-2">
-				<Avatar className="h-[62px] w-[62px] border-2">
-					<AvatarImage src={usuario?.image ?? ""} width={62} height={62} alt="profile-image" />
+				<Avatar
+					onClick={() => hiddenFileInput.current?.click()}
+					className="relative h-[62px] w-[62px] border-2 hover:cursor-pointer">
+					<AvatarImage
+						src={
+							imageFile ? URL.createObjectURL(new Blob([imageFile])) : (usuario?.image ?? undefined)
+						}
+						width={62}
+						height={62}
+						alt="profile-image"
+					/>
 					<AvatarFallback>
 						{usuario?.nombre?.substring(0, 1)?.toUpperCase() ?? <CircleUserRound />}
 						{usuario?.apellido?.substring(0, 1)?.toUpperCase()}
 					</AvatarFallback>
+					<div className="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center text-white">
+						<Edit2 width={18} height={18} />
+						<span className="text-[9px]">max. 1mb</span>
+					</div>
 				</Avatar>
 				<div>
 					{usuario?.nombre && usuario?.apellido ? (
@@ -114,16 +129,17 @@ function RouteComponent() {
 							children={(field) => <field.TextField label="Organización" />}
 						/>
 						<div className="space-y-2">
-							<div className="flex items-center gap-1">
-								<Label>Subir Imagen</Label>
-								<Upload width={15} height={15} />
-							</div>
 							<Input
+								ref={hiddenFileInput}
 								type="file"
 								accept="image/*"
+								className="hidden"
 								onChange={(e) => {
 									const file = e.target.files?.[0]
 									if (file) {
+										if (file.size > 1048576) {
+											return toast("La imagen es demasiado grande")
+										}
 										setImageFile(file)
 										form.setFieldValue("image", file)
 									}
