@@ -72,3 +72,22 @@ export default new Hono<AppEnv>()
 
 		return c.json({ id: nuevas_respuestas[0].id }, 200)
 	})
+	.delete("/:id", checkAuth, async (c) => {
+		const usuario = c.get("usuario")
+		const id = c.req.param("id")
+
+		const { data, error: dbError } = await tryCatch(
+			db
+				.delete(respuestaTable)
+				.where(and(eq(respuestaTable.id, id), eq(respuestaTable.usuarioId, usuario!.id)))
+				.returning(),
+		)
+		if (dbError) {
+			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })
+		}
+		if (!data[0]) {
+			throw new HTTPException(ERROR_CODE.NOT_FOUND, { message: "Resultado no encontrado" })
+		}
+
+		return c.json({ status: "ok" }, 200)
+	})

@@ -304,11 +304,11 @@ export async function getRespuestas(): Promise<Respuestas[] | null> {
 	)
 }
 
-export const getRespuestasOptions = (id: string | undefined) => {
+export const getRespuestasOptions = (usuarioId: string | undefined) => {
 	return queryOptions({
-		queryKey: ["resultados", id],
+		queryKey: ["resultados", usuarioId],
 		queryFn: getRespuestas,
-		enabled: !!id,
+		enabled: !!usuarioId,
 		staleTime: Infinity,
 		throwOnError: true,
 	})
@@ -339,4 +339,22 @@ export const getRespuestaByIdOptions = (usuarioId: string | undefined, respuesta
 		staleTime: Infinity,
 		throwOnError: true,
 	})
+}
+
+export async function deleteRespuestaById(respuestaId: string) {
+	return fetchWithAuth().then((token) =>
+		client.api.respuestas[":id"]
+			.$delete({ param: { id: respuestaId } }, { headers: { Authorization: `Bearer ${token}` } })
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return json
+			}),
+	)
 }

@@ -63,59 +63,63 @@ function RouteComponent() {
 						<p className="text-muted-foreground mt-1 text-xs">{puntajes?.textMes}</p>
 					</CardContent>
 				</Card>
-				<Card>
-					<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-						<CardTitle className="text-sm font-medium">Último Puntaje</CardTitle>
-						<BarChart3 className="text-muted-foreground h-4 w-4" />
-					</CardHeader>
-					<CardContent>
-						<div className="text-2xl font-bold">{puntajes?.ultimoPuntaje}%</div>
-						<p className="text-muted-foreground mt-1 text-xs">{puntajes?.textDiff}</p>
-					</CardContent>
-				</Card>
+				{resultados?.length ? (
+					<Card>
+						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+							<CardTitle className="text-sm font-medium">Último Puntaje</CardTitle>
+							<BarChart3 className="text-muted-foreground h-4 w-4" />
+						</CardHeader>
+						<CardContent>
+							<div className="text-2xl font-bold">{puntajes?.ultimoPuntaje}%</div>
+							<p className="text-muted-foreground mt-1 text-xs">{puntajes?.textDiff}</p>
+						</CardContent>
+					</Card>
+				) : null}
 			</div>
 
 			<div className="grid gap-4 md:grid-cols-2">
-				<Card className="col-span-1">
-					<CardHeader>
-						<CardTitle>Evaluaciones Recientes</CardTitle>
-						<CardDescription>Tus evaluaciones realizadas recientemente</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<div className="space-y-4">
-							{resultados?.slice(0, 3).map((respuesta, i) => {
-								const res = recentResult(respuesta)
-								return [
-									{
-										name: "Evaluacion",
-										date: res!.date,
-										score: res!.score,
-										id: res!.id,
-									},
-								].map((assessment) => (
-									<div
-										key={assessment.id}
-										className="flex items-center justify-between border-b pb-2 last:border-0">
-										<div className="grid grid-cols-5 items-start gap-5">
-											<p className="grid-col-span-1 grid w-[40px] text-xl font-bold md:text-4xl">
-												{i + 1}.
-											</p>
-											<div className="col-span-4 grid">
-												<p className="text-muted-foreground">Completado</p>
-												<p className="text-muted-foreground">{assessment.date}</p>
+				{resultados?.length ? (
+					<Card className="col-span-1">
+						<CardHeader>
+							<CardTitle>Evaluaciones Recientes</CardTitle>
+							<CardDescription>Tus evaluaciones realizadas recientemente</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div className="space-y-4">
+								{resultados?.slice(0, 3).map((respuesta, i) => {
+									const res = recentResult(respuesta)
+									return [
+										{
+											name: "Evaluacion",
+											date: res!.date,
+											score: res!.score,
+											id: res!.id,
+										},
+									].map((assessment) => (
+										<div
+											key={assessment.id}
+											className="flex items-center justify-between border-b pb-2 last:border-0">
+											<div className="grid grid-cols-5 items-start gap-5">
+												<p className="grid-col-span-1 grid w-[40px] text-xl font-bold md:text-4xl">
+													{i + 1}.
+												</p>
+												<div className="col-span-4 grid">
+													<p className="text-muted-foreground">Completado</p>
+													<p className="text-muted-foreground">{assessment.date}</p>
+												</div>
 											</div>
+											<Button variant="outline" size="sm" asChild>
+												<Link to="/resultados/$id" params={{ id: assessment.id }}>
+													Ver
+												</Link>
+											</Button>
 										</div>
-										<Button variant="outline" size="sm" asChild>
-											<Link to="/resultados/$id" params={{ id: assessment.id }}>
-												Ver
-											</Link>
-										</Button>
-									</div>
-								))
-							})}
-						</div>
-					</CardContent>
-				</Card>
+									))
+								})}
+							</div>
+						</CardContent>
+					</Card>
+				) : null}
 
 				<Card className="col-span-1">
 					<CardHeader>

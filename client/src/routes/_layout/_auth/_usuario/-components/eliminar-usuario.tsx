@@ -59,7 +59,7 @@ export function EliminarUsuario() {
 						<AlertDialogHeader>
 							<AlertDialogTitle>¿Estás seguro que quieres eliminar tu cuenta?</AlertDialogTitle>
 							<AlertDialogDescription>
-								Esta acción no puede revertirse. Se eliminarán permanentemente tus datos y tus
+								Esta acción no puede revertirse. Se eliminarán permanentemente tus datos y
 								evaluaciones.
 							</AlertDialogDescription>
 						</AlertDialogHeader>

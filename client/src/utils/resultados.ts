@@ -173,17 +173,17 @@ export const recomendaciones = {
 }
 export function getBagde(score: number) {
 	let style = "bg-red-200"
-	let nivel = "Bajo"
+	let nivel = "bajo"
 
 	if (score > 33 && score <= 66) {
 		style = "bg-yellow-200"
-		nivel = "Medio"
+		nivel = "medio"
 	} else if (score > 66) {
 		style = "bg-green-200"
-		nivel = "Alto"
+		nivel = "alto"
 	}
 
-	const title = `${score}% Nivel ${nivel}`
+	const title = `${score}% - ${nivel}`
 
 	return { score, style, title }
 }

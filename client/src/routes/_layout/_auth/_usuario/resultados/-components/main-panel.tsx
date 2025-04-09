@@ -3,6 +3,7 @@ import type { Respuestas } from "@monorepo/server/db"
 import { Link } from "@tanstack/react-router"
 import { useMemo } from "react"
 
+import { Badge } from "@/client/components/ui/badge"
 import {
 	Card,
 	CardContent,
@@ -11,7 +12,9 @@ import {
 	CardTitle,
 } from "@/client/components/ui/card"
 import { buttonVariants, cn } from "@/client/lib/utils"
-import { daysOff, recentResult } from "@/client/utils/resultados"
+import { daysOff, getBagde, recentResult } from "@/client/utils/resultados"
+
+import { DeleteRespuesta } from "./delete-respuesta"
 
 type MainPanelProps = {
 	resultados?: Respuestas
@@ -35,23 +38,27 @@ export function MainPanel({ resultados }: MainPanelProps) {
 			<Card>
 				{resultados ? (
 					<div className="space-y-4">
-						<CardHeader>
-							<CardTitle>Evaluación</CardTitle>
-							<CardDescription>
+						<CardHeader className="text-end">
+							<CardDescription className="">
 								Completado hace {daysDiff} {daysDiff === 1 ? "día" : "días"}
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className="space-y-6">
-								<div className="grid grid-cols-2 gap-4">
+								<div className="grid grid-cols-3 items-center justify-around gap-4">
 									<div className="space-y-2">
 										<p className="text-muted-foreground text-sm font-medium">Puntaje general</p>
-										<p className="text-2xl font-bold">{puntaje?.score}%</p>
+										<Badge
+											variant="outline"
+											className={cn("text-2xl font-bold", getBagde(puntaje!.score).style)}>
+											{getBagde(puntaje!.score).title}{" "}
+										</Badge>
 									</div>
-									<div className="space-y-2">
+									<div className="space-y-2 text-center">
 										<p className="text-muted-foreground text-sm font-medium">resultados</p>
 										<p className="text-2xl font-bold">{puntaje?.total}/29</p>
 									</div>
+									<DeleteRespuesta respuestaId={resultados.id} />
 								</div>
 
 								<div className="space-y-4">
