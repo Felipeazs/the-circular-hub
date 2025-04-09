@@ -141,7 +141,7 @@ export default new Hono<AppEnv>()
 
 		// compare password with db
 		const { data: usuarioEncontrado, error: dbError } = await tryCatch(
-			db.query.usuario.findFirst({ where: eq(usuarioTable.id, usuario.id) }),
+			db.query.usuario.findFirst({ where: eq(usuarioTable.id, usuario!.id) }),
 		)
 		if (dbError) {
 			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })

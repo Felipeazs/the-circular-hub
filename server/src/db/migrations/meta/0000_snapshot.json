@@ -1,5 +1,5 @@
 {
-  "id": "ba611861-cef9-4c43-ae22-c8e1fbd8ec54",
+  "id": "f2a59a68-ef31-4af6-8026-1315c2ccf1ea",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -276,12 +276,6 @@
         },
         "organizacion": {
           "name": "organizacion",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "rut": {
-          "name": "rut",
           "type": "text",
           "primaryKey": false,
           "notNull": false

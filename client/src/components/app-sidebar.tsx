@@ -1,8 +1,6 @@
-import { useMutation } from "@tanstack/react-query"
 import { Link, useLocation } from "@tanstack/react-router"
-import { BarChart3, Home, LogOut, PlusCircle } from "lucide-react"
+import { BarChart3, Home, PlusCircle } from "lucide-react"
 
-import { logout } from "../lib/queries"
 import { cn } from "../lib/utils"
 import {
 	Sidebar,
@@ -34,20 +32,8 @@ const items = [
 	},
 ]
 
-export function AppSidebar({ handleExit }: { handleExit: () => void }) {
+export function AppSidebar() {
 	const { pathname } = useLocation()
-
-	const { mutate } = useMutation({
-		mutationFn: logout,
-		onSuccess: () => {
-			handleExit()
-		},
-	})
-
-	function handleLogout() {
-		mutate()
-	}
-
 	return (
 		<Sidebar className="bg-slate-50 p-4">
 			<SidebarContent>
@@ -71,13 +57,6 @@ export function AppSidebar({ handleExit }: { handleExit: () => void }) {
 									</Link>
 								</SidebarMenuButton>
 							))}
-							<SidebarMenuButton
-								variant="outline"
-								onClick={handleLogout}
-								className="justify-start bg-slate-50 text-red-500 hover:cursor-pointer hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/20">
-								<LogOut className="h-5 w-5" />
-								Cerrar Sesión
-							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>
 				</SidebarGroupContent>

@@ -15,7 +15,6 @@ export const usuario = pgTable(
 		apellido: text("apellido"),
 		email: text("email").notNull(),
 		organizacion: text("organizacion"),
-		rut: text("rut"),
 		password: text("password").notNull(),
 		roles: text({ enum: ["super_admin", "admin", "user"] })
 			.array()
@@ -131,7 +130,6 @@ export const editUsuarioSchema = createInsertSchema(usuario, {
 	nombre: z.string(),
 	apellido: z.string(),
 	organizacion: z.string(),
-	rut: z.string(),
 	email: z.string().email(),
 	image: z
 		.union([

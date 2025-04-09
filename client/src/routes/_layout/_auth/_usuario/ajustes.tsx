@@ -1,7 +1,7 @@
 import { editUsuarioSchema } from "@monorepo/server/db"
 import { useMutation } from "@tanstack/react-query"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-import { CircleUserRound } from "lucide-react"
+import { CircleUserRound, Upload } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -55,7 +55,6 @@ function RouteComponent() {
 			apellido: usuario?.apellido ?? "",
 			email: usuario?.email ?? "",
 			organizacion: usuario?.organizacion ?? "",
-			rut: usuario?.rut ?? "",
 			image: usuario?.image || imageFile,
 			roles: usuario?.roles ?? ["user"],
 		},
@@ -110,17 +109,15 @@ function RouteComponent() {
 							children={(field) => <field.TextField label="Apellido" />}
 						/>
 						<form.AppField
-							name="rut"
-							validators={{ onChange: editUsuarioSchema.shape.rut }}
-							children={(field) => <field.TextField label="Rut" />}
-						/>
-						<form.AppField
 							name="organizacion"
 							validators={{ onChange: editUsuarioSchema.shape.organizacion }}
 							children={(field) => <field.TextField label="Organización" />}
 						/>
 						<div className="space-y-2">
-							<Label>Imagen</Label>
+							<div className="flex items-center gap-1">
+								<Label>Subir Imagen</Label>
+								<Upload width={15} height={15} />
+							</div>
 							<Input
 								type="file"
 								accept="image/*"
@@ -163,7 +160,6 @@ function RouteComponent() {
 					</CardFooter>
 				</Card>
 			</form>
-
 			<ChangePassword />
 			<EliminarUsuario />
 		</div>

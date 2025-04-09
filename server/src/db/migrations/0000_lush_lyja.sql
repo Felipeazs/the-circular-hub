@@ -40,7 +40,6 @@ CREATE TABLE "usuarios" (
 	"apellido" text,
 	"email" text NOT NULL,
 	"organizacion" text,
-	"rut" text,
 	"password" text NOT NULL,
 	"roles" text[] DEFAULT '{"user"}',
 	"image" text,

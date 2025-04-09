@@ -2,12 +2,15 @@ import { useIsFetching, useIsMutating } from "@tanstack/react-query"
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router"
 import { CircleUserRound, Settings } from "lucide-react"
 
+import { Logout } from "../components/logout"
 import { ProgressBar } from "../components/progress-bar"
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu"
 import { buttonVariants } from "../lib/utils"
@@ -48,11 +51,16 @@ function RouteComponent() {
 									{data?.apellido?.substring(0, 1)?.toUpperCase()}
 								</AvatarFallback>
 								<DropdownMenuContent>
+									<DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
+									<DropdownMenuSeparator />
 									<DropdownMenuItem>
 										<Link to="/ajustes" className="flex w-full items-center gap-2">
 											<Settings />
-											<span>Cuenta</span>
+											<span>Ajustes</span>
 										</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										<Logout />
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenuTrigger>

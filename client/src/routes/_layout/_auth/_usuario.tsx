@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
 import { useEffect } from "react"
 
+import { Login } from "@/client/components/login"
 import { getRespuestasOptions, meQueryOptions } from "@/client/lib/queries"
 import { useStore } from "@/client/store"
 
@@ -22,6 +23,10 @@ function RouteComponent() {
 			setResultados(resultados)
 		}
 	}, [usuario])
+
+	if (!usuario) {
+		return <Login />
+	}
 
 	return usuario && <Outlet />
 }

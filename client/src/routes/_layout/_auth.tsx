@@ -1,10 +1,12 @@
-import { createFileRoute, Outlet, redirect, useLocation, useNavigate } from "@tanstack/react-router"
+import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router"
 import { useEffect } from "react"
+
+import { Login } from "@/client/components/login"
 
 import { AppSidebar } from "../../components/app-sidebar"
 import { Breadcrumbs } from "../../components/breadbrumbs"
 import { SidebarProvider, SidebarTrigger } from "../../components/ui/sidebar"
-import { authMeQueryOptions, logout } from "../../lib/queries"
+import { authMeQueryOptions } from "../../lib/queries"
 import { useStore } from "../../store"
 
 export const Route = createFileRoute("/_layout/_auth")({
@@ -20,12 +22,7 @@ export const Route = createFileRoute("/_layout/_auth")({
 		} catch {
 			store.quit()
 
-			await logout().then(() =>
-				redirect({
-					to: "/login",
-					throw: true,
-				}),
-			)
+			return { usuario: null }
 		}
 	},
 	component: AuthRoute,
@@ -34,24 +31,20 @@ export const Route = createFileRoute("/_layout/_auth")({
 function AuthRoute() {
 	const { paths } = useStore()
 	const { pathname } = useLocation()
-	const { store, queryClient } = Route.useRouteContext()
-	const navigate = useNavigate()
+	const { store, usuario } = Route.useRouteContext()
 
 	useEffect(() => {
 		store.setPaths(pathname)
 	}, [pathname])
 
-	function handleExit() {
-		store.quit()
-		queryClient.invalidateQueries({ queryKey: ["auth"] })
-
-		navigate({ to: "/" })
+	if (!usuario) {
+		return <Login />
 	}
 
 	return (
 		<>
 			<SidebarProvider>
-				<AppSidebar handleExit={handleExit} />
+				<AppSidebar />
 				<SidebarTrigger />
 				<div className="flex w-full flex-col gap-6 p-1">
 					<Breadcrumbs breadcrumbs={paths?.links} current={paths?.current} />

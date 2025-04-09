@@ -26,6 +26,7 @@ export default new Hono().post("/", async (c) => {
 		verify(refresh_token, env.JWT_REFRESH_SECRET),
 	)
 	if (!verified || verifyError) {
+		deleteCookie(c, "refresh_token")
 		throw new HTTPException(ERROR_CODE.UNAUTHORIZED, { message: "Acceso no autorizado" })
 	}
 
@@ -36,6 +37,7 @@ export default new Hono().post("/", async (c) => {
 		redis.get(`${usuario.id}:refresh_token`),
 	)
 	if (redisError) {
+		deleteCookie(c, "refresh_token")
 		throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: redisError.message })
 	}
 

@@ -44,7 +44,8 @@ export function EliminarUsuario() {
 				<CardTitle>Zona de peligro</CardTitle>
 				<CardDescription className="border-destructive flex items-center gap-4 rounded-md border-1 p-4 text-red-500">
 					<TriangleAlert width={50} />
-					Eliminar esta cuenta borrará permanentemente toda la información de tus evaluaciones.
+					Eliminar esta cuenta borrará permanentemente toda la información de tu cuenta y
+					evaluaciones.
 				</CardDescription>
 			</CardHeader>
 			<CardFooter>

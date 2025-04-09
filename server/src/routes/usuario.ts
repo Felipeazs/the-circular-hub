@@ -23,7 +23,7 @@ const app = new Hono<AppEnv>()
 		const usuario = c.get("usuario")
 
 		const { data: redisItem, error: redisError } = await tryCatch(
-			getRedisItem({ item: "usuario", key: usuario.id }),
+			getRedisItem({ item: "usuario", key: usuario!.id }),
 		)
 		if (redisError) {
 			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: redisError.message })
@@ -32,7 +32,7 @@ const app = new Hono<AppEnv>()
 			return c.json({ usuario: redisItem }, 200)
 		}
 
-		const id = usuario.id
+		const id = usuario!.id
 
 		const { data: usuarioFound, error: dbError } = await tryCatch(
 			db.query.usuario.findFirst({ where: eq(usuarioTable.id, id) }),
@@ -46,7 +46,7 @@ const app = new Hono<AppEnv>()
 
 		const sjson = SuperJSON.stringify(usuarioFound)
 
-		await setRedisItem({ item: "usuario", key: usuario.id, value: sjson })
+		await setRedisItem({ item: "usuario", key: usuario!.id, value: sjson })
 
 		return c.json({ usuario: sjson }, 200)
 	})
@@ -60,13 +60,13 @@ const app = new Hono<AppEnv>()
 		async (c) => {
 			const usuario = c.get("usuario")
 
-			const { nombre, apellido, email, rut, organizacion, roles, image } = c.req.valid("form")
+			const { nombre, apellido, email, organizacion, roles, image } = c.req.valid("form")
 
 			let dbimage = image
 			if (image instanceof File) {
 				const arrayBuf = await image.arrayBuffer()
 				const buffer = Buffer.from(arrayBuf).toString("base64")
-				const { data: cloud, error } = await tryCatch(uploadImage(buffer!, usuario.id, "profile"))
+				const { data: cloud, error } = await tryCatch(uploadImage(buffer!, usuario!.id, "profile"))
 				if (error) {
 					throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: error.message })
 				}
@@ -81,12 +81,11 @@ const app = new Hono<AppEnv>()
 						nombre,
 						apellido,
 						email,
-						rut,
 						organizacion,
 						roles: typeof roles === "string" ? ["user"] : roles,
 						image: dbimage as string,
 					})
-					.where(eq(usuarioTable.id, usuario.id)),
+					.where(eq(usuarioTable.id, usuario!.id)),
 			)
 			if (dbUpdateError) {
 				throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, {
@@ -98,7 +97,7 @@ const app = new Hono<AppEnv>()
 			}
 
 			const { data: _data, error: redisDelError } = await tryCatch(
-				deleteRedisItem({ item: "usuario", key: usuario.id }),
+				deleteRedisItem({ item: "usuario", key: usuario!.id }),
 			)
 			if (redisDelError) {
 				throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, {
@@ -113,7 +112,7 @@ const app = new Hono<AppEnv>()
 		const usuario = c.get("usuario")
 
 		const { data, error } = await tryCatch(
-			db.delete(usuarioTable).where(eq(usuarioTable.id, usuario.id)).returning(),
+			db.delete(usuarioTable).where(eq(usuarioTable.id, usuario!.id)).returning(),
 		)
 		if (error) {
 			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, {

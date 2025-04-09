@@ -9,7 +9,7 @@ export type EnvUsuario = {
 
 export type AppEnv = {
 	Variables: {
-		usuario: EnvUsuario
+		usuario: EnvUsuario | null
 	}
 	Bindings: {
 		AUTH_SECRET: string

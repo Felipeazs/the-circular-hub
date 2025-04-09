@@ -19,7 +19,7 @@ export default new Hono<AppEnv>()
 
 		const { data, error: dbError } = await tryCatch(
 			db.query.respuesta.findMany({
-				where: eq(respuestaTable.usuarioId, usuario.id),
+				where: eq(respuestaTable.usuarioId, usuario!.id),
 				orderBy: desc(respuestaTable.createdAt),
 			}),
 		)
@@ -40,7 +40,7 @@ export default new Hono<AppEnv>()
 
 		const { data, error: dbError } = await tryCatch(
 			db.query.respuesta.findFirst({
-				where: and(eq(respuestaTable.usuarioId, usuario.id), eq(respuestaTable.id, id)),
+				where: and(eq(respuestaTable.usuarioId, usuario!.id), eq(respuestaTable.id, id)),
 			}),
 		)
 		if (dbError) {
@@ -61,7 +61,7 @@ export default new Hono<AppEnv>()
 			db
 				.insert(respuestaTable)
 				.values({
-					usuarioId: usuario.id,
+					usuarioId: usuario!.id,
 					...respuestas,
 				})
 				.returning(),
