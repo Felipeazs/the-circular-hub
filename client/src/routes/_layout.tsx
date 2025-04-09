@@ -34,10 +34,10 @@ function RouteComponent() {
 				{!isLoggedIn && (
 					<div className="flex gap-2">
 						<Link to="/login" className={buttonVariants({ variant: "outline" })} viewTransition>
-							Log in
+							ingresar
 						</Link>
 						<Link to="/registro" className={buttonVariants({ variant: "default" })} viewTransition>
-							Regístrate
+							regístrate
 						</Link>
 					</div>
 				)}
@@ -79,23 +79,23 @@ function RouteComponent() {
 			<footer className="absolute z-10 my-6 w-full border-t bg-white py-6 md:py-0">
 				<div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 					<p className="text-muted-foreground text-center text-sm leading-loose md:text-left">
-						© 2025 AssessmentPro. All rights reserved.
+						© 2025 The Circular Hub
 					</p>
 					<div className="flex gap-4">
 						<Link
 							to="/"
 							className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
-							Terms
+							Términos y condiciones
 						</Link>
 						<Link
 							to="/"
 							className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
-							Privacy
+							Privacidad
 						</Link>
 						<Link
 							to="/"
 							className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
-							Contact
+							Contacto
 						</Link>
 					</div>
 				</div>

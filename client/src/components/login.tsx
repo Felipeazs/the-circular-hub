@@ -43,7 +43,7 @@ export function Login() {
 	return (
 		<Card className="mx-auto mt-20 w-max">
 			<CardHeader>
-				<CardTitle>Log in</CardTitle>
+				<CardTitle>Ingresar</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<form

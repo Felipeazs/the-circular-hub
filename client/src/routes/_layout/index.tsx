@@ -17,22 +17,22 @@ function Index() {
 						<div className="flex flex-col justify-center space-y-4">
 							<div className="space-y-2">
 								<h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-									Discover Your Path to Personal Growth
+									Descubre tu camino hacia el crecimiento
 								</h1>
 								<p className="text-muted-foreground max-w-[600px] md:text-xl">
-									Our comprehensive assessment tool helps you identify strengths, areas for
-									improvement, and create a roadmap for personal development.
+									Nuestra herramienta de evaluación integral lo ayuda a identificar fortalezas,
+									áreas de mejora y crear una hoja de ruta para su empresa.
 								</p>
 							</div>
 							<div className="flex flex-col gap-2 min-[400px]:flex-row">
 								<Button size="lg" asChild>
 									<Link to="/evaluacion">
-										Start Your Assessment
+										Empieza tu evaluación
 										<ArrowRight className="ml-2 h-4 w-4" />
 									</Link>
 								</Button>
 								<Button size="lg" variant="outline" asChild>
-									<Link to="/dashboard">View Dashboard</Link>
+									<Link to="/dashboard">Ver Dashboard</Link>
 								</Button>
 							</div>
 						</div>
@@ -43,10 +43,10 @@ function Index() {
 									<div className="flex h-full w-full flex-col items-center justify-center space-y-4 rounded-lg border border-dashed p-6">
 										<LineChart className="text-muted-foreground h-16 w-16" />
 										<div className="space-y-2 text-center">
-											<h3 className="font-bold">Personalized Insights</h3>
+											<h3 className="font-bold">Asesoramiento personalizado</h3>
 											<p className="text-muted-foreground text-sm">
-												Get detailed analysis and actionable recommendations based on your
-												responses.
+												Obtenga análisis detallado y recomendaciones procesables basadas en sus
+												respuestas.
 											</p>
 										</div>
 									</div>

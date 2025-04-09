@@ -27,8 +27,8 @@ export function Logout() {
 	}
 
 	return (
-		<div className="flex h-[20px] w-full items-center gap-2">
-			<LogOut />
+		<div className="flex h-[20px] w-full items-center gap-2 text-red-500">
+			<LogOut className="text-red-500" />
 			<Button
 				variant="ghost"
 				size="sm"
