@@ -263,7 +263,7 @@ export async function editMe(data: EditUsuario): Promise<string | null> {
 	)
 }
 
-export async function saveRespuestas(respuestas: CreateRespuestas) {
+export async function saveRespuestas(respuestas: CreateRespuestas): Promise<Respuestas> {
 	return fetchWithAuth().then((token) =>
 		client.api.respuestas
 			.$post(
@@ -281,7 +281,7 @@ export async function saveRespuestas(respuestas: CreateRespuestas) {
 					throw new Error(json.message as string)
 				}
 
-				return json
+				return SuperJSON.parse(json.respuesta)
 			}),
 	)
 }
@@ -341,7 +341,7 @@ export const getRespuestaByIdOptions = (usuarioId: string | undefined, respuesta
 	})
 }
 
-export async function deleteRespuestaById(respuestaId: string) {
+export async function deleteRespuestaById(respuestaId: string): Promise<Respuestas> {
 	return fetchWithAuth().then((token) =>
 		client.api.respuestas[":id"]
 			.$delete({ param: { id: respuestaId } }, { headers: { Authorization: `Bearer ${token}` } })
@@ -354,7 +354,7 @@ export async function deleteRespuestaById(respuestaId: string) {
 					throw new Error(json.message as string)
 				}
 
-				return json
+				return SuperJSON.parse(json.respuesta)
 			}),
 	)
 }

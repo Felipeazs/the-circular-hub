@@ -52,7 +52,7 @@ export function EliminarUsuario() {
 				<AlertDialog>
 					<AlertDialogTrigger asChild>
 						<Button variant="destructive" className="hover:cursor-pointer">
-							Eliminar Cuenta
+							Eliminar cuenta
 						</Button>
 					</AlertDialogTrigger>
 					<AlertDialogContent>
@@ -70,7 +70,7 @@ export function EliminarUsuario() {
 							</AlertDialogAction>
 						</AlertDialogFooter>
 					</AlertDialogContent>
-				</AlertDialog>{" "}
+				</AlertDialog>
 			</CardFooter>
 		</Card>
 	)

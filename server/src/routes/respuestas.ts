@@ -69,8 +69,13 @@ export default new Hono<AppEnv>()
 		if (dbError) {
 			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: dbError.message })
 		}
+		if (!nuevas_respuestas[0]) {
+			throw new HTTPException(ERROR_CODE.NOT_FOUND, { message: "Resultado no encontrado" })
+		}
 
-		return c.json({ id: nuevas_respuestas[0].id }, 200)
+		const sjson = SuperJSON.stringify(nuevas_respuestas[0])
+
+		return c.json({ respuesta: sjson }, 200)
 	})
 	.delete("/:id", checkAuth, async (c) => {
 		const usuario = c.get("usuario")
@@ -89,5 +94,7 @@ export default new Hono<AppEnv>()
 			throw new HTTPException(ERROR_CODE.NOT_FOUND, { message: "Resultado no encontrado" })
 		}
 
-		return c.json({ status: "ok" }, 200)
+		const sjson = SuperJSON.stringify(data[0])
+
+		return c.json({ respuesta: sjson }, 200)
 	})

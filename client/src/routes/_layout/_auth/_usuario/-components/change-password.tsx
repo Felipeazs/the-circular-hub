@@ -73,7 +73,7 @@ export function ChangePassword() {
 				</CardContent>
 				<CardFooter>
 					<form.AppForm>
-						<form.SubscribeButton label="Cambiar Contraseña" />
+						<form.SubscribeButton label="Cambiar contraseña" />
 					</form.AppForm>
 				</CardFooter>
 			</Card>

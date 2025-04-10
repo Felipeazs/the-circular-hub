@@ -3,6 +3,16 @@ import { useNavigate } from "@tanstack/react-router"
 import { Trash } from "lucide-react"
 import { toast } from "sonner"
 
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/client/components/ui/alert-dialog"
 import { Button } from "@/client/components/ui/button"
 import { deleteRespuestaById } from "@/client/lib/queries"
 import { useStore } from "@/client/store"
@@ -18,10 +28,10 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 
 	const { mutate } = useMutation({
 		mutationFn: deleteRespuestaById,
-		onSuccess: async () => {
+		onSuccess: async (data) => {
 			await queryClient.invalidateQueries({ queryKey: ["respuestas", usuario?.id] })
 
-			updateResultados(respuestaId)
+			updateResultados({ respuesta: data, action: "delete" })
 
 			navigate({ to: "/resultados" })
 
@@ -35,13 +45,25 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 	return (
 		<div className="space-y-2 text-end">
 			<p className="text-white">.</p>
-			<Button
-				variant="outline"
-				size="sm"
-				className="hover:cursor-pointer"
-				onClick={() => mutate(respuestaId)}>
-				<Trash />
-			</Button>
+
+			<AlertDialog>
+				<AlertDialogTrigger asChild>
+					<Button variant="ghost" size="sm" className="hover:cursor-pointer">
+						<Trash />
+					</Button>
+				</AlertDialogTrigger>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>¿Estás seguro que quieres eliminar esta evaluación?</AlertDialogTitle>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel className="hover:cursor-pointer">Cancelar</AlertDialogCancel>
+						<AlertDialogAction className="hover:cursor-pointer" onClick={() => mutate(respuestaId)}>
+							OK
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</div>
 	)
 }

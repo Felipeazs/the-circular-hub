@@ -22,7 +22,13 @@ export interface StoreState {
 	setUsuario: (data: Usuario) => void
 	resultados: Respuestas[] | undefined
 	setResultados: (data: Respuestas[]) => void
-	updateResultados: (respuestaId: string) => void
+	updateResultados: ({
+		respuesta,
+		action,
+	}: {
+		respuesta: Respuestas
+		action: "insert" | "delete"
+	}) => void
 }
 
 export const useStore = create<StoreState>()((set) => ({
@@ -67,10 +73,18 @@ export const useStore = create<StoreState>()((set) => ({
 	setUsuario: (usuario) => set(() => ({ usuario })),
 	resultados: undefined,
 	setResultados: (resultados) => set(() => ({ resultados })),
-	updateResultados: (respuestaId) =>
+	updateResultados: ({ respuesta, action }) =>
 		set(({ resultados }) => {
-			// filter respuesta
-			const updatedResultados = resultados?.filter((res) => res.id !== respuestaId)
+			let updatedResultados = resultados
+
+			switch (action) {
+				case "insert":
+					updatedResultados?.push(respuesta)
+					break
+				case "delete":
+					updatedResultados = resultados?.filter((res) => res.id !== respuesta.id)
+					break
+			}
 
 			return { resultados: updatedResultados }
 		}),

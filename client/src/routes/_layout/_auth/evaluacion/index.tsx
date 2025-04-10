@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 
 import { saveRespuestas } from "@/client/lib/queries"
+import { useStore } from "@/client/store"
 
 import { Preguntas } from "./-components/preguntas"
 
@@ -14,6 +15,7 @@ type Answers = {
 }
 
 function RouteComponent() {
+	const { updateResultados } = useStore()
 	const navigate = useNavigate()
 	const { queryClient, usuario } = Route.useRouteContext()
 
@@ -22,12 +24,12 @@ function RouteComponent() {
 		onSuccess: async (data) => {
 			await queryClient.invalidateQueries({ queryKey: ["resultados", usuario?.id] })
 
+			updateResultados({ respuesta: data, action: "insert" })
+
 			navigate({ to: `/resultados/${data.id}` })
 		},
 	})
 	function saveForm(form: Answers) {
-		console.warn(form)
-
 		mutate(form)
 	}
 	return (
