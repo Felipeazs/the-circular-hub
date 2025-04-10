@@ -8,6 +8,7 @@ import {
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogContent,
+	AlertDialogDescription,
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
@@ -29,11 +30,11 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 	const { mutate } = useMutation({
 		mutationFn: deleteRespuestaById,
 		onSuccess: async (data) => {
-			await queryClient.invalidateQueries({ queryKey: ["respuestas", usuario?.id] })
+			await queryClient.invalidateQueries({ queryKey: ["resultados", usuario?.id] })
 
 			updateResultados({ respuesta: data, action: "delete" })
 
-			navigate({ to: "/resultados" })
+			navigate({ to: "/panel" })
 
 			toast("Evaluación eliminada")
 		},
@@ -54,7 +55,10 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 				</AlertDialogTrigger>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>¿Estás seguro que quieres eliminar esta evaluación?</AlertDialogTitle>
+						<AlertDialogTitle>Eliminar evaluación</AlertDialogTitle>
+						<AlertDialogDescription>
+							¿Estás seguro que quieres eliminar esta evaluación?
+						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
 						<AlertDialogCancel className="hover:cursor-pointer">Cancelar</AlertDialogCancel>

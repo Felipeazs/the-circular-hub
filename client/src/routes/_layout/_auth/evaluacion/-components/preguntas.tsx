@@ -542,7 +542,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 												) : answers[question.id] === "no" ? (
 													<span className="text-red-600">No</span>
 												) : (
-													<span className="text-gray-400">Not answered</span>
+													<span className="text-gray-400">{" - "}</span>
 												)}
 											</div>
 										</div>
