@@ -79,7 +79,7 @@ export const useStore = create<StoreState>()((set) => ({
 
 			switch (action) {
 				case "insert":
-					updatedResultados?.push(respuesta)
+					updatedResultados?.unshift(respuesta)
 					break
 				case "delete":
 					updatedResultados = resultados?.filter((res) => res.id !== respuesta.id)
