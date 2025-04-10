@@ -33,7 +33,8 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 	})
 
 	return (
-		<div className="text-end">
+		<div className="space-y-2 text-end">
+			<p className="text-white">.</p>
 			<Button
 				variant="outline"
 				size="sm"

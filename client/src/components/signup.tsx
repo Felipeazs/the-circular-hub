@@ -22,7 +22,7 @@ export function Signup() {
 			enter(data)
 			toast("Bienvenido")
 
-			navigate({ to: "/dashboard" })
+			navigate({ to: "/panel" })
 		},
 		onError: (error) => {
 			toast(error.message)

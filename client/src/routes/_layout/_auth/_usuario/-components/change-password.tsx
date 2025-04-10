@@ -50,7 +50,7 @@ export function ChangePassword() {
 			<Card>
 				<CardHeader>
 					<CardTitle>Seguridad</CardTitle>
-					<CardDescription>Actualiza tu contraseña</CardDescription>
+					<CardDescription>Cambia tu contraseña</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-4">
 					<form.AppField

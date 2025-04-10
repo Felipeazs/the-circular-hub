@@ -37,7 +37,7 @@ function RouteComponent() {
 	}, [resultados])
 
 	return (
-		<div className="w-full space-y-6">
+		<div className="w-[93%] space-y-6 md:w-full">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">Mis Resultados</h1>
@@ -52,13 +52,15 @@ function RouteComponent() {
 			</div>
 
 			<Tabs defaultValue="recent">
-				<TabsList>
+				<TabsList className="w-[98%] md:w-full">
 					<TabsTrigger value="recent">Reciente</TabsTrigger>
 					{resultados?.length ? (
 						<>
 							<TabsTrigger value="all">Todos</TabsTrigger>
 							<TabsTrigger value="trends">Tendencia</TabsTrigger>
-							<TabsTrigger value="recs">Recomendaciones</TabsTrigger>
+							<TabsTrigger value="recs" className="inline justify-start truncate">
+								Recomendaciones
+							</TabsTrigger>
 						</>
 					) : null}
 				</TabsList>

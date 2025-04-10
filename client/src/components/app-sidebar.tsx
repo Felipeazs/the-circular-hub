@@ -16,8 +16,8 @@ import {
 
 const items = [
 	{
-		title: "Dashboard",
-		url: "/dashboard",
+		title: "Panel Principal",
+		url: "/panel",
 		icon: Home,
 	},
 	{

@@ -45,7 +45,7 @@ export function MainPanel({ resultados }: MainPanelProps) {
 						</CardHeader>
 						<CardContent>
 							<div className="space-y-6">
-								<div className="grid grid-cols-3 items-center justify-around gap-4">
+								<div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-center md:justify-around">
 									<div className="space-y-2">
 										<p className="text-muted-foreground text-sm font-medium">Puntaje general</p>
 										<Badge
@@ -54,7 +54,7 @@ export function MainPanel({ resultados }: MainPanelProps) {
 											{getBagde(puntaje!.score).title}{" "}
 										</Badge>
 									</div>
-									<div className="space-y-2 text-center">
+									<div className="space-y-2 md:text-center">
 										<p className="text-muted-foreground text-sm font-medium">resultados</p>
 										<p className="text-2xl font-bold">{puntaje?.total}/29</p>
 									</div>

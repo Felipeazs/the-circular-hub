@@ -32,7 +32,7 @@ function Index() {
 									</Link>
 								</Button>
 								<Button size="lg" variant="outline" asChild>
-									<Link to="/dashboard">Ver Dashboard</Link>
+									<Link to="/panel">Ver Dashboard</Link>
 								</Button>
 							</div>
 						</div>

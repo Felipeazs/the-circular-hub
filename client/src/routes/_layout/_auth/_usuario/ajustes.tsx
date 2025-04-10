@@ -44,7 +44,7 @@ function RouteComponent() {
 
 			await queryClient.invalidateQueries({ queryKey: ["usuario", usuarioCtx?.id] })
 
-			navigate({ to: "/dashboard" })
+			navigate({ to: "/panel" })
 		},
 		onError: (error) => {
 			toast(error.message)

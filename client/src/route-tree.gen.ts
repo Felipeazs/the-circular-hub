@@ -20,7 +20,7 @@ import { Route as LayoutPasswordResetImport } from './routes/_layout/password/re
 import { Route as LayoutPasswordForgotImport } from './routes/_layout/password/forgot'
 import { Route as LayoutAuthUsuarioImport } from './routes/_layout/_auth/_usuario'
 import { Route as LayoutAuthEvaluacionIndexImport } from './routes/_layout/_auth/evaluacion/index'
-import { Route as LayoutAuthUsuarioDashboardImport } from './routes/_layout/_auth/_usuario/dashboard'
+import { Route as LayoutAuthUsuarioPanelImport } from './routes/_layout/_auth/_usuario/panel'
 import { Route as LayoutAuthUsuarioAjustesImport } from './routes/_layout/_auth/_usuario/ajustes'
 import { Route as LayoutAuthUsuarioResultadosIndexImport } from './routes/_layout/_auth/_usuario/resultados/index'
 import { Route as LayoutAuthUsuarioResultadosIdImport } from './routes/_layout/_auth/_usuario/resultados/$id'
@@ -78,13 +78,11 @@ const LayoutAuthEvaluacionIndexRoute = LayoutAuthEvaluacionIndexImport.update({
   getParentRoute: () => LayoutAuthRoute,
 } as any)
 
-const LayoutAuthUsuarioDashboardRoute = LayoutAuthUsuarioDashboardImport.update(
-  {
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => LayoutAuthUsuarioRoute,
-  } as any,
-)
+const LayoutAuthUsuarioPanelRoute = LayoutAuthUsuarioPanelImport.update({
+  id: '/panel',
+  path: '/panel',
+  getParentRoute: () => LayoutAuthUsuarioRoute,
+} as any)
 
 const LayoutAuthUsuarioAjustesRoute = LayoutAuthUsuarioAjustesImport.update({
   id: '/ajustes',
@@ -173,11 +171,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAuthUsuarioAjustesImport
       parentRoute: typeof LayoutAuthUsuarioImport
     }
-    '/_layout/_auth/_usuario/dashboard': {
-      id: '/_layout/_auth/_usuario/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof LayoutAuthUsuarioDashboardImport
+    '/_layout/_auth/_usuario/panel': {
+      id: '/_layout/_auth/_usuario/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof LayoutAuthUsuarioPanelImport
       parentRoute: typeof LayoutAuthUsuarioImport
     }
     '/_layout/_auth/evaluacion/': {
@@ -208,14 +206,14 @@ declare module '@tanstack/react-router' {
 
 interface LayoutAuthUsuarioRouteChildren {
   LayoutAuthUsuarioAjustesRoute: typeof LayoutAuthUsuarioAjustesRoute
-  LayoutAuthUsuarioDashboardRoute: typeof LayoutAuthUsuarioDashboardRoute
+  LayoutAuthUsuarioPanelRoute: typeof LayoutAuthUsuarioPanelRoute
   LayoutAuthUsuarioResultadosIdRoute: typeof LayoutAuthUsuarioResultadosIdRoute
   LayoutAuthUsuarioResultadosIndexRoute: typeof LayoutAuthUsuarioResultadosIndexRoute
 }
 
 const LayoutAuthUsuarioRouteChildren: LayoutAuthUsuarioRouteChildren = {
   LayoutAuthUsuarioAjustesRoute: LayoutAuthUsuarioAjustesRoute,
-  LayoutAuthUsuarioDashboardRoute: LayoutAuthUsuarioDashboardRoute,
+  LayoutAuthUsuarioPanelRoute: LayoutAuthUsuarioPanelRoute,
   LayoutAuthUsuarioResultadosIdRoute: LayoutAuthUsuarioResultadosIdRoute,
   LayoutAuthUsuarioResultadosIndexRoute: LayoutAuthUsuarioResultadosIndexRoute,
 }
@@ -266,7 +264,7 @@ export interface FileRoutesByFullPath {
   '/password/forgot': typeof LayoutPasswordForgotRoute
   '/password/reset': typeof LayoutPasswordResetRoute
   '/ajustes': typeof LayoutAuthUsuarioAjustesRoute
-  '/dashboard': typeof LayoutAuthUsuarioDashboardRoute
+  '/panel': typeof LayoutAuthUsuarioPanelRoute
   '/evaluacion': typeof LayoutAuthEvaluacionIndexRoute
   '/resultados/$id': typeof LayoutAuthUsuarioResultadosIdRoute
   '/resultados': typeof LayoutAuthUsuarioResultadosIndexRoute
@@ -280,7 +278,7 @@ export interface FileRoutesByTo {
   '/password/forgot': typeof LayoutPasswordForgotRoute
   '/password/reset': typeof LayoutPasswordResetRoute
   '/ajustes': typeof LayoutAuthUsuarioAjustesRoute
-  '/dashboard': typeof LayoutAuthUsuarioDashboardRoute
+  '/panel': typeof LayoutAuthUsuarioPanelRoute
   '/evaluacion': typeof LayoutAuthEvaluacionIndexRoute
   '/resultados/$id': typeof LayoutAuthUsuarioResultadosIdRoute
   '/resultados': typeof LayoutAuthUsuarioResultadosIndexRoute
@@ -297,7 +295,7 @@ export interface FileRoutesById {
   '/_layout/password/forgot': typeof LayoutPasswordForgotRoute
   '/_layout/password/reset': typeof LayoutPasswordResetRoute
   '/_layout/_auth/_usuario/ajustes': typeof LayoutAuthUsuarioAjustesRoute
-  '/_layout/_auth/_usuario/dashboard': typeof LayoutAuthUsuarioDashboardRoute
+  '/_layout/_auth/_usuario/panel': typeof LayoutAuthUsuarioPanelRoute
   '/_layout/_auth/evaluacion/': typeof LayoutAuthEvaluacionIndexRoute
   '/_layout/_auth/_usuario/resultados/$id': typeof LayoutAuthUsuarioResultadosIdRoute
   '/_layout/_auth/_usuario/resultados/': typeof LayoutAuthUsuarioResultadosIndexRoute
@@ -313,7 +311,7 @@ export interface FileRouteTypes {
     | '/password/forgot'
     | '/password/reset'
     | '/ajustes'
-    | '/dashboard'
+    | '/panel'
     | '/evaluacion'
     | '/resultados/$id'
     | '/resultados'
@@ -326,7 +324,7 @@ export interface FileRouteTypes {
     | '/password/forgot'
     | '/password/reset'
     | '/ajustes'
-    | '/dashboard'
+    | '/panel'
     | '/evaluacion'
     | '/resultados/$id'
     | '/resultados'
@@ -341,7 +339,7 @@ export interface FileRouteTypes {
     | '/_layout/password/forgot'
     | '/_layout/password/reset'
     | '/_layout/_auth/_usuario/ajustes'
-    | '/_layout/_auth/_usuario/dashboard'
+    | '/_layout/_auth/_usuario/panel'
     | '/_layout/_auth/evaluacion/'
     | '/_layout/_auth/_usuario/resultados/$id'
     | '/_layout/_auth/_usuario/resultados/'
@@ -405,7 +403,7 @@ export const routeTree = rootRoute
       "parent": "/_layout/_auth",
       "children": [
         "/_layout/_auth/_usuario/ajustes",
-        "/_layout/_auth/_usuario/dashboard",
+        "/_layout/_auth/_usuario/panel",
         "/_layout/_auth/_usuario/resultados/$id",
         "/_layout/_auth/_usuario/resultados/"
       ]
@@ -422,8 +420,8 @@ export const routeTree = rootRoute
       "filePath": "_layout/_auth/_usuario/ajustes.tsx",
       "parent": "/_layout/_auth/_usuario"
     },
-    "/_layout/_auth/_usuario/dashboard": {
-      "filePath": "_layout/_auth/_usuario/dashboard.tsx",
+    "/_layout/_auth/_usuario/panel": {
+      "filePath": "_layout/_auth/_usuario/panel.tsx",
       "parent": "/_layout/_auth/_usuario"
     },
     "/_layout/_auth/evaluacion/": {
