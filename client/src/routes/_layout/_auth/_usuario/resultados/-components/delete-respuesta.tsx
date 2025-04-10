@@ -46,7 +46,6 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 	return (
 		<div className="space-y-2 text-end">
 			<p className="text-white">.</p>
-
 			<AlertDialog>
 				<AlertDialogTrigger asChild>
 					<Button variant="ghost" size="sm" className="hover:cursor-pointer">

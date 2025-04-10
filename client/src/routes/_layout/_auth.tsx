@@ -48,7 +48,7 @@ function AuthRoute() {
 				<SidebarTrigger />
 				<div className="flex w-full flex-col gap-6 p-1">
 					<Breadcrumbs breadcrumbs={paths?.links} current={paths?.current} />
-					<main className="flex w-[98%] items-center justify-baseline text-xs md:w-[80%] md:text-sm">
+					<main className="flex w-[98%] items-center justify-center text-xs lg:w-[80%] lg:justify-start lg:text-sm 2xl:w-[60%]">
 						<Outlet />
 					</main>
 				</div>
