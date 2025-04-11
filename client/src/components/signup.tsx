@@ -59,12 +59,12 @@ export function Signup() {
 			<form.AppField
 				name="password"
 				validators={{ onChange: signupSchema.shape.password }}
-				children={(field) => <field.TextField label="Password" type="password" />}
+				children={(field) => <field.TextField label="Contraseña" type="password" />}
 			/>
 			<form.AppField
 				name="repeat_password"
 				validators={{ onChange: signupSchema.shape.repeat_password }}
-				children={(field) => <field.TextField label="Repeat the password" type="password" />}
+				children={(field) => <field.TextField label="Repite la contraseña" type="password" />}
 			/>
 			<form.AppForm>
 				<form.SubscribeButton label="Registrarse" />

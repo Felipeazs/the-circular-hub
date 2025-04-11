@@ -62,7 +62,7 @@ export function Login() {
 						<form.AppField
 							name="password"
 							validators={{ onChange: loginSchema.shape.password }}
-							children={(field) => <field.TextField label="Password" type="password" />}
+							children={(field) => <field.TextField label="Contraseña" type="password" />}
 						/>
 						<Link
 							to="/password/forgot"
