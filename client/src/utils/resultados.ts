@@ -102,6 +102,7 @@ export function recentResult(respuestas: Respuestas): Puntajes | undefined {
 type LineGraphProps = {
 	name: string
 	puntaje: number
+	fecha: string
 }
 
 export function lineGraph(respuestas: Respuestas[] | null) {
@@ -110,7 +111,7 @@ export function lineGraph(respuestas: Respuestas[] | null) {
 		respuestas.toReversed().forEach((respuesta, i) => {
 			const res = recentResult(respuesta)
 
-			data.push({ name: `Eval. ${i + 1}`, puntaje: res!.score })
+			data.push({ name: `${i + 1}`, puntaje: res!.score, fecha: res!.date })
 		})
 
 		return data
