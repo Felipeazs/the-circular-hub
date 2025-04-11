@@ -41,10 +41,12 @@ export function LineGraph({ data }: { data: LineGraphProps[] | undefined }) {
 							return (
 								<div className="space-y-3 rounded-md border-1 border-gray-200 bg-white p-2">
 									<div>
-										<p className="font-bold">evaluacion {label}</p>
+										<p className="">evaluación {label}</p>
 										<p className="text-xs text-gray-400">{payload[0].payload.fecha}</p>
 									</div>
-									<p>puntaje: {payload[0].value}%</p>
+									<p>
+										puntaje: <span className="text-xl font-bold">{payload[0].value}</span>%
+									</p>
 								</div>
 							)
 						}
