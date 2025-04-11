@@ -11,7 +11,6 @@ import {
 } from "@/client/components/ui/card"
 import { Label } from "@/client/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/client/components/ui/radio-group"
-import { cn } from "@/client/lib/utils"
 
 // Define the question structure
 type Question = {
@@ -469,16 +468,6 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 		return categoryQuestions.every((question) => answers[question.id] !== null)
 	}
 
-	const getCategoryCompletionStatus = (categoryId: string) => {
-		const categoryQuestions = questions.filter((q) => q.category === categoryId)
-		const answeredQuestions = categoryQuestions.filter((q) => answers[q.id] !== null)
-		return {
-			total: categoryQuestions.length,
-			answered: answeredQuestions.length,
-			isComplete: categoryQuestions.length === answeredQuestions.length,
-		}
-	}
-
 	const renderCategoryQuestions = () => {
 		return (
 			<>
@@ -561,7 +550,7 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 	}
 	return (
 		<div className="flex gap-10">
-			<div className="mx-auto w-full max-w-3xl">
+			<div className="">
 				{!showSummary && (
 					<div className="mb-6">
 						<div className="mb-2 flex items-center justify-between">
@@ -617,33 +606,6 @@ export function Preguntas({ saveForm }: { saveForm: (answers: Answers) => void }
 					</CardFooter>
 				</Card>
 			</div>
-
-			{!showSummary && (
-				<div className="hidden w-[40%] grid-cols-1 gap-2 xl:grid">
-					{categories.map((category, index) => {
-						const status = getCategoryCompletionStatus(category.id)
-						return (
-							<button
-								type="button"
-								key={category.id}
-								onClick={() => !showSummary && setCurrentCategoryIndex(index)}
-								className={cn(
-									"rounded-lg border p-3 text-left transition-colors",
-									currentCategoryIndex === index && !showSummary
-										? "border-primary bg-primary/5"
-										: "border-muted bg-background hover:bg-muted/50",
-									status.isComplete && "border-green-500/30 bg-green-50 dark:bg-green-950/20",
-								)}
-								disabled={showSummary}>
-								<div className="truncate text-sm font-medium">{category.title}</div>
-								<div className="text-muted-foreground mt-1 text-xs">
-									{status.answered}/{status.total} contestadas
-								</div>
-							</button>
-						)
-					})}
-				</div>
-			)}
 		</div>
 	)
 }

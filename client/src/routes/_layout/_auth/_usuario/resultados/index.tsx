@@ -37,7 +37,7 @@ function RouteComponent() {
 	}, [resultados])
 
 	return (
-		<div className="w-[93%] space-y-6">
+		<div className="w-[93%] space-y-6 md:w-full">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">Mis Resultados</h1>

@@ -1,13 +1,10 @@
-import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router"
-import { useEffect } from "react"
+import { createFileRoute, Outlet } from "@tanstack/react-router"
 
 import { Login } from "@/client/components/login"
 
 import { AppSidebar } from "../../components/app-sidebar"
-import { Breadcrumbs } from "../../components/breadbrumbs"
 import { SidebarProvider, SidebarTrigger } from "../../components/ui/sidebar"
 import { authMeQueryOptions } from "../../lib/queries"
-import { useStore } from "../../store"
 
 export const Route = createFileRoute("/_layout/_auth")({
 	beforeLoad: async ({ context: { queryClient, store } }) => {
@@ -29,13 +26,7 @@ export const Route = createFileRoute("/_layout/_auth")({
 })
 
 function AuthRoute() {
-	const { paths } = useStore()
-	const { pathname } = useLocation()
-	const { store, usuario } = Route.useRouteContext()
-
-	useEffect(() => {
-		store.setPaths(pathname)
-	}, [pathname])
+	const { usuario } = Route.useRouteContext()
 
 	if (!usuario) {
 		return <Login />
@@ -46,12 +37,9 @@ function AuthRoute() {
 			<SidebarProvider>
 				<AppSidebar />
 				<SidebarTrigger />
-				<div className="flex w-full flex-col gap-6 p-1">
-					<Breadcrumbs breadcrumbs={paths?.links} current={paths?.current} />
-					<main className="flex w-[98%] items-center text-xs md:justify-center lg:w-[80%] lg:justify-start lg:text-sm 2xl:w-[60%]">
-						<Outlet />
-					</main>
-				</div>
+				<main className="flex w-[98%] flex-col items-center p-3 text-xs md:items-start lg:w-[60%] lg:justify-start lg:text-sm xl:w-[50%] 2xl:w-[40%]">
+					<Outlet />
+				</main>
 			</SidebarProvider>
 		</>
 	)
