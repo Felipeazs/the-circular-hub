@@ -109,7 +109,7 @@ function RouteComponent() {
 				}}>
 				<Card>
 					<CardHeader>
-						<CardTitle>Información de tu cuenta</CardTitle>
+						<CardTitle className="text-xl">Información de tu cuenta</CardTitle>
 						<CardDescription>Actualiza la información de tu perfil</CardDescription>
 					</CardHeader>
 					<CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-2">

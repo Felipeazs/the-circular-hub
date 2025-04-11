@@ -49,7 +49,7 @@ export function ChangePassword() {
 			}}>
 			<Card>
 				<CardHeader>
-					<CardTitle>Seguridad</CardTitle>
+					<CardTitle className="text-xl">Seguridad</CardTitle>
 					<CardDescription>Cambia tu contraseña</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-4">

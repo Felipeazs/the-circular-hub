@@ -52,7 +52,7 @@ export function DeleteRespuesta({ respuestaId }: DeleteRespuestaProps) {
 						<Trash />
 					</Button>
 				</AlertDialogTrigger>
-				<AlertDialogContent>
+				<AlertDialogContent className="font-raleway">
 					<AlertDialogHeader>
 						<AlertDialogTitle>Eliminar evaluación</AlertDialogTitle>
 						<AlertDialogDescription>

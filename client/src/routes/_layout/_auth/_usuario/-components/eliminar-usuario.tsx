@@ -17,6 +17,7 @@ import {
 import { Button } from "@/client/components/ui/button"
 import {
 	Card,
+	CardContent,
 	CardDescription,
 	CardFooter,
 	CardHeader,
@@ -41,13 +42,14 @@ export function EliminarUsuario() {
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Zona de peligro</CardTitle>
-				<CardDescription className="border-destructive flex items-center gap-4 rounded-md border-1 p-4 text-red-500">
-					<TriangleAlert width={50} />
-					Eliminar esta cuenta borrará permanentemente toda la información de tu cuenta y
-					evaluaciones.
-				</CardDescription>
+				<CardTitle className="text-xl">Zona de peligro</CardTitle>
+				<CardDescription>Elimina tu cuenta</CardDescription>
 			</CardHeader>
+			<CardContent className="border-destructive mx-6 flex items-center gap-4 rounded-md border-1 p-4 text-red-500">
+				<TriangleAlert width={50} />
+				Eliminar esta cuenta borrará permanentemente toda la información de tu cuenta y
+				evaluaciones.
+			</CardContent>
 			<CardFooter>
 				<AlertDialog>
 					<AlertDialogTrigger asChild>
@@ -55,7 +57,7 @@ export function EliminarUsuario() {
 							Eliminar cuenta
 						</Button>
 					</AlertDialogTrigger>
-					<AlertDialogContent>
+					<AlertDialogContent className="font-raleway">
 						<AlertDialogHeader>
 							<AlertDialogTitle>¿Estás seguro que quieres eliminar tu cuenta?</AlertDialogTitle>
 							<AlertDialogDescription>
