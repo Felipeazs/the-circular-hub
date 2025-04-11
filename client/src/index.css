@@ -8,25 +8,25 @@
 	font-family: "Raleway";
 	font-weight: 300;
 	font-sytle: light;
-	src: url("fonts/Raleway-Light.ttf") format("truetype");
+	src: url("/fonts/Raleway-Light.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Raleway";
 	font-weight: 400;
 	font-sytle: normal;
-	src: url("fonts/Raleway-Regular.ttf") format("truetype");
+	src: url("/fonts/Raleway-Regular.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Raleway";
 	font-weight: 500;
 	font-sytle: medium;
-	src: url("fonts/Raleway-Medium.ttf") format("truetype");
+	src: url("/fonts/Raleway-Medium.ttf") format("truetype");
 }
 @font-face {
 	font-family: "Raleway";
 	font-weight: 700;
 	font-sytle: bold;
-	src: url("fonts/Raleway-Bold.ttf") format("truetype");
+	src: url("/fonts/Raleway-Bold.ttf") format("truetype");
 }
 
 :root {
