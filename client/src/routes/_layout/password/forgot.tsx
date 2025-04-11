@@ -34,7 +34,7 @@ export function RouteComponent() {
 	return (
 		<Card className="mx-auto mt-20 w-max">
 			<CardHeader>
-				<CardTitle>Cambiar contraseña</CardTitle>
+				<CardTitle>Solicitud de cambio de contraseña</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<form
@@ -50,7 +50,7 @@ export function RouteComponent() {
 						children={(field) => <field.TextField label="Email" placeholder="Ingresa tu email" />}
 					/>
 					<form.AppForm>
-						<form.SubscribeButton label="Enviar solicitud" />
+						<form.SubscribeButton label="Enviar" />
 					</form.AppForm>
 				</form>
 			</CardContent>

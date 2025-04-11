@@ -66,11 +66,14 @@ export function RouteComponent() {
 						name="repeat_password"
 						validators={{ onChange: resetPassSchema.shape.repeat_password }}
 						children={(field) => (
-							<field.TextField label="Repetir Contraseña" placeholder="Ingresa la contraseña" />
+							<field.TextField
+								label="Repetir Contraseña"
+								placeholder="Ingresa tu nueva contraseña"
+							/>
 						)}
 					/>
 					<form.AppForm>
-						<form.SubscribeButton label="Enviar solicitud" />
+						<form.SubscribeButton label="Cambiar" />
 					</form.AppForm>
 				</form>
 			</CardContent>
