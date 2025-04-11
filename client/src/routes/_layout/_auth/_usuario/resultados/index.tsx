@@ -9,6 +9,15 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/client/components/ui/card"
+import {
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+} from "@/client/components/ui/pagination"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/client/components/ui/tabs"
 import { buttonVariants } from "@/client/lib/utils"
 import { useStore } from "@/client/store"
@@ -88,7 +97,7 @@ function RouteComponent() {
 												key={assessment.id}
 												className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0">
 												<div className="grid grid-cols-8 items-baseline gap-5">
-													<p className="w-[40px] text-xl font-bold md:text-4xl">{i + 1}.</p>
+													<p className="w-[40px] text-xl font-bold md:text-2xl">{i + 1}.</p>
 													<p className="text-muted-foreground md:text-md col-span-6 grid text-xs">
 														{assessment.date}
 													</p>
@@ -109,6 +118,22 @@ function RouteComponent() {
 										))
 									})}
 								</div>
+								<Pagination className="mt-5">
+									<PaginationContent>
+										<PaginationItem>
+											<PaginationPrevious href="#" />
+										</PaginationItem>
+										<PaginationItem>
+											<PaginationLink href="#">1</PaginationLink>
+										</PaginationItem>
+										<PaginationItem>
+											<PaginationEllipsis />
+										</PaginationItem>
+										<PaginationItem>
+											<PaginationNext href="#" />
+										</PaginationItem>
+									</PaginationContent>
+								</Pagination>
 							</CardContent>
 						</Card>
 					) : null}

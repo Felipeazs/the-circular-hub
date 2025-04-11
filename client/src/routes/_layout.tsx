@@ -50,7 +50,7 @@ function RouteComponent() {
 									{data?.nombre?.substring(0, 1)?.toUpperCase() ?? <CircleUserRound />}
 									{data?.apellido?.substring(0, 1)?.toUpperCase()}
 								</AvatarFallback>
-								<DropdownMenuContent>
+								<DropdownMenuContent className="font-raleway">
 									<DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
 									<DropdownMenuSeparator />
 									<DropdownMenuItem>

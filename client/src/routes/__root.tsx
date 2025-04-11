@@ -29,7 +29,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function Root() {
 	return (
-		<div className="flex min-h-[calc(100vh-1px)] flex-col">
+		<div className="font-raleway flex min-h-[calc(100vh-1px)] flex-col">
 			<PostHogProvider>
 				<Outlet />
 				<Toaster />

@@ -55,11 +55,11 @@ function RouteComponent() {
 			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-						<CardTitle className="text-sm font-medium">Evaluaciones Realizadas</CardTitle>
+						<CardTitle className="text-sm font-medium">Evaluaciones</CardTitle>
 						<CheckCircle className="text-muted-foreground h-4 w-4" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">{resultados?.length}</div>
+						<div className="text-4xl font-bold">{resultados?.length}</div>
 						<p className="text-muted-foreground mt-1 text-xs">{puntajes?.textMes}</p>
 					</CardContent>
 				</Card>
@@ -70,7 +70,7 @@ function RouteComponent() {
 							<BarChart3 className="text-muted-foreground h-4 w-4" />
 						</CardHeader>
 						<CardContent>
-							<div className="text-2xl font-bold">{puntajes?.ultimoPuntaje}%</div>
+							<div className="text-4xl font-bold">{puntajes?.ultimoPuntaje}%</div>
 							<p className="text-muted-foreground mt-1 text-xs">{puntajes?.textDiff}</p>
 						</CardContent>
 					</Card>
@@ -99,8 +99,8 @@ function RouteComponent() {
 										<div
 											key={assessment.id}
 											className="flex items-center justify-between border-b pb-2 last:border-0">
-											<div className="grid grid-cols-5 items-start gap-5">
-												<p className="grid-col-span-1 grid w-[40px] text-xl font-bold lg:text-4xl">
+											<div className="grid grid-cols-5 items-end gap-5">
+												<p className="grid-col-span-1 grid w-[40px] text-xl font-bold lg:text-2xl">
 													{i + 1}.
 												</p>
 												<div className="col-span-4 grid">
