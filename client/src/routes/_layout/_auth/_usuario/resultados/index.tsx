@@ -52,15 +52,13 @@ function RouteComponent() {
 			</div>
 
 			<Tabs defaultValue="recent">
-				<TabsList className="w-[98%] md:w-full">
+				<TabsList className="inline w-full truncate sm:w-max">
 					<TabsTrigger value="recent">Reciente</TabsTrigger>
 					{resultados?.length ? (
 						<>
 							<TabsTrigger value="all">Todos</TabsTrigger>
 							<TabsTrigger value="trends">Tendencia</TabsTrigger>
-							<TabsTrigger value="recs" className="inline justify-start truncate">
-								Recomendaciones
-							</TabsTrigger>
+							<TabsTrigger value="recs">Recomendaciones</TabsTrigger>
 						</>
 					) : null}
 				</TabsList>

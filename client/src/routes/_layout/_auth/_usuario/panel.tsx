@@ -34,7 +34,7 @@ function RouteComponent() {
 			}).length
 
 			const signMes = mesRealizadas > 0 ? "+" : ""
-			const textMes = `${signMes} ${mesRealizadas} realizadas este mes`
+			const textMes = `${signMes}${mesRealizadas} realizadas este mes`
 
 			return {
 				ultimoPuntaje,
