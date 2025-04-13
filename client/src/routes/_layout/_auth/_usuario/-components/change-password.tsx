@@ -21,7 +21,7 @@ export function ChangePassword() {
 	const { mutate } = useMutation({
 		mutationFn: changePassword,
 		onSuccess: async () => {
-			toast("Contraseña cambiada")
+			toast("Contraseña cambiada con éxito")
 			await query.invalidateQueries({ queryKey: ["usuario", usuario?.id] })
 		},
 		onError: (error) => {

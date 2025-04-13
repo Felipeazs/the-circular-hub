@@ -49,7 +49,7 @@ export function RouteComponent() {
 			</CardHeader>
 			<CardContent>
 				<form
-					className="flex w-[250px] flex-col gap-5"
+					className="flex w-[270px] flex-col gap-5"
 					onSubmit={(e) => {
 						e.preventDefault()
 						e.stopPropagation()

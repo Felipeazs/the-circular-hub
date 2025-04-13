@@ -93,27 +93,42 @@ export const respuestaRelations = relations(respuesta, ({ one }) => ({
 	}),
 }))
 
-export const signupSchema = createInsertSchema(usuario, {
-	email: z.string().email(),
-	password: z.string(),
-}).merge(
-	z.object({
-		repeat_password: z.string(),
-	}),
-)
+const email_specs = z.string().email()
 
-export const loginSchema = createInsertSchema(usuario, {
-	email: z.string().email(),
-	password: z.string(),
+const password_specs = z
+	.string()
+	.min(8, { message: "La contraseña debe tener al menos 8 caracteres" })
+	.max(100, { message: "La contraseña debe tene como máximo 100 caracteres" })
+	.refine((password) => /[A-Z]/.test(password), {
+		message: "La contraseña debe tener al menos una letra mayúscula",
+	})
+	.refine((password) => /[a-z]/.test(password), {
+		message: "La contraseña debe tener al menos una letra minúscula",
+	})
+	.refine((password) => /\d/.test(password), {
+		message: "La contraseña debe tener al menos un número",
+	})
+	.refine((password) => /[^a-z0-9\s]/i.test(password), {
+		message: "La contraseña debe tener al menos un símbolo",
+	})
+
+export const signupSchema = z.object({
+	email: email_specs,
+	password: password_specs,
+	repeat_password: password_specs,
 })
 
-export const forgotPassSchema = createInsertSchema(usuario).pick({
+export const loginSchema = signupSchema.omit({
+	repeat_password: true,
+})
+
+export const forgotPassSchema = signupSchema.omit({
+	password: true,
+	repeat_password: true,
+})
+
+export const resetPassSchema = signupSchema.omit({
 	email: true,
-})
-
-export const resetPassSchema = z.object({
-	password: z.string(),
-	repeat_password: z.string(),
 })
 
 export const resetPassTokenSchema = z.object({
@@ -121,16 +136,16 @@ export const resetPassTokenSchema = z.object({
 })
 
 export const changePassSchema = z.object({
-	password: z.string(),
-	new_password: z.string(),
-	repeat_new_password: z.string(),
+	password: password_specs,
+	new_password: password_specs,
+	repeat_new_password: password_specs,
 })
 
 export const editUsuarioSchema = createInsertSchema(usuario, {
 	nombre: z.string(),
 	apellido: z.string(),
 	organizacion: z.string(),
-	email: z.string().email(),
+	email: email_specs,
 	image: z
 		.union([
 			z.instanceof(File),
@@ -169,10 +184,12 @@ export const createRespuestasSchema = createInsertSchema(respuesta).omit({
 	updatedAt: true,
 })
 
+// usuario
 export type Usuario = z.infer<typeof usuarioSchema>
 export type LoginUsuario = z.infer<typeof loginSchema>
 export type SignupUsuario = z.infer<typeof signupSchema>
 export type EditUsuario = z.infer<typeof editUsuarioSchema>
 
+// respuestas
 export type Respuestas = z.infer<typeof respuestasSchema>
 export type CreateRespuestas = z.infer<typeof createRespuestasSchema>

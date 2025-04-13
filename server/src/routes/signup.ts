@@ -14,7 +14,7 @@ export default new Hono().post("/", zValidator("json", signupSchema), rateLimit,
 	const { email, password, repeat_password } = c.req.valid("json")
 
 	if (password !== repeat_password) {
-		throw new Error("Las contraseñas no coinciden")
+		throw new HTTPException(ERROR_CODE.BAD_REQUEST, { message: "Las contraseñas no coinciden" })
 	}
 
 	const { data: usuarioEncontrado, error: dbFindError } = await tryCatch(

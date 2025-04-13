@@ -15,7 +15,7 @@ export function RouteComponent() {
 	const { mutate } = useMutation({
 		mutationFn: forgotPassword,
 		onSuccess: () => {
-			toast("Te Hemos enviado un correo para cambiar la contraseña")
+			toast("Por favor, revisa tu correo para cambiar la contraseña")
 		},
 		onError: (error) => {
 			toast(error.message)
@@ -38,7 +38,7 @@ export function RouteComponent() {
 			</CardHeader>
 			<CardContent>
 				<form
-					className="flex w-[250px] flex-col gap-5"
+					className="flex w-[270px] flex-col gap-5"
 					onSubmit={(e) => {
 						e.preventDefault()
 						e.stopPropagation()

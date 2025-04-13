@@ -173,14 +173,16 @@ export const recomendaciones = {
 	},
 }
 export function getBagde(score: number) {
-	let style = "bg-red-200"
+	let style = "font-bold"
 	let nivel = "bajo"
 
-	if (score > 33 && score <= 66) {
-		style = "bg-yellow-200"
+	if (score <= 33) {
+		style = style.concat(" bg-red-200")
+	} else if (score > 33 && score <= 66) {
+		style = style.concat(" bg-yellow-200")
 		nivel = "medio"
 	} else if (score > 66) {
-		style = "bg-green-200"
+		style = style.concat(" bg-green-200")
 		nivel = "alto"
 	}
 

@@ -47,7 +47,7 @@ export function Login() {
 			</CardHeader>
 			<CardContent>
 				<form
-					className="flex w-[250px] flex-col gap-5"
+					className="flex w-[270px] flex-col gap-5"
 					onSubmit={(e) => {
 						e.preventDefault()
 						e.stopPropagation()
@@ -64,13 +64,13 @@ export function Login() {
 							validators={{ onChange: loginSchema.shape.password }}
 							children={(field) => <field.TextField label="Contraseña" type="password" />}
 						/>
-						<Link
-							to="/password/forgot"
-							className="underline-blue-100 text-xs underline underline-offset-1"
-							viewTransition>
-							¿Has olvidado tu contraseña?
-						</Link>
 					</div>
+					<Link
+						to="/password/forgot"
+						className="underline-blue-100 text-xs underline underline-offset-1"
+						viewTransition>
+						¿Has olvidado tu contraseña?
+					</Link>
 					<form.AppForm>
 						<form.SubscribeButton label="Ingresar" />
 					</form.AppForm>
