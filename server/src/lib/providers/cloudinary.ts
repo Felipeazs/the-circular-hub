@@ -31,3 +31,11 @@ export async function uploadImage(
 
 	return res
 }
+
+export async function deleteImage(id: string, subfolder: string) {
+	const res = await cloudinary.uploader.destroy(`${env.CLOUDINARY_FOLDER}/${subfolder}/${id}`, {
+		resource_type: "image",
+	})
+
+	return res
+}

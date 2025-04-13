@@ -93,7 +93,7 @@ export const respuestaRelations = relations(respuesta, ({ one }) => ({
 	}),
 }))
 
-const email_specs = z.string().email()
+const email_specs = z.string().email({ message: "ingrese un mail válido" })
 
 const password_specs = z
 	.string()

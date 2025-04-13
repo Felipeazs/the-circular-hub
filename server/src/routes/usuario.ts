@@ -9,7 +9,7 @@ import type { AppEnv } from "../lib/types"
 import db from "../db"
 import { editUsuarioSchema, usuario as usuarioTable } from "../db/schemas"
 import { ERROR_CODE } from "../lib/constants"
-import { uploadImage } from "../lib/providers/cloudinary"
+import { deleteImage, uploadImage } from "../lib/providers/cloudinary"
 import { deleteRedisItem, getRedisItem, setRedisItem } from "../lib/redis"
 import { zValidator } from "../lib/validator-wrapper"
 import { checkAuth } from "../middlewares/auth"
@@ -123,6 +123,11 @@ const app = new Hono<AppEnv>()
 			throw new HTTPException(ERROR_CODE.NOT_FOUND, {
 				message: "No se puedo eliminar el usuario",
 			})
+		}
+
+		const { data: _cloud, error: cloudError } = await tryCatch(deleteImage(usuario!.id, "profile"))
+		if (cloudError) {
+			throw new HTTPException(ERROR_CODE.INTERNAL_SERVER_ERROR, { message: cloudError.message })
 		}
 
 		return c.json({ status: "ok" }, 200)

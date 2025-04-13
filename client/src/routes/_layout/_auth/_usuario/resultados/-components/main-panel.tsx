@@ -1,7 +1,7 @@
 import type { Respuestas } from "@monorepo/server/db"
 
 import { Link } from "@tanstack/react-router"
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import { Badge } from "@/client/components/ui/badge"
 import {
@@ -12,7 +12,7 @@ import {
 	CardTitle,
 } from "@/client/components/ui/card"
 import { buttonVariants, cn } from "@/client/lib/utils"
-import { daysOff, getBagde, recentResult } from "@/client/utils/resultados"
+import { daysOff, getBagde, recentResult, recomendaciones } from "@/client/utils/resultados"
 
 import { DeleteRespuesta } from "./delete-respuesta"
 
@@ -20,7 +20,11 @@ type MainPanelProps = {
 	resultados?: Respuestas
 }
 
+export type Recomendaciones = typeof recomendaciones.high
+
 export function MainPanel({ resultados }: MainPanelProps) {
+	const [potencial, setPotencial] = useState<Recomendaciones>()
+
 	const daysDiff = useMemo(() => {
 		if (resultados) {
 			return daysOff(resultados)
@@ -30,6 +34,18 @@ export function MainPanel({ resultados }: MainPanelProps) {
 	const puntaje = useMemo(() => {
 		if (resultados) {
 			return recentResult(resultados)
+		}
+	}, [resultados])
+
+	useEffect(() => {
+		if (puntaje) {
+			if (puntaje.score <= 33) {
+				setPotencial(recomendaciones.low)
+			} else if (puntaje.score > 33 && puntaje.score <= 66) {
+				setPotencial(recomendaciones.medium)
+			} else {
+				setPotencial(recomendaciones.high)
+			}
 		}
 	}, [resultados])
 
@@ -45,7 +61,7 @@ export function MainPanel({ resultados }: MainPanelProps) {
 						</CardHeader>
 						<CardContent>
 							<div className="space-y-6">
-								<div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-center md:justify-around">
+								<div className="flex justify-between">
 									<div className="space-y-2">
 										<p className="text-muted-foreground text-sm font-medium">Puntaje general</p>
 										<Badge
@@ -54,12 +70,10 @@ export function MainPanel({ resultados }: MainPanelProps) {
 											{getBagde(puntaje!.score).title}{" "}
 										</Badge>
 									</div>
-									<div className="space-y-2 md:text-center">
-										<p className="text-muted-foreground text-sm font-medium">resultados</p>
-										<p className="text-2xl font-bold">{puntaje?.total}/29</p>
-									</div>
 									<DeleteRespuesta respuestaId={resultados.id} />
 								</div>
+
+								<p className="font-medium">{potencial?.titulo}</p>
 
 								<div className="space-y-4">
 									<h3 className="font-medium">Desglose por categoría</h3>
