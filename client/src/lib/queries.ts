@@ -87,10 +87,21 @@ export async function signup({ email, password, repeat_password }: SignupUsuario
 }
 
 export async function logout(): Promise<{ status: string }> {
-	return client.api.logout.$post({}).then(async (res) => {
-		const json = await res.json()
-		return json
-	})
+	return fetchWithAuth().then((token) =>
+		client.api.logout
+			.$post({}, { headers: { Authorization: `Bearer ${token}` } })
+			.then(async (res) => {
+				const json = await res.json()
+
+				if (!res.ok && "status" in json && "message" in json) {
+					await checkRateLimit(json.status as unknown as number)
+
+					throw new Error(json.message as string)
+				}
+
+				return json
+			}),
+	)
 }
 
 export async function forgotPassword(email: string) {

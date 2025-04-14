@@ -78,5 +78,6 @@ export async function deleteRedisItem({ item, key }: RedisItem) {
 		throw new Error("Redis client not initialized. Call initRedis() first.")
 	}
 
-	await client.hDel(key, item)
+	const deletedItem = await client.hDel(key, item)
+	return deletedItem
 }
