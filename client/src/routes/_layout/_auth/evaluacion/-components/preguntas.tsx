@@ -50,7 +50,7 @@ const categories = [
 		id: "vinculacion",
 		title: "2. Vinculación con  el entorno",
 		description:
-			"Este tópico analiza las relaciiones de la empresa con su entorno geográfico y empresarial, con el objetivo de evaluar el nivel de interacción y colaboración con actores ecternos para identificar y aprovechar sinergias territoriales e industriales",
+			"Este tópico analiza las relaciones de la empresa con su entorno geográfico y empresarial, con el objetivo de evaluar el nivel de interacción y colaboración con actores externos para identificar y aprovechar sinergias territoriales e industriales",
 		puntos: [
 			{ punto: "Participación en proyectos locales o territoriales", id: "vinculacion_1" },
 			{
@@ -67,7 +67,7 @@ const categories = [
 		id: "gestion_recursos",
 		title: "3. Gestión de recursos",
 		description:
-			"Identifica oportunidades para optimizar el uso de recursos y avanzar hacia insumos más sostenibles, enfocándosse en cómo la empresa getiona sus materiales, energía y agua",
+			"Identifica oportunidades para optimizar el uso de recursos y avanzar hacia insumos más sostenibles, enfocándose en cómo la empresa gestiona sus materiales, energía y agua",
 		puntos: [
 			{ punto: "Monitoreo del consumo de amterias primas", id: "gestion_recursos_1" },
 			{
@@ -96,10 +96,10 @@ const categories = [
 		id: "gestion_residuos",
 		title: "4. Gestión de residuos y valorización",
 		description:
-			"Determinal el nivel actual de recuperaciión y aprovechamiento de residuos y explorar oportunidades para mejorar su valorización. Evalúa cómo la empresa gestiona los residuos generados en sus procesos productivos. Incluye preguntas sobre:",
+			"Determinal el nivel actual de recuperación y aprovechamiento de residuos y explorar oportunidades para mejorar su valorización. Evalúa cómo la empresa gestiona los residuos generados en sus procesos productivos. Incluye preguntas sobre:",
 		puntos: [
 			{
-				punto: "Indentificación y cuantificación mensual de residuos generados",
+				punto: "Identificación y cuantificación mensual de residuos generados",
 				id: "gestion_residuos_1",
 			},
 			{
@@ -129,7 +129,7 @@ const categories = [
 		id: "diseno_circular",
 		title: "5. Diseño circular e innovación",
 		description:
-			"Determinael nivel actual de recuperación y aprovechamiento de residuos, explorando oportunidades para mejorar su valorización. Evalúa la forma en que la empresa gestiona los residuos generados en sus procesos productivos",
+			"Determina el nivel actual de recuperación y aprovechamiento de residuos, explorando oportunidades para mejorar su valorización. Evalúa la forma en que la empresa gestiona los residuos generados en sus procesos productivos",
 		puntos: [
 			{
 				punto:
@@ -158,7 +158,7 @@ const categories = [
 		id: "colaboracion",
 		title: "6. Colaboración e intercambio industrial",
 		description:
-			"Explora las posiblidades de colaboración entre empresas para cerra ciclos de materiales e identifica oportunidades para maximizar la eficiencia en el uso de recursos a través de sinergias interempresariales",
+			"Explora las posiblidades de colaboración entre empresas para cerrar ciclos de materiales e identifica oportunidades para maximizar la eficiencia en el uso de recursos a través de sinergias interempresariales",
 		puntos: [
 			{
 				punto:
@@ -167,11 +167,11 @@ const categories = [
 			},
 			{
 				punto:
-					"Participación en procesos colaborativos como logística inversa o simbiosis industria",
+					"Participación en procesos colaborativos como logística inversa o simbiosis industrial",
 				id: "colaboracion_2",
 			},
 			{
-				punto: "Intercambio potencial de recursos como maquinaria o almacinamiento",
+				punto: "Intercambio potencial de recursos como maquinaria o almacenamiento",
 				id: "colaboracion_3",
 			},
 			{ punto: "Fomento del uso compartido entre empresas o consumidores", id: "colaboracion_4" },
@@ -181,7 +181,7 @@ const categories = [
 		id: "extension_reparabilidad",
 		title: "7. Extensión del ciclo de vida y reparabilidad",
 		description:
-			"Evalúa si la empresa está maximizando el valor generado a lo largo del ciclo de vida del producto omaterial, analizando las acciones que implementa para extender la vida útil de productos y materiales no renovables",
+			"Evalúa si la empresa está maximizando el valor generado a lo largo del ciclo de vida del producto o material, analizando las acciones que implementa para extender la vida útil de productos y materiales no renovables",
 		puntos: [
 			{
 				punto: "Soluciones propuestas para reparación y mantenimiento",
@@ -221,11 +221,11 @@ const categories = [
 		id: "impacto_ambiental",
 		title: "9. Impacto ambiental y social",
 		description:
-			"Determina si la empresa cuneta con una visión integral que combine sostenibilidad ambiental y responsabilidad social. Evalúa si mide y gestiona de manera activa los impactos ambientales asociados a sus operaciones",
+			"Determina si la empresa cuenta con una visión integral que combine sostenibilidad ambiental y responsabilidad social. Evalúa si mide y gestiona de manera activa los impactos ambientales asociados a sus operaciones",
 		puntos: [
 			{
 				punto:
-					"Identificación dle impacto ambiental asociado a extracción, fabricación y transporte",
+					"Identificación del impacto ambiental asociado a extracción, fabricación y transporte",
 				id: "impacto_ambiental_a",
 			},
 			{
@@ -243,7 +243,7 @@ const categories = [
 		id: "educacion_sensibilizacion",
 		title: "10. Educación y sensibilización interna",
 		description:
-			"Evalúa si los empleados participan activamente como agentes de cambio en la transición hacia prácticas circulares dentro de la empresa. Explora las iniciativas internas orientadas a fomentas compotamientos responsables y sostenibles entre el personal",
+			"Evalúa si los empleados participan activamente como agentes de cambio en la transición hacia prácticas circulares dentro de la empresa. Explora las iniciativas internas orientadas a fomentar comportamientos responsables y sostenibles entre el personal",
 		puntos: [
 			{
 				punto: "Acciones educativas sobre consumo responsable en el lugar de trabajo",
@@ -251,7 +251,7 @@ const categories = [
 			},
 			{
 				punto:
-					"Participación activa del personal en prevención del desperdicio durante proceos productivos",
+					"Participación activa del personal en prevención del desperdicio durante procesos productivos",
 				id: "educacion_sensibilizacion_2",
 			},
 		],
@@ -303,7 +303,7 @@ const questions: Question[] = [
 	},
 	{
 		id: "gestion_recursos_3",
-		text: "¿La empresa realiza compras utilizando estregias de sosteniblidad?",
+		text: "¿La empresa realiza compras utilizando estrategias de sosteniblidad?",
 		category: "gestion_recursos",
 	},
 	{
@@ -318,7 +318,7 @@ const questions: Question[] = [
 	},
 	{
 		id: "gestion_residuos_3",
-		text: "¿Se conoce el destino o uso que el gesto/reciclador le da a los rediuos?",
+		text: "¿Se conoce el destino o uso que el gesto/reciclador le da a los residuos?",
 		category: "gestion_residuos",
 	},
 	{
@@ -338,12 +338,12 @@ const questions: Question[] = [
 	},
 	{
 		id: "colaboracion_1",
-		text: "¿Existen iniciativas para compratir maquinaria y servcios a mayor escala con otras empresas?",
+		text: "¿Existen iniciativas para compartir maquinaria y servcios a mayor escala con otras empresas?",
 		category: "colaboracion",
 	},
 	{
 		id: "colaboracion_2",
-		text: "¿Podrían las salidas (residuos) de una organización del entorno ser utilizadas como recurosos para la empresa?",
+		text: "¿Podrían las salidas (residuos) de una organización del entorno ser utilizadas como recursos para la empresa?",
 		category: "colaboracion",
 	},
 	{
@@ -398,7 +398,7 @@ const questions: Question[] = [
 	},
 	{
 		id: "educacion_sensibilizacion_2",
-		text: "¿Realizan acciones para invlucrar al personal en prevenir el desperdicio de consumibles durante los procesos productivos?",
+		text: "¿Realizan acciones para involucrar al personal en prevenir el desperdicio de consumibles durante los procesos productivos?",
 		category: "educacion_sensibilizacion",
 	},
 	{
